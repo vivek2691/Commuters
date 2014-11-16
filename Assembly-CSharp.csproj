@@ -51,11 +51,12 @@
      <Compile Include="Assets\Scripts\Abstract Data Structures\Heap.cs" />
      <Compile Include="Assets\Scripts\Abstract Data Structures\Priority_Node.cs" />
      <Compile Include="Assets\Scripts\Abstract Data Structures\Vertex.cs" />
-     <Compile Include="Assets\Scripts\Enums\PublicEnums.cs" />
      <Compile Include="Assets\Scripts\Game Data Structures\G_Edge.cs" />
      <Compile Include="Assets\Scripts\Game Data Structures\G_Graph.cs" />
      <Compile Include="Assets\Scripts\Game Data Structures\G_Person.cs" />
      <Compile Include="Assets\Scripts\Game Data Structures\G_Vertex.cs" />
+     <Compile Include="Assets\Scripts\Globals\PublicConstants.cs" />
+     <Compile Include="Assets\Scripts\Globals\PublicEnums.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
