@@ -1,9 +1,13 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Test.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Game Data Structures\G_Person.cs">
     <Files>
-      <File FileName="Assets\Scripts\Enums\PublicEnums.cs" Line="16" Column="5" />
-      <File FileName="Assets\Scripts\Test.cs" Line="10" Column="3" />
+      <File FileName="Assets\Scripts\Game Data Structures\G_Person.cs" Line="129" Column="5" />
+      <File FileName="Assets\Scripts\Game Data Structures\G_Vertex.cs" Line="114" Column="4" />
+      <File FileName="Assets\Scripts\Game Data Structures\G_Edge.cs" Line="12" Column="28" />
+      <File FileName="Assets\Scripts\Abstract Data Structures\Heap.cs" Line="196" Column="21" />
+      <File FileName="Assets\Scripts\Abstract Data Structures\Priority_Node.cs" Line="41" Column="4" />
+      <File FileName="Assets\Scripts\Abstract Data Structures\Edge.cs" Line="111" Column="18" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
