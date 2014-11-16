@@ -5,7 +5,6 @@
 using System;
 using System.Collections.Generic;
 
-using AssemblyCSharp.Heap;
 
 namespace AssemblyCSharp
 {
@@ -84,6 +83,8 @@ namespace AssemblyCSharp
 			{
 				computeShortestPath(v_new);
 			}
+
+			throw new Exception ("Not yet implemented!");
 		}
 
 		/// <summary>
@@ -109,9 +110,10 @@ namespace AssemblyCSharp
 			}
 			else if(myState == PersonState.Edge)// The player starts in the middle of an edge.
 			{
-				List<G_Vertex> verts = myEdge.getVerticeList();
-				foreach(G_Vertex v in verts)
+				List<Vertex> verts = myEdge.getVerticeList();
+				foreach(Vertex v_abstract in verts)
 				{
+					G_Vertex v = v_abstract as G_Vertex;
 					double distance = v.distanceTo (getX(), getY()) + v.distanceTo (goal);
 					Priority_Node<G_Vertex> node = new Priority_Node<G_Vertex> (v, distance);
 					PQ.Add (node);
@@ -143,11 +145,11 @@ namespace AssemblyCSharp
 				case PersonState.Vertex:
 					return myVertex.getX();
 				case PersonState.Edge:
-					G_Vertex v1 = myEdge.getV1();
-					G_Vertex v2 = myEdge.getV2();
+					G_Vertex v1 = myEdge.getV1() as G_Vertex;
+					G_Vertex v2 = myEdge.getV2() as G_Vertex;
 					int x1 = v1.getX();
 					int x2 = v2.getX();
-				return x1*(1 - weight) + x2*weight;
+				return (int)(x1*(1 - weight) + x2*weight);
 			}
 
 			throw new Exception("We should never get here.");
@@ -164,11 +166,11 @@ namespace AssemblyCSharp
 			case PersonState.Vertex:
 				return myVertex.getX();
 			case PersonState.Edge:
-				G_Vertex v1 = myEdge.getV1();
-				G_Vertex v2 = myEdge.getV2();
+				G_Vertex v1 = myEdge.getV1() as G_Vertex;
+				G_Vertex v2 = myEdge.getV2() as G_Vertex;
 				int y1 = v1.getY();
 				int y2 = v2.getY();
-				return y1*(1 - weight) + y2*weight;
+				return (int)(y1*(1 - weight) + y2*weight);
 			}
 			
 			throw new Exception("We should never get here.");

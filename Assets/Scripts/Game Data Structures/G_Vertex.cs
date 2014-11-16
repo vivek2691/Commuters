@@ -31,7 +31,16 @@ namespace AssemblyCSharp
 		bool train_stop  = false;
 		bool bike_shop   = false;
 		bool bike_rental = false;
-		
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="AssemblyCSharp.G_Vertex"/> class.
+		/// </summary>
+		/// <param name="index">Index.</param>
+		public G_Vertex(int index) : base(index)
+		{
+
+		}
+
 		
 		/// <summary>
 		/// Sets the position to the given geometric coordinates.
@@ -79,8 +88,9 @@ namespace AssemblyCSharp
 			if(p == null)
 			{
 				throw new UnityException("G_Vertex removePerson(): Null person");
-				return people.Remove (p);
-			}			
+			}	
+
+			return people.Remove (p);
 		}
 
 		// -- Distance computation functions.

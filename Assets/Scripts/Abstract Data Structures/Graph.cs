@@ -40,7 +40,7 @@ namespace AssemblyCSharp
 		/// <returns>The edge.</returns>
 		/// <param name="vertex_index_1">Vertex_index_1.</param>
 		/// <param name="vertex_index_2">Vertex_index_2.</param>
-		int newEdge(Vertex v1, Vertex v2)
+		Edge newEdge(Vertex v1, Vertex v2)
 		{
 			// Construct the edge.
 			int index = edge_index++;

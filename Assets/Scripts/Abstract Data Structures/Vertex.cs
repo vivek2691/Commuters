@@ -42,7 +42,7 @@ namespace AssemblyCSharp
 		/// <param name="e">E.</param>
 		public bool removeEdge(Edge e)
 		{
-			return edges.Remove ();
+			return edges.Remove (e);
 		}
 
 		/// <summary>

@@ -45,8 +45,8 @@ namespace AssemblyCSharp
 		/// <param name="v">V. The vertex a person is currently on.</param>
 		public double getWeight(G_Vertex v)
 		{
-			G_Vertex v1 = this.v1;
-			G_Vertex v2 = this.v2;
+			G_Vertex v1 = this.v1 as G_Vertex;
+			G_Vertex v2 = this.v2 as G_Vertex;
 
 			if(v == v1)
 			{
@@ -114,8 +114,9 @@ namespace AssemblyCSharp
 			if(p == null)
 			{
 				throw new Exception("G_Vertex removePerson(): Null person");
-				return people.Remove (p);
 			}			
+
+			return people.Remove (p);
 		}
 	}
 }
