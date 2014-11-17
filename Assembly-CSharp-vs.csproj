@@ -46,6 +46,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Abstract Data Structures\Box.cs" />
      <Compile Include="Assets\Scripts\Abstract Data Structures\Edge.cs" />
      <Compile Include="Assets\Scripts\Abstract Data Structures\Graph.cs" />
      <Compile Include="Assets\Scripts\Abstract Data Structures\Heap.cs" />

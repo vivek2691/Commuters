@@ -16,9 +16,8 @@ namespace AssemblyCSharp
 		private HashSet<G_Person> people;
 
 		// -- Properties
-		// FIXME : We may want to improve this to be a set of trails, instead of only having one type.
-		// All edges start out being unimproved.
-		private EdgeType myType = EdgeType.Unimproved;
+		// Each Edge has a set of improvement properties.
+		private HashSet<EdgeType> myImprovements = new HashSet<EdgeType> ();
 
 		private double edge_length;
 
@@ -30,6 +29,9 @@ namespace AssemblyCSharp
 		/// <param name="index">Index.</param>
 		public G_Edge (G_Vertex v1, G_Vertex v2, int index) : base(v1, v2, index)
 		{
+
+			// Every edge starts out being unimproved.
+			myImprovements.Add(EdgeType.Unimproved);// This may be superfluous, because it is implied.
 
 			/*
 			 * Compute the length of the edge using the Euclidean metric.
@@ -75,18 +77,19 @@ namespace AssemblyCSharp
 		/// Allows edges to be upgraded and downgraded.
 		/// </summary>
 		/// <param name="myType">My type.</param>
-		public void setEdgeType(EdgeType type)
+		/// <returns> Returns true iff the input type was not already an improvment of this edge.</returns>
+		public bool addImprovement(EdgeType type)
 		{
-			this.myType = type;
+			return myImprovements.Add(type);
 		}
 
 		/// <summary>
 		/// Gets the type.
 		/// </summary>
 		/// <returns>The type.</returns>
-		public EdgeType getType()
+		public HashSet<EdgeType> getImprovements()
 		{
-			return myType;
+			return myImprovements;
 		}
 
 		/// <summary>

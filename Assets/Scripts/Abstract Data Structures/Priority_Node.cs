@@ -19,17 +19,20 @@ namespace AssemblyCSharp
 		public E elem;
 
 		// Used for retrieving paths after a graph search.
-		public E last;
+		public Priority_Node<E> last;
+
+		public int money;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="AssemblyCSharp.Priority_Node`1"/> class.
 		/// </summary>
 		/// <param name="elem">Element.</param>
 		/// <param name="priority">Priority.</param>
-		public Priority_Node (E elem, double priority)
+		public Priority_Node (E elem, int money, double priority)
 		{
 			this.elem = elem;
 			this.priority = priority;
+			this.money = money;
 		}
 
 		/// <summary>

@@ -14,7 +14,7 @@ namespace AssemblyCSharp
 	{
 		// -- Private Data Fields.
 		private int index = 0;
-		HashSet<Edge> edges;
+		private HashSet<Edge> edges;
 
 		/// <summary>
 		///  Default empty constructor.
@@ -97,6 +97,12 @@ namespace AssemblyCSharp
 		public override int GetHashCode()
 		{
 			return index;
+		}
+
+		// Allow iteration over this vertice's edge elements.
+		public IEnumerable<Edge> getEdges()
+		{
+			return edges;
 		}
 
 	}

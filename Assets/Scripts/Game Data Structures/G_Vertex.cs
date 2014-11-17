@@ -27,10 +27,10 @@ namespace AssemblyCSharp
 
 		// -- Properties.
 		// Every Neighborhood may contain various shops and stops.
-		bool bus_stop    = false;
-		bool train_stop  = false;
-		bool bike_shop   = false;
-		bool bike_rental = false;
+		public bool bus_stop    = false;
+		public bool train_stop  = false;
+		public bool bike_shop   = false;
+		public bool bike_rental = false;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="AssemblyCSharp.G_Vertex"/> class.
