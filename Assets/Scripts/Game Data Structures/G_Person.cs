@@ -154,7 +154,7 @@ namespace AssemblyCSharp
 
 			HashSet<G_Vertex> Visited = new HashSet<G_Vertex>();
 
-			while (PQ.Count > 0)
+			while (!PQ.isEmpty())
 			{
 				Priority_Node<G_Vertex> node = PQ.ExtractDominating();
 				G_Vertex vert = node.elem;
@@ -174,7 +174,9 @@ namespace AssemblyCSharp
 					return true;
 				}
 
-				// -- Expand node.
+				// -- Expand (Visit) the node.
+
+				Visited.Add (vert);
 
 				IEnumerable<Edge> iter = vert.getEdges();
 				foreach(Edge e_abstract in iter)
