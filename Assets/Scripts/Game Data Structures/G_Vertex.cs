@@ -23,7 +23,7 @@ namespace AssemblyCSharp
 		private int x, y;
 		
 		// A set of the people currently inside of this vertex.
-		private HashSet<G_Person> people;
+		private HashSet<G_Person> people = new HashSet<G_Person>();
 
 		// -- Properties.
 		// Every Neighborhood may contain various shops and stops.
@@ -38,7 +38,7 @@ namespace AssemblyCSharp
 		/// <param name="index">Index.</param>
 		public G_Vertex(int index) : base(index)
 		{
-
+			/* Trivial Constructor. */
 		}
 
 		
