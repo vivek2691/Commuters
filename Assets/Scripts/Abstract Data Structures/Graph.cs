@@ -24,8 +24,8 @@ namespace AssemblyCSharp
 		// -- Data Fields.
 
 		// Builtin UBA's do not have generic type specifications in C SHARP.
-		HashSet<Vertex> vertices = new HashSet<Vertex>(); // UBA<Vertex>.
-		HashSet<Edge>   edges    = new HashSet<Edge>(); // UBA<Edge>.
+		private HashSet<Vertex> vertices = new HashSet<Vertex>(); // UBA<Vertex>.
+		private HashSet<Edge>   edges    = new HashSet<Edge>(); // UBA<Edge>.
 
 		private int vert_index = 0;
 		private int edge_index = 0;
@@ -90,7 +90,7 @@ namespace AssemblyCSharp
 			// -- First remove all of the edges.
 			IEnumerable<Edge> edges = v.getEdges ();
 
-			foreach (Edge e in v.getEdges())
+			foreach (Edge e in edges)
 			{
 				removeEdge(e);
 			}

@@ -38,6 +38,7 @@ namespace AssemblyCSharp
 
 		public static int COST_RENT_BIKE = 1;
 		public static int COST_RENT_CAR  = 2;
+
 		public static int COST_BUY_BIKE  = 3;
 		public static int COST_BUY_CAR   = 4;
 	}

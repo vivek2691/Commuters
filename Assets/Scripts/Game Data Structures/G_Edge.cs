@@ -13,7 +13,7 @@ namespace AssemblyCSharp
 	{
 		// The set of people travelling along this Edge.
 		// Each person has a weight field that represent their position percentage along an edge.
-		private HashSet<G_Person> people;
+		private HashSet<G_Person> people = new HashSet<G_Person>();
 
 		// -- Properties
 		// Each Edge has a set of improvement properties.
@@ -29,6 +29,11 @@ namespace AssemblyCSharp
 		/// <param name="index">Index.</param>
 		public G_Edge (G_Vertex v1, G_Vertex v2, int index) : base(v1, v2, index)
 		{
+
+			if (v1 == v2)
+			{
+				throw new Exception("This game should not have edges with identical vertices!!!");
+			}
 
 			// Every edge starts out being unimproved.
 			myImprovements.Add(EdgeType.Unimproved);// This may be superfluous, because it is implied.

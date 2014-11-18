@@ -39,6 +39,9 @@ namespace AssemblyCSharp
 		private Stack<G_Vertex> path = null;
 		private int path_money_cost = 0;
 
+		private double percentage_change_per_frame = 0.0;
+
+
 		private HashSet<Vehicle> vehicles = new HashSet<Vehicle> ();
 
 		public G_Person(G_Vertex v_home, G_Vertex v_work)
@@ -89,21 +92,84 @@ namespace AssemblyCSharp
 		/// </summary>
 		/// <param name="v_new"> The destination vertice this person should be moving to.
 		/// <param name="money"> The total amount of money this person will be willing to spend on this trip.
-		/// <returns><c>true</c>, if a path exists that costs less than the input money allowance and the person was moved, 
-		/// <c>false</c> if no path could be found and the person has not been moved.</returns>
-		public bool MoveTowards(G_Vertex v_new, int money)
+		/// <returns>-1 if no path was found that can be satisfied with the given money alowance.
+		/// returns a cost >= 0 if a path was found and the player has been moved.
+		/// The return value is the cost of any payments the player may have had to make.
+		/// </returns>
+		public int MoveTowards(G_Vertex v_new, int money)
 		{
 			// Compute a new shortest path if the person is given a new destination.
 			if(v_new != v_current_goal || money < path_money_cost)
 			{
 				if(computeShortestPath(v_new, money) == false)
 				{
-					return false;
+					return -1;
 				}
 			}
 
-			// Movement code.
-			throw new Exception ("Not yet implemented!");
+			// -- Movement code.
+
+			// No Path --> no movement.
+			if(path == null || path.Count == 0)
+			{
+				return -1;
+			}
+
+			// Handle moving along an edge.
+			if(myState == PersonState.Edge)
+			{
+				weight += percentage_change_per_frame;
+
+				if(weight < 0)
+				{
+					G_Vertex v_percentage1 = myEdge.getV1() as G_Vertex;
+					teleportToVertex(v_percentage1);
+					return 0;
+				}
+
+				if(weight > 1)
+				{
+					G_Vertex v_percentage2 = myEdge.getV2() as G_Vertex;
+					teleportToVertex(v_percentage2);
+					return 0;
+				}
+
+				return 0;
+			}
+
+			// -- Handle in vertex movement.
+
+			// Retrive relevant topological information.
+			G_Vertex next = path.Pop ();
+			G_Edge edge = myVertex.getEdgeTo (next) as G_Edge;
+			Box<int> amount_left = new Box<int> (money);
+
+			double speed = computePathSpeed (edge, myVertex, next, amount_left);
+
+			int next_vert_index = edge.getVerticeIndex (next);
+
+			double length = edge.getLength();
+
+			// Now change the state of this person to allow him to embark on an edge.
+			if(next_vert_index == 1)
+			{
+				// Case where the person travels from v2 to v1 --> 1.0 -> 0.0
+				weight = 1.0;
+				percentage_change_per_frame = -speed/length;
+			}
+			else
+			{
+				// Case where the person travels from v1 to v2 --> 0.0 -> 1.0
+				weight = 0.0;
+				percentage_change_per_frame = -speed/length;
+			}
+
+			myEdge = edge;
+			edge.addPerson (this);
+			myState = PersonState.Edge;
+
+			// Return the cost of embarking on this edge.
+			return money - amount_left.elem;
 		}
 
 		/// <summary>
@@ -191,7 +257,9 @@ namespace AssemblyCSharp
 					// while updating the money value to be the moeny left after the edge is traversed.
 					// WARNING : This algorithm assumes that the player is always willing to pay more to travel faster.
 					// Because of this design choice, it is possible for people to spend money on short edges instead of longer edges.
-					double time = timeLength (e, vert, v_dest, money);
+					double speed = computePathSpeed (e, vert, v_dest, money);
+
+					double time = speed / e.getLength();
 
 					// Compute the estimated distance value for this node using the euclidean heuristic.
 					double estimate_val = node.priority + time + v_dest.distanceTo(goal);
@@ -216,60 +284,87 @@ namespace AssemblyCSharp
 		/// </returns>
 		/// <param name="edge">Edge.</param>
 		// FIXME : I need to handle bus fares and train fares. (Basically, I need to handle the money.);
-		public double timeLength(G_Edge edge, G_Vertex src, G_Vertex dest, Box<int> money)
+		public double computePathSpeed(G_Edge edge, G_Vertex src, G_Vertex dest, Box<int> money)
 		{
 			HashSet<EdgeType> types = edge.getImprovements ();
 
-			double length = edge.getLength ();
-
-			if (src.train_stop && dest.train_stop && types.Contains (EdgeType.Rail))
+			if (src.train_stop && dest.train_stop && types.Contains (EdgeType.Rail) &&
+			    money.elem >= PublicConstants.COST_TRAIN_TICKET)
 			{
-				return length/PublicConstants.SPEED_RAIL;
+				money.elem -= PublicConstants.COST_TRAIN_TICKET;
+				return PublicConstants.SPEED_RAIL;
 			}
 
+			// Handle Riding in an owned car.
 			if(vehicles.Contains(Vehicle.Car))
 			{
 				if(types.Contains (EdgeType.Boulevard))
 				{
-					return length/PublicConstants.SPEED_BOULEVARD;
+					return PublicConstants.SPEED_BOULEVARD;
 				}
 
 				if(types.Contains (EdgeType.Road))
 			    {
-					return length/PublicConstants.SPEED_ROAD;
+					return PublicConstants.SPEED_ROAD;
 				}
 			}
 
-			// Handle taking a bus.
-			if (src.bus_stop && dest.bus_stop)
+			// Handle Riding in a rental car.
+			if(src.car_rental && money.elem >= PublicConstants.COST_RENT_CAR)
 			{
 				if(types.Contains (EdgeType.Boulevard))
 				{
-					return length/PublicConstants.SPEED_BOULEVARD;
+					money.elem -= PublicConstants.COST_RENT_CAR;
+					return PublicConstants.SPEED_BOULEVARD;
 				}
 				
 				if(types.Contains (EdgeType.Road))
 				{
-					return length/PublicConstants.SPEED_ROAD;
+					money.elem -= PublicConstants.COST_RENT_CAR;
+					return PublicConstants.SPEED_ROAD;
+				}
+			}
+
+			// Handle taking a bus.
+			if (src.bus_stop && dest.bus_stop && money.elem >= PublicConstants.COST_BUS_TICKET)
+			{
+
+				if(types.Contains (EdgeType.Boulevard))
+				{
+					money.elem -= PublicConstants.COST_BUS_TICKET;
+					return PublicConstants.SPEED_BOULEVARD;
+				}
+				
+				if(types.Contains (EdgeType.Road))
+				{
+					money.elem -= PublicConstants.COST_BUS_TICKET;
+					return PublicConstants.SPEED_ROAD;
 				}
 			}
 
 			// Ride an owned bike.
 			if(vehicles.Contains(Vehicle.Bike) && types.Contains(EdgeType.Biking_Trail))
 			{
-				return length/PublicConstants.SPEED_BIKE_TRAIL;
+				return PublicConstants.SPEED_BIKE_TRAIL;
+			}
+
+			// Rent a bike.
+			if(src.bike_rental && types.Contains(EdgeType.Biking_Trail) && money.elem >= PublicConstants.COST_RENT_BIKE)
+			{
+				money.elem -= PublicConstants.COST_RENT_BIKE;
+				return PublicConstants.SPEED_BIKE_TRAIL;
 			}
 
 			// Walk along a footpath.
 			if(types.Contains (EdgeType.Footpath))
 			{
-				return length/PublicConstants.SPEED_FOOTPATH;
+				return PublicConstants.SPEED_FOOTPATH;
 			}
 
 
 			// Walk along a nasty hunk of ground,
 			// hopefully the person will get to work without too many bruises!!!
-			return length/PublicConstants.SPEED_UNIMPROVED;
+			return PublicConstants.SPEED_UNIMPROVED;
 		}
 
 		/// <summary>
@@ -368,6 +463,36 @@ namespace AssemblyCSharp
 		{
 			return vehicles.Contains (v);
 		}
+
+
+		public G_Vertex getHomeVertex()
+		{
+			return v_home;
+		}
+		
+		public G_Vertex getWorkVertex()
+		{
+			return v_work;
+		}
+
+		public void setHomeVertex(G_Vertex v)
+		{
+			if(v == null)
+			{
+				throw new Exception("Null vertex input");
+			}
+			v_home = v;
+		}
+
+		public void setWorkVertex(G_Vertex v)
+		{
+			if(v == null)
+			{
+				throw new Exception("Null vertex input");
+			}
+			v_work = v;
+		}
+
 
 	}
 }

@@ -18,7 +18,7 @@ namespace AssemblyCSharp
 		// Represented as an unordered set of two vertices.
 		protected Vertex v1, v2;
 
-		private int index;
+		//private int index;
 
 		/// <summary>
 		/// Edge constructor. Requires two distinct vertices, non null vertice.
@@ -34,7 +34,7 @@ namespace AssemblyCSharp
 				throw new Exception("Illegal Edge Construction");
 			}
 
-			this.index = index;
+			//this.index = index;
 
 			// Store the vertex references in order from least index to greatest index.
 			if (v1.getIndex() < v2.getIndex ())
@@ -101,6 +101,7 @@ namespace AssemblyCSharp
 			return v1.GetHashCode() + 5342921*v2.GetHashCode();
 		}
 
+		// -- Vertice information retrieval functions.
 		public List<Vertex> getVerticeList()
 		{
 			List<Vertex> output = new List<Vertex>();
@@ -109,6 +110,39 @@ namespace AssemblyCSharp
 			output.Add (v2);
 
 			return output;
+		}
+
+		public int getVerticeIndex(Vertex v)
+		{
+			if (v == v1)
+			{
+				return 1;
+			}
+
+			if (v == v2)
+			{
+				return 2;
+			}
+
+			// The vertice was not found.
+			return -1;
+		}
+
+		public Vertex getVertex(int index)
+		{
+			if(index == 1)
+			{
+				return v1;
+			}
+
+			if(index == 2)
+			{
+				return v2;
+			}
+
+			// Not a useful index.
+			// Remember that edges only have 2 vertices.
+			return null;
 		}
 	}
 }

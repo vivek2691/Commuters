@@ -14,7 +14,7 @@ namespace AssemblyCSharp
 	{
 		// -- Private Data Fields.
 		private int index = 0;
-		private HashSet<Edge> edges;
+		private HashSet<Edge> edges = new HashSet<Edge> ();
 
 		/// <summary>
 		///  Default empty constructor.
@@ -105,6 +105,23 @@ namespace AssemblyCSharp
 			return edges;
 		}
 
+		/// <summary>
+		/// Retrieves an edge that connects this vertex to the input vertex.
+		/// </summary>
+		/// <returns>The edge that connects this vertex to the given vertex.</returns>
+		/// <param name="v">V.</param>
+		public Edge getEdgeTo(Vertex v)
+		{
+			foreach (Edge e in edges)
+			{
+				if(e.getOther(this) == v)
+				{
+					return e;
+				}
+			}
+
+			throw new Exception("This vertex does not contain an edge to the given vertex.");
+		}
 	}
 }
 
