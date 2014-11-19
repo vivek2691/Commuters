@@ -41,6 +41,10 @@ namespace AssemblyCSharp
 
 		public static int COST_BUY_BIKE  = 3;
 		public static int COST_BUY_CAR   = 4;
+
+		// Used for Game Clock
+
+		public static int MINUTES_PER_DAY = 1440;
 	}
 }
 

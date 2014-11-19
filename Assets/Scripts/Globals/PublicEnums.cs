@@ -17,6 +17,12 @@ public enum Vehicle
 	Car
 }
 
+public enum VertexType
+{
+	Rich,
+	Poor
+}
+
 /// <summary>
 /// Person location enum.
 /// 
