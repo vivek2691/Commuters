@@ -7,15 +7,13 @@
 /// </summary>
 //------------------------------------------------------------------------------
 using System;
-namespace AssemblyCSharp
-{
-	public class Box<E>
-	{
-		public E elem;
 
-		public Box (E elem)
-		{
-			this.elem = elem;
-		}
+public class Box<E>
+{
+	public E elem;
+	
+	public Box (E elem)
+	{
+		this.elem = elem;
 	}
 }

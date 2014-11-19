@@ -16,159 +16,179 @@
 using System;
 using System.Collections.Generic;
 using System.Collections;
+using System.Text;
 
-namespace AssemblyCSharp
+
+public class Graph
 {
-	public class Graph
+	// -- Data Fields.
+	
+	// Builtin UBA's do not have generic type specifications in C SHARP.
+	private HashSet<Vertex> vertices = new HashSet<Vertex>(); // UBA<Vertex>.
+	private HashSet<Edge>   edges    = new HashSet<Edge>(); // UBA<Edge>.
+	
+	private int vert_index = 0;
+	private int edge_index = 0;
+	
+	
+	// --  Abstract functions that should be overriden in sub classes.
+	
+	/// <summary>
+	/// Constructs and returns a new Vertex.
+	/// </summary>
+	/// <returns>The vertex.</returns>
+	public Vertex newVertex()
 	{
-		// -- Data Fields.
-
-		// Builtin UBA's do not have generic type specifications in C SHARP.
-		private HashSet<Vertex> vertices = new HashSet<Vertex>(); // UBA<Vertex>.
-		private HashSet<Edge>   edges    = new HashSet<Edge>(); // UBA<Edge>.
-
-		private int vert_index = 0;
-		private int edge_index = 0;
-
-
-		// --  Abstract functions that should be overriden in sub classes.
-
-		/// <summary>
-		/// Constructs and returns a new Vertex.
-		/// </summary>
-		/// <returns>The vertex.</returns>
-		public Vertex newVertex()
-		{
-			Vertex v  = new Vertex (nextVertIndex());
-			addVertex (v);
-			return v;
-		}
-
-		/// <summary>
-		/// 		/// </summary>
-		/// <returns>The edge.</returns>
-		/// <param name="vertex_index_1">Vertex_index_1.</param>
-		/// <param name="vertex_index_2">Vertex_index_2.</param>
-		Edge newEdge(Vertex v1, Vertex v2)
-		{
-			Edge e = new Edge (v1, v2, nextEdgeIndex ());
-			addEdge (e);
-			return e;
-		}
-
-
-		// -- The various helper functions.
-
-
-
-		/// <summary>
-		/// Adds the vertex to this graph.
-		/// </summary>
-		/// <returns><c>true</c>, if vertex was added, <c>false</c> otherwise.</returns>
-		/// <param name="v">V.</param>
-		protected bool addVertex(Vertex v)
-		{
-			return vertices.Add (v);
-		}
-
-		protected int nextVertIndex()
-		{
-			return vert_index++;
-		}
-
-		/// <summary>
-		/// Removes the given vertex from this graph.
-		/// </summary>
-		/// <param name="v">v is the vertex to be removed.</param>
-		public bool removeVertex(Vertex v)
-		{
-			if (!vertices.Contains (v))
-			{
-				return false;
-			}
-
-			// -- First remove all of the edges.
-			IEnumerable<Edge> edges = v.getEdges ();
-
-			foreach (Edge e in edges)
-			{
-				removeEdge(e);
-			}
-
-			// Now remove the vertex.
-			vertices.Remove (v);
-
-			return true;
-		}
-
-		/// <summary>
-		/// Returns an iterator for all of the vertices.
-		/// </summary>
-		/// <returns>The vertices.</returns>
-		public IEnumerable<Vertex> getVertices()
-		{
-			return vertices;
-		}
-
-		/// <summary>
-		/// Constructs a new edge.
-		/// </summary>
-		/// <returns>The edge.</returns>
-		/// <param name="vertex_index_1">Vertex_index_1.</param>
-		/// <param name="vertex_index_2">Vertex_index_2.</param>
-		protected bool addEdge(Edge e)
-		{
-			if (edges.Add (e) == false)
-			{
-				return false;
-			}
-
-			// Update the states of the two Vertices.
-			e.getV1().addEdge (e);
-			e.getV2().addEdge (e);
-
-			return true;
-		}
-
-		/// <summary>
-		/// Returns a unique ID for a newly created edge. this should be used by subclasses.
-		/// </summary>
-		/// <returns>The edge index.</returns>
-		protected int nextEdgeIndex()
-		{
-			return edge_index++;
-		}
-
-
-		/// <summary>
-		/// Removes the given edge from the graph.
-		/// </summary>
-		/// <returns><c>true</c>, if edge was removed, <c>false</c> otherwise.</returns>
-		/// <param name="e">E.</param>
-		public bool removeEdge(Edge e)
-		{
-			if (edges.Remove (e) == false)
-			{
-				return false;
-			}
-
-			e.getV1().removeEdge (e);
-			e.getV2().removeEdge (e);
-
-			return true;
-		}
-
-		/// <summary>
-		/// Returns an iterator for the set of all edges in this graph.
-		/// </summary>
-		/// <returns>The edges.</returns>
-		public IEnumerable<Edge> getEdges()
-		{
-			return edges;
-		}
-
-
+		Vertex v  = new Vertex (nextVertIndex());
+		addVertex (v);
+		return v;
 	}
-
+	
+	/// <summary>
+	/// 		/// </summary>
+	/// <returns>The edge.</returns>
+	/// <param name="vertex_index_1">Vertex_index_1.</param>
+	/// <param name="vertex_index_2">Vertex_index_2.</param>
+	Edge newEdge(Vertex v1, Vertex v2)
+	{
+		Edge e = new Edge (v1, v2, nextEdgeIndex ());
+		addEdge (e);
+		return e;
+	}
+	
+	
+	// -- The various helper functions.
+	
+	
+	
+	/// <summary>
+	/// Adds the vertex to this graph.
+	/// </summary>
+	/// <returns><c>true</c>, if vertex was added, <c>false</c> otherwise.</returns>
+	/// <param name="v">V.</param>
+	protected bool addVertex(Vertex v)
+	{
+		return vertices.Add (v);
+	}
+	
+	protected int nextVertIndex()
+	{
+		return vert_index++;
+	}
+	
+	/// <summary>
+	/// Removes the given vertex from this graph.
+	/// </summary>
+	/// <param name="v">v is the vertex to be removed.</param>
+	public bool removeVertex(Vertex v)
+	{
+		if (!vertices.Contains (v))
+		{
+			return false;
+		}
+		
+		// -- First remove all of the edges.
+		IEnumerable<Edge> edges = v.getEdges ();
+		
+		foreach (Edge e in edges)
+		{
+			removeEdge(e);
+		}
+		
+		// Now remove the vertex.
+		vertices.Remove (v);
+		
+		return true;
+	}
+	
+	/// <summary>
+	/// Returns an iterator for all of the vertices.
+	/// </summary>
+	/// <returns>The vertices.</returns>
+	public IEnumerable<Vertex> getVertices()
+	{
+		return vertices;
+	}
+	
+	/// <summary>
+	/// Constructs a new edge.
+	/// </summary>
+	/// <returns>The edge.</returns>
+	/// <param name="vertex_index_1">Vertex_index_1.</param>
+	/// <param name="vertex_index_2">Vertex_index_2.</param>
+	protected bool addEdge(Edge e)
+	{
+		if (edges.Add (e) == false)
+		{
+			return false;
+		}
+		
+		// Update the states of the two Vertices.
+		e.getV1().addEdge (e);
+		e.getV2().addEdge (e);
+		
+		return true;
+	}
+	
+	/// <summary>
+	/// Returns a unique ID for a newly created edge. this should be used by subclasses.
+	/// </summary>
+	/// <returns>The edge index.</returns>
+	protected int nextEdgeIndex()
+	{
+		return edge_index++;
+	}
+	
+	
+	/// <summary>
+	/// Removes the given edge from the graph.
+	/// </summary>
+	/// <returns><c>true</c>, if edge was removed, <c>false</c> otherwise.</returns>
+	/// <param name="e">E.</param>
+	public bool removeEdge(Edge e)
+	{
+		if (edges.Remove (e) == false)
+		{
+			return false;
+		}
+		
+		e.getV1().removeEdge (e);
+		e.getV2().removeEdge (e);
+		
+		return true;
+	}
+	
+	/// <summary>
+	/// Returns an iterator for the set of all edges in this graph.
+	/// </summary>
+	/// <returns>The edges.</returns>
+	public IEnumerable<Edge> getEdges()
+	{
+		return edges;
+	}
+	
+	public override String ToString()
+	{
+		StringBuilder s = new StringBuilder("");
+		
+		s.AppendLine ("Graph");
+		s.AppendLine ("Vertices:");
+		
+		foreach (Vertex v in vertices)
+		{
+			s.AppendLine(v.ToString());
+		}
+		
+		s.AppendLine ("\n Edges:");
+		
+		foreach (Edge e in edges)
+		{
+			s.AppendLine(e.ToString());
+		}
+		
+		s.AppendLine ("Graph END\n");
+		
+		return s.ToString();
+	}
 }
 

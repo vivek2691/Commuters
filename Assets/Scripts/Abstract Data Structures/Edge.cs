@@ -10,140 +10,161 @@
 using System;
 using System.Collections.Generic;
 
-
-namespace AssemblyCSharp
+public class Edge
 {
-	public class Edge
+	// Represented as an unordered set of two vertices.
+	protected Vertex v1, v2;
+	
+	//private int index;
+	
+	/// <summary>
+	/// Edge constructor. Requires two distinct vertices, non null vertice.
+	/// </summary>
+	/// <param name="v1">V1.</param>
+	/// <param name="v2">V2.</param>
+	public Edge (Vertex v1, Vertex v2, int index)
 	{
-		// Represented as an unordered set of two vertices.
-		protected Vertex v1, v2;
-
-		//private int index;
-
-		/// <summary>
-		/// Edge constructor. Requires two distinct vertices, non null vertice.
-		/// </summary>
-		/// <param name="v1">V1.</param>
-		/// <param name="v2">V2.</param>
-		public Edge (Vertex v1, Vertex v2, int index)
+		if (v1 == null ||
+		    v2 == null ||
+		    v1 == v2)
 		{
-			if (v1 == null ||
-			    v2 == null ||
-			    v1 == v2)
-			{
-				throw new Exception("Illegal Edge Construction");
-			}
-
-			//this.index = index;
-
-			// Store the vertex references in order from least index to greatest index.
-			if (v1.getIndex() < v2.getIndex ())
-			{
-				this.v1 = v1;
-				this.v2 = v2;
-			}
-			else
-			{
-				this.v1 = v2;
-				this.v2 = v1;
-			}
+			throw new Exception("Illegal Edge Construction");
 		}
-
-		// -- Public Interface functions.
-
-		public Vertex getOther(Vertex v)
+		
+		//this.index = index;
+		
+		// Store the vertex references in order from least index to greatest index.
+		if (v1.getIndex() < v2.getIndex ())
 		{
-			if (v == v1)
-			{
-				return v2;
-			}
-
-			if(v == v2)
-			{
-				return v1;
-			}
-
-			throw new Exception("Edge: getOther(v), an illegal vertice was passed to this function.");
+			this.v1 = v1;
+			this.v2 = v2;
 		}
-
-		public Vertex getV1()
+		else
 		{
-			return v1;
+			this.v1 = v2;
+			this.v2 = v1;
 		}
-
-		public Vertex getV2()
+	}
+	
+	// -- Public Interface functions.
+	
+	public Vertex getOther(Vertex v)
+	{
+		if (v == v1)
 		{
 			return v2;
 		}
-
-		// -- Standard overrid functions.
-		public override bool Equals (object obj)
+		
+		if(v == v2)
 		{
-			Edge n = obj as Edge;
-			
-			// Not a Vertex object.
-			if (n == null)
-			{
-				return false;
-			}
-			
-			return Equals (n);
+			return v1;
 		}
 		
-		public bool Equals(Edge e)
-		{
-			return this == e;
-		}
-		
-		public override int GetHashCode()
-		{
-			// The number is a large prime number.
-			return v1.GetHashCode() + 5342921*v2.GetHashCode();
-		}
-
-		// -- Vertice information retrieval functions.
-		public List<Vertex> getVerticeList()
-		{
-			List<Vertex> output = new List<Vertex>();
-
-			output.Add (v1);
-			output.Add (v2);
-
-			return output;
-		}
-
-		public int getVerticeIndex(Vertex v)
-		{
-			if (v == v1)
-			{
-				return 1;
-			}
-
-			if (v == v2)
-			{
-				return 2;
-			}
-
-			// The vertice was not found.
-			return -1;
-		}
-
-		public Vertex getVertex(int index)
-		{
-			if(index == 1)
-			{
-				return v1;
-			}
-
-			if(index == 2)
-			{
-				return v2;
-			}
-
-			// Not a useful index.
-			// Remember that edges only have 2 vertices.
-			return null;
-		}
+		throw new Exception("Edge: getOther(v), an illegal vertice was passed to this function.");
 	}
+	
+	public Vertex getV1()
+	{
+		return v1;
+	}
+	
+	public Vertex getV2()
+	{
+		return v2;
+	}
+	
+	// -- Standard overrid functions.
+	public override bool Equals (object obj)
+	{
+		Edge n = obj as Edge;
+		
+		// Not a Vertex object.
+		if (n == null)
+		{
+			return false;
+		}
+		
+		return Equals (n);
+	}
+	
+	public bool Equals(Edge e)
+	{
+		return this == e;
+	}
+	
+	public override int GetHashCode()
+	{
+		// The number is a large prime number.
+		return v1.GetHashCode() + 5342921*v2.GetHashCode();
+	}
+	
+	// -- Vertice information retrieval functions.
+	public List<Vertex> getVerticeList()
+	{
+		List<Vertex> output = new List<Vertex>();
+		
+		output.Add (v1);
+		output.Add (v2);
+		
+		return output;
+	}
+	
+	/// <summary>
+	/// Returns the index of the given vertex within this structure.
+	/// A syntactic sugar function that allows the vertices to be queried by index.
+	/// This function is the inverse of the getVertex(int index) function.
+	/// </summary>
+	/// <returns>The vertice index.</returns>
+	/// <param name="v">V.</param>
+	public int getVerticeIndex(Vertex v)
+	{
+		if (v == v1)
+		{
+			return 1;
+		}
+		
+		if (v == v2)
+		{
+			return 2;
+		}
+		
+		// The vertice was not found.
+		return -1;
+	}
+	
+	/// <summary>
+	/// A syntactic sugar function that allows the vertices to be queried by index.
+	/// This function is the inverse of the getVerticeIndex(Vertex v) function.
+	/// /// </summary>
+	/// <returns>index = 1 --> returns v1, index = 2 --> returns v2, index = anything else --> returns -1.</returns>
+	/// <param name="index">the index (1 or 2) of the vertice we want.</param>
+	public Vertex getVertex(int index)
+	{
+		if(index == 1)
+		{
+			return v1;
+		}
+		
+		if(index == 2)
+		{
+			return v2;
+		}
+		
+		// Not a useful index.
+		// Remember that edges only have 2 vertices.
+		return null;
+	}
+	
+	/// <summary>
+	/// Returns a string that represents this edge current object.
+	/// </summary>
+	/// <returns>A string that represents the current object.</returns>
+	/// <filterpriority>2</filterpriority>
+	public override string ToString() 
+	{
+		return "(" + v1 + "," + v2 + ")";
+	}
+	
 }
+
 

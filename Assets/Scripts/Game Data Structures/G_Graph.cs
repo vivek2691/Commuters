@@ -10,14 +10,15 @@
 using UnityEngine;
 using System.Collections;
 
-using AssemblyCSharp;
 using System.Collections.Generic;
 
 
 public class G_Graph : Graph
 {
 
-	HashSet<G_Person> people = new HashSet<G_Person>();
+	// -- Data Structures.
+	private HashSet<G_Person> people = new HashSet<G_Person>();
+	private int person_index = 0;
 
 	/// <summary>
 	/// Constructs and returns a new G_vertice.
@@ -39,7 +40,7 @@ public class G_Graph : Graph
 	/// <returns>The edge.</returns>
 	/// <param name="vertex_index_1">Vertex_index_1.</param>
 	/// <param name="vertex_index_2">Vertex_index_2.</param>
-	G_Edge newEdge(G_Vertex v1, G_Vertex v2)
+	public G_Edge newEdge(G_Vertex v1, G_Vertex v2)
 	{
 		G_Edge e = new G_Edge (v1, v2, nextEdgeIndex ());
 		addEdge (e);
@@ -55,11 +56,17 @@ public class G_Graph : Graph
 	/// <param name="work">Work.</param>
 	public G_Person newPerson(G_Vertex home, G_Vertex work)
 	{
-		G_Person p = new G_Person (home, work);
+		int index = nextPersonIndex ();
+		G_Person p = new G_Person (home, work, index);
 
 		people.Add(p);
 
 		return p;
+	}
+
+	protected int nextPersonIndex()
+	{
+		return person_index++;
 	}
 
 	/// <summary>

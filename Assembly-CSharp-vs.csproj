@@ -52,6 +52,7 @@
      <Compile Include="Assets\Scripts\Abstract Data Structures\Heap.cs" />
      <Compile Include="Assets\Scripts\Abstract Data Structures\Priority_Node.cs" />
      <Compile Include="Assets\Scripts\Abstract Data Structures\Vertex.cs" />
+     <Compile Include="Assets\Scripts\BryceTestScript.cs" />
      <Compile Include="Assets\Scripts\Game Data Structures\G_Edge.cs" />
      <Compile Include="Assets\Scripts\Game Data Structures\G_Graph.cs" />
      <Compile Include="Assets\Scripts\Game Data Structures\G_Person.cs" />
