@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using AssemblyCSharp;
+
 
 /// <summary>
 /// Behaviour equivalent of Bryce's G_Edge class

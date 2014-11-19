@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using AssemblyCSharp;
+
 
 
 /// <summary>
@@ -30,7 +30,7 @@ public class PublicClock : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(timeMin==AssemblyCSharp.PublicConstants.MINUTES_PER_DAY)
+		if(timeMin==PublicConstants.MINUTES_PER_DAY)
 			timeMin=0;
 		timeMin += timeLapsePerFrame;
 	}

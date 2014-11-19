@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using AssemblyCSharp;
+
 
 /// <summary>
 /// Neighbourhood Class. Represents a neighbourhood in the game.
@@ -13,7 +13,7 @@ using AssemblyCSharp;
 public class BNeighbourhood : MonoBehaviour {
 
 
-	AssemblyCSharp.G_Vertex vertex;
+	G_Vertex vertex;
 	public GameObject personPrefab;
 
 	BPlayer player;

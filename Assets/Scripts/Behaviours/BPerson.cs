@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using AssemblyCSharp;
+
 
 /// <summary>
 /// This class controls the behaviour and statistics of each NPC. This is my equivalen of Bryce's G_Person class
@@ -35,7 +35,7 @@ public class BPerson : MonoBehaviour {
 	{
 		this.home = home;
 		this.destination = destination;
-		this.gPerson = new G_Person (this.home.GetVertex (),this.destination.GetVertex());
+		this.gPerson = new G_Person (this.home.GetVertex (),this.destination.GetVertex(),0);
 		//this.destination = 
 
 	}
