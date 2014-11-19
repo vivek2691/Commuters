@@ -6,4 +6,5 @@ Temp*
 *.csproj
 *.pidb
 *.unityproj
+*.userprefs
 *.sln
