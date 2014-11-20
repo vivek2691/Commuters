@@ -31,7 +31,7 @@ public class BNeighbourhood : MonoBehaviour {
 	public void Spawn(Vector3 position,BPlayer player,G_Graph graph)
 	{
 		this.player = player;
-		this.vertex = graph.newVertex ((int)gameObject.transform.position.x,(int)gameObject.transform.position.z);
+		this.vertex = graph.newVertex (gameObject.transform.position.x, gameObject.transform.position.z);
 		print (vertex);
 	}
 

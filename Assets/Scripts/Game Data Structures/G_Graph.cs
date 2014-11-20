@@ -24,12 +24,12 @@ public class G_Graph : Graph
 	/// Constructs and returns a new G_vertice.
 	/// </summary>
 	/// <returns>The vertex.</returns>
-	public G_Vertex newVertex(int x, int y)
+	public G_Vertex newVertex(float x, float y)
 	{
 		G_Vertex v  = new G_Vertex (nextVertIndex());
 
 		// Give the vertex the correct data.
-		v.setPosition (x, y);
+		v.setPosition ((double)x, (double)y);
 
 		addVertex (v);
 		return v;
