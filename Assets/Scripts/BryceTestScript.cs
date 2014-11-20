@@ -30,12 +30,12 @@ public class BryceTestScript : MonoBehaviour
 		ASSERT (G.getNumVertices () == 0);
 		ASSERT (G.getNumEdges () == 0);
 
-		G_Vertex v0 = G.newVertex (0, 0);
+		G_Vertex v0 = G.newVertex (18, 0);
 		ASSERT (G.getNumVertices () == 1);
 		ASSERT (G.getNumEdges () == 0);
 		ASSERT (v0.GetHashCode() == 0);
 
-		G_Vertex v1 = G.newVertex (100, 0);
+		G_Vertex v1 = G.newVertex (-17, 0);
 		ASSERT (G.getNumVertices () == 2);
 		ASSERT (G.getNumEdges () == 0);
 		ASSERT (v1.GetHashCode() == 1);
@@ -80,6 +80,7 @@ public class BryceTestScript : MonoBehaviour
 		{
 			ASSERT(e1.hasPerson (p));
 			p.MoveTowards (v1, 20);
+			Debug.Log (p);
 		}
 
 		ASSERT(!e1.hasPerson (p));

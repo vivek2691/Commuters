@@ -414,6 +414,7 @@ public class G_Person
 	{
 		switch(myState)
 		{
+
 		case PersonState.Vertex:
 			return myVertex.getX();
 		case PersonState.Edge:
@@ -436,7 +437,7 @@ public class G_Person
 		switch(myState)
 		{
 		case PersonState.Vertex:
-			return myVertex.getX();
+			return myVertex.getY();
 		case PersonState.Edge:
 			G_Vertex v1 = myEdge.getV1() as G_Vertex;
 			G_Vertex v2 = myEdge.getV2() as G_Vertex;
