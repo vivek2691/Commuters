@@ -19,6 +19,7 @@ public class BPerson : MonoBehaviour {
 	float leaveWorkAt; //Variable that tells the NPC when to leave work for home
 	
 	bool outForWork = false;
+	bool outForHome = false;
 	bool canMove = false;
 
 
@@ -38,11 +39,30 @@ public class BPerson : MonoBehaviour {
 			TravelToWork();
 		}
 		*/
+		if(PublicClock.clock.GetTime()==leaveHomeAt)
+		{
+			outForWork = true;
+		}
+		else if(PublicClock.clock.GetTime()==leaveWorkAt)
+		{
+			outForHome = true;
+			print ("outforhome = true");
+		}
 
 		if(Input.GetKeyDown(KeyCode.M))
 		{
 			TravelToWork();
 			transform.position = new Vector3(gPerson.getX(),transform.position.y,gPerson.getY());
+		}
+
+		if(outForWork)
+		{
+			TravelToWork();
+		}
+		if(outForHome)
+		{
+			print ("Goinghome");
+			TravelToHome();
 		}
 
 	}
@@ -56,6 +76,8 @@ public class BPerson : MonoBehaviour {
 		//print (gPerson);
 		this.leaveHomeAt = Random.Range(PublicConstants.MIN_WAKEUP_TIME,PublicConstants.MAX_WAKEUP_TIME);
 		this.leaveWorkAt = leaveHomeAt + Random.Range(PublicConstants.MIN_WORKING_HOURS,PublicConstants.MAX_WORKING_HOURS);
+		print (leaveHomeAt);
+		print (leaveWorkAt);
 
 	}
 
@@ -66,17 +88,25 @@ public class BPerson : MonoBehaviour {
 
 	void TravelToWork()
 	{
-		print ("Travel TO Work");
-		outForWork = true;
-		canMove = true;
-		//print (destination);
-		gPerson.MoveTowards (destination.GetVertex(), wealth);
-
+		int cost = gPerson.MoveTowards (destination.GetVertex(), wealth);
+		if(cost!=-1)
+			transform.position = new Vector3(gPerson.getX(),transform.position.y,gPerson.getY());
+		else
+		{
+			outForWork = false;
+			lastCommute = gPerson.getCurrentCommutetime();
+			print (lastCommute);
+		}
+			
 	}
 	
 	void TravelToHome()
 	{
-		outForWork = false;
+		int cost = gPerson.MoveTowards (home.GetVertex(),wealth);
+		if(cost!=-1)
+			transform.position = new Vector3(gPerson.getX(),transform.position.y,gPerson.getY());
+		else
+			outForHome = false;
 	}
 
 	public int GetWealth()
