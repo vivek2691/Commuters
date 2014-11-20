@@ -7,13 +7,12 @@ public class BPlayer : MonoBehaviour {
 
 	List<BNeighbourhood> allHoods;
 	List<BEdge> allEdges;
-
-
+	public G_Graph gGraph;
 	public int money;
 
 	// Use this for initialization
 	void Start () {
-	
+		gGraph = new G_Graph ();
 	}
 	
 	// Update is called once per frame
@@ -38,7 +37,7 @@ public class BPlayer : MonoBehaviour {
 		foreach(GameObject obj in objects)
 		{
 			BEdge edge = obj.GetComponent<BEdge>();
-			edge.Spawn();
+			edge.Spawn(gGraph);
 		}
 
 	}
@@ -57,7 +56,7 @@ public class BPlayer : MonoBehaviour {
 			}
 			else
 			{
-				hood.Spawn(obj.transform.position,this);
+				hood.Spawn(obj.transform.position,this,gGraph);
 				allHoods.Add(hood);
 			}
 		}	
@@ -70,7 +69,7 @@ public class BPlayer : MonoBehaviour {
 	{
 		foreach(BNeighbourhood hood in allHoods)
 		{
-			hood.GeneratePopulation();
+			hood.GeneratePopulation(gGraph);
 		}
 	}
 

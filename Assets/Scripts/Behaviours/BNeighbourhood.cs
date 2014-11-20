@@ -28,12 +28,11 @@ public class BNeighbourhood : MonoBehaviour {
 	
 	}
 
-	public void Spawn(Vector3 position,BPlayer player)
+	public void Spawn(Vector3 position,BPlayer player,G_Graph graph)
 	{
 		this.player = player;
-		this.vertex = new G_Vertex (0);
-		this.vertex.setPosition ((int)position.x,(int)position.z);
-
+		this.vertex = graph.newVertex ((int)gameObject.transform.position.x,(int)gameObject.transform.position.z);
+		print (vertex);
 	}
 
 	BNeighbourhood RandomDestination()
@@ -44,15 +43,14 @@ public class BNeighbourhood : MonoBehaviour {
 		return allHoods[rand];
 	}
 
-	public void GeneratePopulation()
+	public void GeneratePopulation(G_Graph graph)
 	{
 		//Add Random number of people to this neighbourhood
-		for(int i=0; i <Random.Range(3,5);i++)
+		for(int i=0; i <1;i++)
 		{
 			GameObject personObject =  (GameObject)Instantiate (personPrefab,this.transform.position,Quaternion.identity);
 			BPerson person = personObject.GetComponent<BPerson>();
-			person.Spawn (this,RandomDestination());
-			vertex.addPerson (person.GetGPerson());
+			person.Spawn (this,RandomDestination(),graph);
 		}
 	}
 
