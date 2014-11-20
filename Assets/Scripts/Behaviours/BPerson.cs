@@ -42,16 +42,8 @@ public class BPerson : MonoBehaviour {
 		if(Input.GetKeyDown(KeyCode.M))
 		{
 			TravelToWork();
-		}
-
-		if(Input.GetKeyDown(KeyCode.N))
-		{
-
 			transform.position = new Vector3(gPerson.getX(),transform.position.y,gPerson.getY());
 		}
-
-
-
 
 	}
 
