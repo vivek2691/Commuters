@@ -5,7 +5,9 @@ TagManager:
   tags:
   - Neighbourhood
   - Edge
-  - closemark
+  - closemarkavgstats
+  - closemarkpersonstats
+  - Person
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

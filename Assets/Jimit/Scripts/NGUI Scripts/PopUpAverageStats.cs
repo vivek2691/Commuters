@@ -6,12 +6,14 @@ public class PopUpAverageStats : MonoBehaviour
     public Camera camera;
     public Camera nguiCamera;
     public GameObject UI_AverageNeighborhoodStats;
+    public GameObject UI_PersonStats;
     GameObject[] neighborhoods;
     
     void Start()
     {
         // at start we don't want to show the neighborhood average stats ui
         DisableAverageStatsUI();
+        DisablePersonStatsUI();
     }
 
     // Update is called once per frame
@@ -23,6 +25,7 @@ public class PopUpAverageStats : MonoBehaviour
             Ray ray = camera.ScreenPointToRay(Input.mousePosition);
             Ray rayNgui = nguiCamera.ScreenPointToRay(Input.mousePosition);
             CheckNeighborhoodHit(ray);
+            CheckPersonHit(ray);
             CheckAverageStatCloseMark(rayNgui);
         }
 
@@ -38,6 +41,11 @@ public class PopUpAverageStats : MonoBehaviour
         UI_AverageNeighborhoodStats.gameObject.active = false;
     }
 
+    private void DisablePersonStatsUI()
+    {
+        UI_PersonStats.gameObject.active = false;
+    }
+
     //activate ui average neighborhood stats. Set the text of values of the clicked neighboor on this UI
     private void ActivateAverageStatsUI(GameObject neighborhood)
     {
@@ -45,6 +53,11 @@ public class PopUpAverageStats : MonoBehaviour
 
         //set all the text values here for eg to set the happiness factor
         // --> UI_AverageNeighborhoodStats.gameObject.transform.GetChild(2).GetChild(0).GetComponent<UILabel>().text = neighborhood.GetHappinessFactor().ToString();
+    }
+
+    private void ActivatePersonStatsUI(GameObject person)
+    {
+        UI_PersonStats.gameObject.active = true;
     }
 
     //check if the neighborhood is clicked by mouse button down
@@ -60,15 +73,32 @@ public class PopUpAverageStats : MonoBehaviour
         }
     }
 
+    //check if the person obj is clicked  to display person avg stats
+    private void CheckPersonHit(Ray ray)
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 500))
+        {
+            if (hit.collider.tag == "Person")
+            {
+                ActivatePersonStatsUI(hit.collider.gameObject);
+            }
+        }
+    }
+
     //close the average stat box if clicked on the close mark
     private void CheckAverageStatCloseMark(Ray ray)
     {
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 500))
         {
-            if (hit.collider.tag == "closemark")
+            if (hit.collider.tag == "closemarkavgstats")
             {
                 DisableAverageStatsUI();
+            }
+            else if (hit.collider.tag == "closemarkpersonstats")
+            {
+                DisablePersonStatsUI();
             }
         }
     }
