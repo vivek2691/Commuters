@@ -94,7 +94,16 @@ public class G_Edge : Edge
 	{
 		return myImprovements;
 	}
-	
+
+	/// <summary>
+	/// Returns true iff the given edge has the requested improvement.
+	/// </summary>
+	/// <param name="e">The edgetype we are querying.</param>
+	public bool hasImprovement(EdgeType e)
+	{
+		return myImprovements.Contains (e);
+	}
+
 	/// <summary>
 	/// Adds a person to this Neighborhood.
 	/// </summary>
@@ -130,22 +139,9 @@ public class G_Edge : Edge
 		return people.Contains (p);
 	}
 
-	public bool hasImprovement(EdgeType e)
-	{
-		return myImprovements.Contains (e);
-	}
-
 	public IEnumerable getPeople()
 	{
 		return people;
 	}
 
-	/// <summary>
-	/// Returns an iterable collection of all improvements for this edge.
-	/// </summary>
-	/// <returns>The improvements.</returns>
-	public IEnumerable getImprovements()
-	{
-		return myImprovements;
-	}
 }	
