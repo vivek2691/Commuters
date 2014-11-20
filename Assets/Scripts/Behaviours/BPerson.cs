@@ -19,6 +19,7 @@ public class BPerson : MonoBehaviour {
 	float leaveWorkAt; //Variable that tells the NPC when to leave work for home
 	
 	bool outForWork = false;
+	bool outForHome = false;
 	bool canMove = false;
 
 
@@ -33,16 +34,29 @@ public class BPerson : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		/*
-		if(leaveHomeAt == PublicClock.clock.GetTime() && !outForWork){
-			TravelToWork();
+
+		if(PublicClock.clock.GetTime()==leaveHomeAt)
+		{
+			outForWork = true;
 		}
-		*/
+		else if(PublicClock.clock.GetTime()==leaveWorkAt)
+		{
+			outForHome = true;
+		}
 
 		if(Input.GetKeyDown(KeyCode.M))
 		{
 			TravelToWork();
 			transform.position = new Vector3(gPerson.getX(),transform.position.y,gPerson.getY());
+		}
+
+		if(outForWork)
+		{
+			TravelToWork();
+		}
+		if(outForHome)
+		{
+			TravelToHome();
 		}
 
 	}
@@ -51,12 +65,9 @@ public class BPerson : MonoBehaviour {
 	{
 		this.home = home;
 		this.destination = destination;
-		print (home.GetVertex() + " " + destination.GetVertex());
 		this.gPerson = graph.newPerson (home.GetVertex (), destination.GetVertex ());
-		//print (gPerson);
 		this.leaveHomeAt = Random.Range(PublicConstants.MIN_WAKEUP_TIME,PublicConstants.MAX_WAKEUP_TIME);
 		this.leaveWorkAt = leaveHomeAt + Random.Range(PublicConstants.MIN_WORKING_HOURS,PublicConstants.MAX_WORKING_HOURS);
-
 	}
 
 	public G_Person GetGPerson()
@@ -66,17 +77,28 @@ public class BPerson : MonoBehaviour {
 
 	void TravelToWork()
 	{
-		print ("Travel TO Work");
-		outForWork = true;
-		canMove = true;
-		//print (destination);
-		gPerson.MoveTowards (destination.GetVertex(), wealth);
-
+		int cost = gPerson.MoveTowards (destination.GetVertex(), wealth);
+		if(cost!=-1)
+			transform.position = new Vector3(gPerson.getX(),transform.position.y,gPerson.getY());
+		else
+		{
+			outForWork = false;
+			lastCommute = gPerson.getCurrentCommutetime();
+		}
+			
 	}
 	
 	void TravelToHome()
 	{
-		outForWork = false;
+		int cost = gPerson.MoveTowards (home.GetVertex(),wealth);
+		if(cost!=-1)
+			transform.position = new Vector3(gPerson.getX(),transform.position.y,gPerson.getY());
+		else
+		{
+			outForHome = false;
+			lastCommute = gPerson.getCurrentCommutetime();
+		}
+			
 	}
 
 	public int GetWealth()

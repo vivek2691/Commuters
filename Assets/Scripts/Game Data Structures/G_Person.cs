@@ -39,7 +39,8 @@ public class G_Person
 	private G_Vertex v_current_goal = null;
 	private Stack<G_Vertex> path = null;
 	private int path_money_cost = 0;
-	
+	private int path_time_cost = 0;
+
 	private double percentage_change_per_frame = 0.0;
 	
 	
@@ -84,7 +85,12 @@ public class G_Person
 			myVertex = v_new;
 		}
 	}
-	
+
+	public int getCurrentCommutetime()
+	{
+		return path_time_cost;
+	}
+
 	/// <summary>
 	/// Instructs the person to move at maximum speed towards the given vertice,
 	/// using shortest path graph algorithms.
@@ -386,12 +392,15 @@ public class G_Person
 	/// <param name="end_node">The last node in the path. Naturally, this should never be null.</param>
 	private Stack<G_Vertex> extractPath(Priority_Node<G_Vertex> end_node)
 	{
+		path_time_cost = (int)end_node.priority;
+
 		Stack<G_Vertex> S = new Stack<G_Vertex> ();
 
 		while (end_node != null)
 		{
 			S.Push(end_node.elem);
 			end_node = end_node.last;
+
 		}
 
 		// Don't keep the current vertex in the path, because it will cause a 1 frame delay.
