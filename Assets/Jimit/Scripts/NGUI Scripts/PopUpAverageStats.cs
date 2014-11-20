@@ -25,6 +25,11 @@ public class PopUpAverageStats : MonoBehaviour
             CheckNeighborhoodHit(ray);
             CheckAverageStatCloseMark(rayNgui);
         }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            UI_AverageNeighborhoodStats.gameObject.transform.GetChild(2).GetChild(0).GetComponent<UILabel>().text = "65";
+        }
     }
 
     //deactive ui average neighbourhood stats
@@ -33,10 +38,13 @@ public class PopUpAverageStats : MonoBehaviour
         UI_AverageNeighborhoodStats.gameObject.active = false;
     }
 
-    //activate ui average neighborhood stats. Set the text of values of that neighboor on this UI
+    //activate ui average neighborhood stats. Set the text of values of the clicked neighboor on this UI
     private void ActivateAverageStatsUI(GameObject neighborhood)
     {
         UI_AverageNeighborhoodStats.gameObject.active = true;
+
+        //set all the text values here for eg to set the happiness factor
+        // --> UI_AverageNeighborhoodStats.gameObject.transform.GetChild(2).GetChild(0).GetComponent<UILabel>().text = neighborhood.GetHappinessFactor().ToString();
     }
 
     //check if the neighborhood is clicked by mouse button down
@@ -58,10 +66,8 @@ public class PopUpAverageStats : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 500))
         {
-            Debug.Log(" hitting ");
             if (hit.collider.tag == "closemark")
             {
-                Debug.Log(" close mark hit ");
                 DisableAverageStatsUI();
             }
         }
