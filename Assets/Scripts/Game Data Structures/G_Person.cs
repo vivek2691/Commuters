@@ -410,18 +410,19 @@ public class G_Person
 	/// Gets the x coordinate of this person.
 	/// </summary>
 	/// <returns>The x.</returns>
-	public int getX()
+	public float getX()
 	{
 		switch(myState)
 		{
+
 		case PersonState.Vertex:
-			return myVertex.getX();
+			return (float)myVertex.getX();
 		case PersonState.Edge:
 			G_Vertex v1 = myEdge.getV1() as G_Vertex;
 			G_Vertex v2 = myEdge.getV2() as G_Vertex;
-			int x1 = v1.getX();
-			int x2 = v2.getX();
-			return (int)(x1*(1 - weight) + x2*weight);
+			double x1 = v1.getX();
+			double x2 = v2.getX();
+			return (float)(x1*(1 - weight) + x2*weight);
 		}
 		
 		throw new Exception("We should never get here.");
@@ -431,18 +432,18 @@ public class G_Person
 	/// Gets the y coordinate of this person.
 	/// </summary>
 	/// <returns>The y.</returns>
-	public int getY()
+	public float getY()
 	{
 		switch(myState)
 		{
 		case PersonState.Vertex:
-			return myVertex.getX();
+			return (float)myVertex.getY();
 		case PersonState.Edge:
 			G_Vertex v1 = myEdge.getV1() as G_Vertex;
 			G_Vertex v2 = myEdge.getV2() as G_Vertex;
-			int y1 = v1.getY();
-			int y2 = v2.getY();
-			return (int)(y1*(1 - weight) + y2*weight);
+			double y1 = v1.getY();
+			double y2 = v2.getY();
+			return (float)(y1*(1 - weight) + y2*weight);
 		}
 		
 		throw new Exception("We should never get here.");
