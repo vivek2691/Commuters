@@ -12,6 +12,7 @@ public class BPerson : MonoBehaviour {
 	int wealth=1000;
 	int health;
 	int happiness;
+	float happinessFactor;
 	
 	float lastCommute;
 	float averageCommute;
@@ -46,8 +47,7 @@ public class BPerson : MonoBehaviour {
 
 		if(Input.GetKeyDown(KeyCode.M))
 		{
-			TravelToWork();
-			transform.position = new Vector3(gPerson.getX(),transform.position.y,gPerson.getY());
+			print (GetHappiness());
 		}
 
 		if(outForWork)
@@ -65,6 +65,10 @@ public class BPerson : MonoBehaviour {
 	{
 		this.home = home;
 		this.destination = destination;
+		this.wealth = Random.Range (20, 50);
+		this.health = Random.Range (70,90);
+		this.happinessFactor = Random.Range (0f,1f);
+		//print (happinessFactor);
 		this.gPerson = graph.newPerson (home.GetVertex (), destination.GetVertex ());
 		this.leaveHomeAt = Random.Range(PublicConstants.MIN_WAKEUP_TIME,PublicConstants.MAX_WAKEUP_TIME);
 		this.leaveWorkAt = leaveHomeAt + Random.Range(PublicConstants.MIN_WORKING_HOURS,PublicConstants.MAX_WORKING_HOURS);
@@ -113,7 +117,7 @@ public class BPerson : MonoBehaviour {
 
 	public int GetHappiness()
 	{
-		return happiness;
+		return (int)((wealth*happinessFactor)+(health*(1-happinessFactor)));
 	}
 	public float GetLastCommute()
 	{
