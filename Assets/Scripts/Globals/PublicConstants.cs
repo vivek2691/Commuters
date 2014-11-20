@@ -44,6 +44,10 @@ using System;
 		// Used for Game Clock
 		
 		public static int MINUTES_PER_DAY = 1440;
+		public static int MIN_WORKING_HOURS = 6;
+		public static int MAX_WORKING_HOURS = 12;
+		public static int MIN_WAKEUP_TIME = 6;
+		public static int MAX_WAKEUP_TIME = 11;
 	}
 
 

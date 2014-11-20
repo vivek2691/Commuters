@@ -35,12 +35,12 @@ public class PublicClock : MonoBehaviour {
 		timeMin += timeLapsePerFrame;
 	}
 
-	public float getTime()
+	public float GetTime()
 	{
 		return Mathf.Floor(timeMin/60);
 	}
 
 	void OnGUI(){
-		GUI.Label(new Rect(10,10,100,20),getTime().ToString());
+		GUI.Label(new Rect(10,10,100,20),GetTime().ToString());
 	}
 }

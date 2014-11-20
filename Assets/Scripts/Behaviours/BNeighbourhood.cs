@@ -46,10 +46,14 @@ public class BNeighbourhood : MonoBehaviour {
 
 	public void GeneratePopulation()
 	{
-		GameObject personObject =  (GameObject)Instantiate (personPrefab,this.transform.position,Quaternion.identity);
-		BPerson person = personObject.GetComponent<BPerson>();
-		person.Spawn (this,RandomDestination());
-		vertex.addPerson (person.GetGPerson());
+		//Add Random number of people to this neighbourhood
+		for(int i=0; i <Random.Range(3,5);i++)
+		{
+			GameObject personObject =  (GameObject)Instantiate (personPrefab,this.transform.position,Quaternion.identity);
+			BPerson person = personObject.GetComponent<BPerson>();
+			person.Spawn (this,RandomDestination());
+			vertex.addPerson (person.GetGPerson());
+		}
 	}
 
 	public G_Vertex GetVertex()

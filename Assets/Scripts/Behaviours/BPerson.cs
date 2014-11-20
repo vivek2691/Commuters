@@ -15,6 +15,10 @@ public class BPerson : MonoBehaviour {
 	
 	float lastCommute;
 	float averageCommute;
+	float leaveHomeAt; //Variable that tells the NPC when to leave home for work
+	float leaveWorkAt; //Variable that tells the NPC when to leave work for home
+	
+	bool outForWork = false;
 
 
 	BNeighbourhood home,destination,current;
@@ -28,7 +32,9 @@ public class BPerson : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if(leaveHomeAt == PublicClock.clock.GetTime() && !outForWork){
+			TravelToWork();
+		}
 	}
 
 	public void Spawn(BNeighbourhood home,BNeighbourhood destination)
@@ -36,7 +42,8 @@ public class BPerson : MonoBehaviour {
 		this.home = home;
 		this.destination = destination;
 		this.gPerson = new G_Person (this.home.GetVertex (),this.destination.GetVertex(),0);
-		//this.destination = 
+		this.leaveHomeAt = Random.Range(PublicConstants.MIN_WAKEUP_TIME,PublicConstants.MAX_WAKEUP_TIME);
+		this.leaveWorkAt = leaveHomeAt + Random.Range(PublicConstants.MIN_WORKING_HOURS,PublicConstants.MAX_WORKING_HOURS);
 
 	}
 
@@ -45,9 +52,14 @@ public class BPerson : MonoBehaviour {
 		return gPerson;
 	}
 
-	void Travel()
+	void TravelToWork()
 	{
-
+		outForWork = true;
+	}
+	
+	void TravelToHome()
+	{
+		outForWork = false;
 	}
 
 	public int GetWealth()
