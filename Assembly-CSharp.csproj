@@ -181,6 +181,7 @@
      <Compile Include="Assets\Jimit\NGUI\Scripts\UI\UITexture.cs" />
      <Compile Include="Assets\Jimit\NGUI\Scripts\UI\UITooltip.cs" />
      <Compile Include="Assets\Jimit\NGUI\Scripts\UI\UIViewport.cs" />
+     <Compile Include="Assets\Jimit\Scripts\NGUI Scripts\PopUpAverageStats.cs" />
      <Compile Include="Assets\Jimit\Scripts\NGUI Scripts\PopUpMessageScript.cs" />
      <Compile Include="Assets\Jimit\Scripts\NGUI Scripts\TimerLabelScript.cs" />
      <Compile Include="Assets\Scripts\Abstract Data Structures\Box.cs" />
