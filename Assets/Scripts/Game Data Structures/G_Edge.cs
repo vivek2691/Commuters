@@ -85,6 +85,16 @@ public class G_Edge : Edge
 	{
 		return myImprovements.Add(type);
 	}
+
+	/// <summary>
+	/// Removes the input improvement.
+	/// </summary>
+	/// <returns><c>true</c> iff the given improvement was in this edge's improvement set and it was removed.</returns>
+	/// <param name="type">Type.</param>
+	public bool removeImprovement(EdgeType type)
+	{
+		return myImprovements.Remove (type);
+	}
 	
 	/// <summary>
 	/// Gets the type.
@@ -94,7 +104,16 @@ public class G_Edge : Edge
 	{
 		return myImprovements;
 	}
-	
+
+	/// <summary>
+	/// Returns true iff the given edge has the requested improvement.
+	/// </summary>
+	/// <param name="e">The edgetype we are querying.</param>
+	public bool hasImprovement(EdgeType e)
+	{
+		return myImprovements.Contains (e);
+	}
+
 	/// <summary>
 	/// Adds a person to this Neighborhood.
 	/// </summary>
@@ -124,4 +143,15 @@ public class G_Edge : Edge
 		
 		return people.Remove (p);
 	}
+
+	public bool hasPerson(G_Person p)
+	{
+		return people.Contains (p);
+	}
+
+	public IEnumerable getPeople()
+	{
+		return people;
+	}
+
 }	

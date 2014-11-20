@@ -72,6 +72,7 @@ public class G_Person
 		{
 			myVertex.removePerson(this);
 			v_new.addPerson(this);
+			myVertex = v_new;
 			return;
 		}
 		
@@ -80,6 +81,7 @@ public class G_Person
 			myEdge.removePerson(this);
 			myState = PersonState.Vertex;
 			v_new.addPerson (this);
+			myVertex = v_new;
 		}
 	}
 	
