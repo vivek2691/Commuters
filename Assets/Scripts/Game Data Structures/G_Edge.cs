@@ -124,4 +124,28 @@ public class G_Edge : Edge
 		
 		return people.Remove (p);
 	}
+
+	public bool hasPerson(G_Person p)
+	{
+		return people.Contains (p);
+	}
+
+	public bool hasImprovement(EdgeType e)
+	{
+		return myImprovements.Contains (e);
+	}
+
+	public IEnumerable getPeople()
+	{
+		return people;
+	}
+
+	/// <summary>
+	/// Returns an iterable collection of all improvements for this edge.
+	/// </summary>
+	/// <returns>The improvements.</returns>
+	public IEnumerable getImprovements()
+	{
+		return myImprovements;
+	}
 }	
