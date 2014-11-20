@@ -190,5 +190,15 @@ public class Graph
 		
 		return s.ToString();
 	}
+
+	public int getNumVertices()
+	{
+		return vertices.Count;
+	}
+
+	public int getNumEdges()
+	{
+		return edges.Count;
+	}
 }
 
