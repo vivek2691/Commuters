@@ -11,7 +11,7 @@ public class TimerLabelScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-    timer = (int)Time.timeSinceLevelLoad;
-    GetComponent<UILabel>().text = timer.ToString();
+        timer = PublicClock.clock.GetTime();
+       GetComponent<UILabel>().text = timer.ToString();
 	}
 }

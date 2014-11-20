@@ -43,7 +43,7 @@ MonoBehaviour:
   mSprites:
   - name: Bridge
     x: 0
-    y: 1262
+    y: 1763
     width: 1024
     height: 539
     borderLeft: 0
@@ -54,32 +54,6 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: car3
-    x: 0
-    y: 881
-    width: 40
-    height: 40
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 204
-    paddingBottom: 204
-  - name: car4
-    x: 0
-    y: 0
-    width: 512
-    height: 221
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 130
-    paddingBottom: 161
   - name: Dirt
     x: 0
     y: 3072
@@ -93,11 +67,24 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: RailRoadhori
-    x: 1939
-    y: 4064
-    width: 32
-    height: 32
+  - name: dirtroad2
+    x: 1025
+    y: 3584
+    width: 512
+    height: 512
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: ground1
+    x: 0
+    y: 2303
+    width: 1024
+    height: 768
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -107,7 +94,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: RailRoadVert
-    x: 1972
+    x: 1939
     y: 4064
     width: 32
     height: 32
@@ -120,7 +107,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: road
-    x: 1025
+    x: 1538
     y: 3696
     width: 400
     height: 400
@@ -132,71 +119,6 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: roadCurve
-    x: 2005
-    y: 4064
-    width: 32
-    height: 32
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: RoadDirt
-    x: 0
-    y: 1802
-    width: 1024
-    height: 576
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: roadIntersection
-    x: 1939
-    y: 4031
-    width: 32
-    height: 32
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: roadStraight
-    x: 1972
-    y: 4031
-    width: 32
-    height: 32
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: Silver-Motorbike
-    x: 0
-    y: 2379
-    width: 1024
-    height: 692
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 166
-    paddingBottom: 166
   mPixelSize: 1
   mReplacement: {fileID: 0}
   mCoordinates: 0

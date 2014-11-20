@@ -53,11 +53,27 @@ public class PopUpAverageStats : MonoBehaviour
 
         //set all the text values here for eg to set the happiness factor
         // --> UI_AverageNeighborhoodStats.gameObject.transform.GetChild(2).GetChild(0).GetComponent<UILabel>().text = neighborhood.GetHappinessFactor().ToString();
+        UI_AverageNeighborhoodStats.gameObject.transform.GetChild(2).GetChild(0).GetComponent<UILabel>().text = neighborhood.GetComponent<BNeighbourhood>().GetAverageHappiness().ToString();
+
+        //for average wealth
+        UI_AverageNeighborhoodStats.gameObject.transform.GetChild(3).GetChild(0).GetComponent<UILabel>().text = neighborhood.GetComponent<BNeighbourhood>().GetAverageWealth().ToString();
+
+        //for average health
+        UI_AverageNeighborhoodStats.gameObject.transform.GetChild(4).GetChild(0).GetComponent<UILabel>().text = neighborhood.GetComponent<BNeighbourhood>().GetAverageHealth().ToString();
     }
 
     private void ActivatePersonStatsUI(GameObject person)
     {
         UI_PersonStats.gameObject.active = true;
+
+        //set all person stats values here
+        UI_PersonStats.gameObject.transform.GetChild(2).GetChild(0).GetComponent<UILabel>().text = person.GetComponent<BPerson>().GetHappiness().ToString();
+
+        //for average wealth
+        UI_PersonStats.gameObject.transform.GetChild(3).GetChild(0).GetComponent<UILabel>().text = person.GetComponent<BPerson>().GetWealth().ToString();
+
+        //for average health
+        UI_PersonStats.gameObject.transform.GetChild(4).GetChild(0).GetComponent<UILabel>().text = person.GetComponent<BPerson>().GetHealth().ToString();
     }
 
     //check if the neighborhood is clicked by mouse button down

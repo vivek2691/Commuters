@@ -19,12 +19,12 @@ using System;
 		
 		// Please feel free to modify these values.
 		
-		public static double SPEED_UNIMPROVED = 1.0;
-		public static double SPEED_FOOTPATH   = 1.5;
-		public static double SPEED_BIKE_TRAIL = 3;
-		public static double SPEED_ROAD       = 10;
-		public static double SPEED_BOULEVARD  = 15;
-		public static double SPEED_RAIL       = 20;
+		public static double SPEED_UNIMPROVED = 0.5;
+		public static double SPEED_FOOTPATH   = 1.0;
+		public static double SPEED_BIKE_TRAIL = 1.5;
+		public static double SPEED_ROAD       = 5;
+		public static double SPEED_BOULEVARD  = 7;
+		public static double SPEED_RAIL       = 10;
 		
 		
 		// Please change these to your heart's content, hopefully with the goal of improving gameplay.
