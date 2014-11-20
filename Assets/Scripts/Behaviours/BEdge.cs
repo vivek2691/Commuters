@@ -22,9 +22,13 @@ public class BEdge : MonoBehaviour {
 	
 	}
 
-	public void Spawn()
+	public void Spawn(G_Graph graph)
 	{
-		this.gEdge = new G_Edge(vertex1.GetVertex(),vertex2.GetVertex (),0);
+		if(vertex1.GetVertex () == null || vertex2.GetVertex () == null)
+			print("A vertex is null for this edge");
+		this.gEdge = graph.newEdge(vertex1.GetVertex(),vertex2.GetVertex());
+//		print (gEdge);
+
 	}
 
 	public bool IsVertex(BNeighbourhood vertex)

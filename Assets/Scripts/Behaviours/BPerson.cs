@@ -9,7 +9,7 @@ using System.Collections.Generic;
 /// </summary>
 public class BPerson : MonoBehaviour {
 	
-	int wealth;
+	int wealth=1000;
 	int health;
 	int happiness;
 	
@@ -19,6 +19,7 @@ public class BPerson : MonoBehaviour {
 	float leaveWorkAt; //Variable that tells the NPC when to leave work for home
 	
 	bool outForWork = false;
+	bool canMove = false;
 
 
 	BNeighbourhood home,destination,current;
@@ -32,16 +33,34 @@ public class BPerson : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		/*
 		if(leaveHomeAt == PublicClock.clock.GetTime() && !outForWork){
 			TravelToWork();
 		}
+		*/
+
+		if(Input.GetKeyDown(KeyCode.M))
+		{
+			TravelToWork();
+		}
+
+		if(Input.GetKeyDown(KeyCode.N))
+		{
+			transform.position = new Vector3(gPerson.getX(),transform.position.y,gPerson.getY());
+		}
+
+
+
+
 	}
 
-	public void Spawn(BNeighbourhood home,BNeighbourhood destination)
+	public void Spawn(BNeighbourhood home,BNeighbourhood destination,G_Graph graph)
 	{
 		this.home = home;
 		this.destination = destination;
-		this.gPerson = new G_Person (this.home.GetVertex (),this.destination.GetVertex(),0);
+		print (home.GetVertex() + " " + destination.GetVertex());
+		this.gPerson = graph.newPerson (home.GetVertex (), destination.GetVertex ());
+		//print (gPerson);
 		this.leaveHomeAt = Random.Range(PublicConstants.MIN_WAKEUP_TIME,PublicConstants.MAX_WAKEUP_TIME);
 		this.leaveWorkAt = leaveHomeAt + Random.Range(PublicConstants.MIN_WORKING_HOURS,PublicConstants.MAX_WORKING_HOURS);
 
@@ -54,7 +73,12 @@ public class BPerson : MonoBehaviour {
 
 	void TravelToWork()
 	{
+		print ("Travel TO Work");
 		outForWork = true;
+		canMove = true;
+		//print (destination);
+		gPerson.MoveTowards (destination.GetVertex(), wealth);
+
 	}
 	
 	void TravelToHome()

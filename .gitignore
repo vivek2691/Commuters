@@ -1,6 +1,8 @@
 #Commuter .gitignore file
 
 .DS_Store
+Commuters-csharp.sln
+Commuters.sln
 Library*
 Temp*
 *.csproj
