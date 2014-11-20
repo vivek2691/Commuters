@@ -34,11 +34,7 @@ public class BPerson : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		/*
-		if(leaveHomeAt == PublicClock.clock.GetTime() && !outForWork){
-			TravelToWork();
-		}
-		*/
+
 		if(PublicClock.clock.GetTime()==leaveHomeAt)
 		{
 			outForWork = true;
@@ -46,7 +42,6 @@ public class BPerson : MonoBehaviour {
 		else if(PublicClock.clock.GetTime()==leaveWorkAt)
 		{
 			outForHome = true;
-			print ("outforhome = true");
 		}
 
 		if(Input.GetKeyDown(KeyCode.M))
@@ -61,7 +56,6 @@ public class BPerson : MonoBehaviour {
 		}
 		if(outForHome)
 		{
-			print ("Goinghome");
 			TravelToHome();
 		}
 
@@ -71,14 +65,9 @@ public class BPerson : MonoBehaviour {
 	{
 		this.home = home;
 		this.destination = destination;
-		print (home.GetVertex() + " " + destination.GetVertex());
 		this.gPerson = graph.newPerson (home.GetVertex (), destination.GetVertex ());
-		//print (gPerson);
 		this.leaveHomeAt = Random.Range(PublicConstants.MIN_WAKEUP_TIME,PublicConstants.MAX_WAKEUP_TIME);
 		this.leaveWorkAt = leaveHomeAt + Random.Range(PublicConstants.MIN_WORKING_HOURS,PublicConstants.MAX_WORKING_HOURS);
-		print (leaveHomeAt);
-		print (leaveWorkAt);
-
 	}
 
 	public G_Person GetGPerson()
@@ -95,7 +84,6 @@ public class BPerson : MonoBehaviour {
 		{
 			outForWork = false;
 			lastCommute = gPerson.getCurrentCommutetime();
-			print (lastCommute);
 		}
 			
 	}
@@ -106,7 +94,11 @@ public class BPerson : MonoBehaviour {
 		if(cost!=-1)
 			transform.position = new Vector3(gPerson.getX(),transform.position.y,gPerson.getY());
 		else
+		{
 			outForHome = false;
+			lastCommute = gPerson.getCurrentCommutetime();
+		}
+			
 	}
 
 	public int GetWealth()
