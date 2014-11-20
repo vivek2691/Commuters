@@ -85,6 +85,16 @@ public class G_Edge : Edge
 	{
 		return myImprovements.Add(type);
 	}
+
+	/// <summary>
+	/// Removes the input improvement.
+	/// </summary>
+	/// <returns><c>true</c> iff the given improvement was in this edge's improvement set and it was removed.</returns>
+	/// <param name="type">Type.</param>
+	public bool removeImprovement(EdgeType type)
+	{
+		return myImprovements.Remove (type);
+	}
 	
 	/// <summary>
 	/// Gets the type.
