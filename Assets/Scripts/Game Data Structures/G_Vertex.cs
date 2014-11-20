@@ -16,7 +16,7 @@ using System;
 public class G_Vertex : Vertex
 {
 	// Geometric location on the screen / in the world.
-	private int x, y;
+	private double x, y;
 	
 	// A set of the people currently inside of this vertex.
 	private HashSet<G_Person> people = new HashSet<G_Person>();
@@ -44,18 +44,18 @@ public class G_Vertex : Vertex
 	/// </summary>
 	/// <param name="x_new">X_new.</param>
 	/// <param name="y_new">Y_new.</param>
-	public void setPosition(int x_new, int y_new)
+	public void setPosition(double x_new, double y_new)
 	{
 		x = x_new;
 		y = y_new;
 	}
 	
-	public int getX()
+	public double getX()
 	{
 		return x;
 	}
 	
-	public int getY()
+	public double getY()
 	{
 		return y;
 	}
@@ -99,23 +99,23 @@ public class G_Vertex : Vertex
 	/// <param name="v">V.</param>
 	public double distanceTo(G_Vertex v)
 	{
-		int x1 = getX ();
-		int x2 = v.getX ();
-		int y1 = getY ();
-		int y2 = v.getY ();
+		double x1 = getX ();
+		double x2 = v.getX ();
+		double y1 = getY ();
+		double y2 = v.getY ();
 		
 		return distance (x1, y1, x2, y2);
 	}
 	
-	public double distanceTo(int x, int y)
+	public double distanceTo(double x, double y)
 	{
 		return distance (x, y, getX (), getY ());
 	}
 	
-	public static double distance(int x1, int y1, int x2, int y2)
+	public static double distance(double x1, double y1, double x2, double y2)
 	{
-		int dx = x1 - x2;
-		int dy = y1 - y2;
+		double dx = x1 - x2;
+		double dy = y1 - y2;
 		
 		return Math.Sqrt (dx * dx + dy * dy);
 	}
