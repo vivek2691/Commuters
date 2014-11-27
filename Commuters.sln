@@ -5,6 +5,8 @@ Project("{84CB313E-6AAF-9ECC-2FBC-84AD3A9F4739}") = "Commuters", "Assembly-CShar
 EndProject
 Project("{84CB313E-6AAF-9ECC-2FBC-84AD3A9F4739}") = "Commuters", "Assembly-CSharp-Editor.csproj", "{E42E3545-E787-7027-45DB-F1F910C86385}"
 EndProject
+Project("{84CB313E-6AAF-9ECC-2FBC-84AD3A9F4739}") = "Commuters", "Assembly-UnityScript.unityproj", "{952D93F1-280D-3B7F-844A-6AF914F40D26}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,11 +21,15 @@ Global
 		{E42E3545-E787-7027-45DB-F1F910C86385}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E42E3545-E787-7027-45DB-F1F910C86385}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E42E3545-E787-7027-45DB-F1F910C86385}.Release|Any CPU.Build.0 = Release|Any CPU
+		{952D93F1-280D-3B7F-844A-6AF914F40D26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{952D93F1-280D-3B7F-844A-6AF914F40D26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{952D93F1-280D-3B7F-844A-6AF914F40D26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{952D93F1-280D-3B7F-844A-6AF914F40D26}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																																																															GlobalSection(MonoDevelopProperties) = preSolution
+																																																																				GlobalSection(MonoDevelopProperties) = preSolution
 =======
 																																																												GlobalSection(MonoDevelopProperties) = preSolution
 >>>>>>> 7e593b15999dd91764a8871461b9cfe994c2c15e

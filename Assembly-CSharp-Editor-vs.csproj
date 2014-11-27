@@ -168,6 +168,9 @@
      <None Include="Assets\Jimit\NGUI\Examples\Atlases\SciFi\SciFi Font - Normal.txt" />
      <None Include="Assets\Jimit\NGUI\Examples\Models\Orc Armor\Orc Armor.shader" />
      <None Include="Assets\Jimit\NGUI\Examples\Resources\Localization.txt" />
+ <Reference Include="Assembly-UnityScript">
+ <HintPath>C:/Git_Commuters/Commuters/Library/ScriptAssemblies/Assembly-UnityScript.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEditor.Graphs">
  <HintPath>G:/Unity/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
  </Reference>

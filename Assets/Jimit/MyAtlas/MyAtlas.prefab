@@ -67,11 +67,37 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: dirt5
+    x: 1025
+    y: 3195
+    width: 600
+    height: 450
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: dirtroad2
     x: 1025
-    y: 3584
+    y: 2559
     width: 512
     height: 512
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: dirtroad3
+    x: 1025
+    y: 3646
+    width: 600
+    height: 450
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -94,8 +120,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: RailRoadVert
-    x: 1939
-    y: 4064
+    x: 1626
+    y: 3663
     width: 32
     height: 32
     borderLeft: 0
@@ -107,7 +133,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: road
-    x: 1538
+    x: 1626
     y: 3696
     width: 400
     height: 400
