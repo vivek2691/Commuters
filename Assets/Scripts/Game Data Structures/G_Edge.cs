@@ -75,6 +75,42 @@ public class G_Edge : Edge
 	{
 		return edge_length;
 	}
+
+	public double getHealth ()
+	{
+		if (myImprovements.Contains (EdgeType.Footpath))
+		{
+			return PublicConstants.health_footpath;
+		}
+
+		if (myImprovements.Contains (EdgeType.Biking_Trail))
+		{
+			return PublicConstants.health_biking_trail;
+		}
+
+		if(myImprovements.Contains (EdgeType.Unimproved))
+		{
+			return PublicConstants.health_unimproved;
+		}
+
+	   	if(myImprovements.Contains (EdgeType.Rail))
+		{
+			return PublicConstants.health_rail;
+		}
+
+		if(myImprovements.Contains (EdgeType.Road))
+		{
+			return PublicConstants.health_road;
+		}
+
+		if(myImprovements.Contains (EdgeType.Boulevard))
+		{
+			return PublicConstants.health_boulevard;
+		}
+
+
+		return 0;
+	}
 	
 	/// <summary>
 	/// Allows edges to be upgraded and downgraded.
