@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400000}
   m_Layer: 0
-  m_Name: MyAtlas
+  m_Name: MyAtlas3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39,13 +39,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d0c51bb0b6e93049af5e88f93826e3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: 5642f79c743e5654897ef560c8c4cdc4, type: 2}
+  material: {fileID: 2100000, guid: 0f09f6cbc4d9314419da494c67831521, type: 2}
   mSprites:
-  - name: bike5
-    x: 257
-    y: 768
-    width: 256
-    height: 256
+  - name: highway
+    x: 1026
+    y: 512
+    width: 512
+    height: 512
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -54,11 +54,11 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: bus5
-    x: 0
-    y: 511
-    width: 256
-    height: 256
+  - name: railtrack1
+    x: 513
+    y: 512
+    width: 512
+    height: 512
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -67,24 +67,11 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: car5
+  - name: road2
     x: 0
-    y: 768
-    width: 256
-    height: 256
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: train5
-    x: 0
-    y: 254
-    width: 256
-    height: 256
+    y: 512
+    width: 512
+    height: 512
     borderLeft: 0
     borderRight: 0
     borderTop: 0

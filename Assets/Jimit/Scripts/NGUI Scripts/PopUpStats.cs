@@ -5,29 +5,73 @@ public class PopUpStats : MonoBehaviour
 {
     public Camera camera;
     public Camera nguiCamera;
+
+    //for neighborhood
     public GameObject UI_AverageNeighborhoodStats;
     public GameObject UI_nAvgStatsBox;
     public GameObject UI_nPeopleStatsBox;
+    public GameObject UI_nUpgradesBox;
+
+    //for person
     public GameObject UI_PersonStats;
+
+    //for vertex and edges
+    public GameObject VertexUpgradesBox;
+    public GameObject EdgeUpgradesBox;
     GameObject[] neighborhoods;
 
-    public enum NeighborhoodStatsTab { avgstats = 1, peoplestats };
+    public enum NeighborhoodStatsTab { avgstats = 1, peoplestats, upgrades };
+    public enum MouseClickStats { firstClick = 1, secondClick };
+    public enum VertexUpgradeType { BusStation = 1, RailStation, BikeShop, CarShop };
+    public enum EdgeUpgradeType { unImproved = 1, FootPath, BikeTrail, SpeedRoad, SpeedBoulevard, SpeedRail };
     NeighborhoodStatsTab neighborhoodStatsTab;
+    MouseClickStats mouseClickStats;
+    VertexUpgradeType vertexUpgradeType;
+    EdgeUpgradeType edgeUpgradeType;
     private GameObject currentNeighborhood = null;
+
+    //booleans for vertex upgrades
+    private bool isBusUpgraded = false;
+    private bool isRailUpgrade = false;
+    private bool isCarUpgraded = false;
+    private bool isBikeUpgraded = false;
+    private bool isVertexUpgradeClicked = false;
+
+    //booleans for edge upgrades
+    private bool isFoothPath = false;
+    private bool isBikeTrail = false;
+    private bool isSpeedRoad = false;
+    private bool isBoulevard = false;
+    private bool isSpeedRail = false;
+    private bool isEdgeUpgradeClicked = false;
+
+    //floats
+    private float waitTime = 1.0f;
+    private float currTime;
+
+    //test variables 
+    public int money;
 
     void Start()
     {
         neighborhoodStatsTab = NeighborhoodStatsTab.avgstats;
+        mouseClickStats = MouseClickStats.firstClick;
+        vertexUpgradeType = VertexUpgradeType.BusStation;
+        edgeUpgradeType = EdgeUpgradeType.unImproved;
         // at start we don't want to show the neighborhood average stats ui
         DisableAverageStatsUI();
         DisablePersonStatsUI();
+        DeactivateInitialVertexUpgrades();
+        DeactivateInitialEdgeUpgrades();
+        DisableVertexUpgradesBox();
+        DisableEdgeUpgradesBox();
     }
 
     // Update is called once per frame
     void Update()
     {
         //at every update we check for a mouse click and if so ray cast and see if its hit a neighborhood
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !isVertexUpgradeClicked)
         {
             Ray ray = camera.ScreenPointToRay(Input.mousePosition);
             Ray rayNgui = nguiCamera.ScreenPointToRay(Input.mousePosition);
@@ -36,10 +80,7 @@ public class PopUpStats : MonoBehaviour
             CheckAverageStatCloseMark(rayNgui);
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            UI_AverageNeighborhoodStats.gameObject.transform.GetChild(2).GetChild(0).GetComponent<UILabel>().text = "65";
-        }
+        CheckMouseInput();
     }
 
     //deactive ui average neighbourhood stats
@@ -69,6 +110,7 @@ public class PopUpStats : MonoBehaviour
         {
             UI_nAvgStatsBox.gameObject.active = true;
             UI_nPeopleStatsBox.gameObject.active = false;
+            UI_nUpgradesBox.gameObject.active = false;
             //average happiness
             UI_AverageNeighborhoodStats.gameObject.transform.GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetComponent<UILabel>().text = neighborhood.GetComponent<BNeighbourhood>().GetAverageHappiness().ToString();
 
@@ -80,10 +122,21 @@ public class PopUpStats : MonoBehaviour
         }
 
         //activate people stats of neighborhood, 2nd Tab
-        else
+        if (tabNo == 2)
         {
             UI_nAvgStatsBox.gameObject.active = false;
             UI_nPeopleStatsBox.gameObject.active = true;
+            UI_nUpgradesBox.gameObject.active = false;
+        }
+
+        //activate 3rd tab
+        if (tabNo == 3)
+        {
+            UI_nAvgStatsBox.gameObject.active = false;
+            UI_nPeopleStatsBox.gameObject.active = false;
+            UI_nUpgradesBox.gameObject.active = true;
+
+            //get all the values for that neighborhood here
         }
     }
 
@@ -109,9 +162,10 @@ public class PopUpStats : MonoBehaviour
         }
     }
 
-    public void OnNAvgStatsPersonTabClick()
+    //on click event for upgrades tab
+    public void OnNUpgradesTabClick()
     {
-        setAvgStatsTab(2);
+        setAvgStatsTab(3);
         int tabNo = getAvgStatsCurrentTab();
         if (currentNeighborhood != null)
         {
@@ -179,13 +233,569 @@ public class PopUpStats : MonoBehaviour
         }
     }
 
+    //************** TOOL BOX FUNCTIONS *******************
+
+    private void DisableVertexUpgradesBox()
+    {
+        VertexUpgradesBox.active = false;
+    }
+
+    private void DisableEdgeUpgradesBox()
+    {
+        EdgeUpgradesBox.active = false;
+    }
+
+    private void ActivateVertexUpgradesBox()
+    {
+        VertexUpgradesBox.active = true;
+    }
+
+    private void ActivateEdgeUpgradesBox()
+    {
+        EdgeUpgradesBox.active = true;
+    }
+
+    //************* ON BUTTON CLICKS ****************
+    public void OnVertexBoxClick()
+    {
+        ActivateVertexUpgradesBox();
+        CheckVertexUpgrades();
+        DisableEdgeUpgradesBox();
+    }
+
+    public void OnEdgeBoxClick()
+    {
+        ActivateEdgeUpgradesBox();
+        CheckEdgeUpgrades();
+        DisableVertexUpgradesBox();
+    }
+
+    public void onCloseMarkClick()
+    {
+        if (VertexUpgradesBox.active == true)
+        {
+            DisableVertexUpgradesBox();
+        }
+        else
+        {
+            DisableEdgeUpgradesBox();
+        }
+    }
+
+    // ******** vertex button clicks ***********
+    public void OnBusStopButtonClick()
+    {
+        if (isBusUpgraded)
+        {
+            isVertexUpgradeClicked = true;
+            vertexUpgradeType = VertexUpgradeType.BusStation;
+        }
+    }
+
+    public void OnRailStationButtonClick()
+    {
+        if (isRailUpgrade)
+        {
+            isVertexUpgradeClicked = true;
+            vertexUpgradeType = VertexUpgradeType.RailStation;
+        }
+    }
+
+    public void OnBikeShopClick()
+    {
+        if (isBikeUpgraded)
+        {
+            isVertexUpgradeClicked = true;
+            vertexUpgradeType = VertexUpgradeType.BikeShop;
+        }
+    }
+
+    public void OnCarShopClick()
+    {
+        if (isCarUpgraded)
+        {
+            isVertexUpgradeClicked = true;
+            vertexUpgradeType = VertexUpgradeType.CarShop;
+        }
+    }
+    // ******** vertex button click ends *********
+
+    // ******** edge button click starts **********
+    public void OnEdgeUnImprovedButtonClick()
+    {
+        isEdgeUpgradeClicked = true;
+        edgeUpgradeType = EdgeUpgradeType.unImproved;
+    }
+
+    public void OnEdgeFootPathButtonClick()
+    {
+        if (isFoothPath)
+        {
+            isEdgeUpgradeClicked = true;
+            edgeUpgradeType = EdgeUpgradeType.FootPath;
+        }
+    }
+
+    public void OnEdgeBikeTrailClick()
+    {
+        if (isBikeTrail)
+        {
+            isEdgeUpgradeClicked = true;
+            edgeUpgradeType = EdgeUpgradeType.BikeTrail;
+        }
+    }
+
+    public void OnEdgeSpeedRoadClick()
+    {
+        if (isSpeedRoad)
+        {
+            isEdgeUpgradeClicked = true;
+            edgeUpgradeType = EdgeUpgradeType.SpeedRoad;
+        }
+    }
+
+    public void OnEdgeSpeedBoulevardClick()
+    {
+        if (isBoulevard)
+        {
+            isEdgeUpgradeClicked = true;
+            edgeUpgradeType = EdgeUpgradeType.SpeedBoulevard;
+        }
+    }
+
+    public void OnEdgeRailClick()
+    {
+        if (isSpeedRail)
+        {
+            isEdgeUpgradeClicked = true;
+            edgeUpgradeType = EdgeUpgradeType.SpeedRail;
+        }
+    }
+
+    // ******** edge button click ends **********
+    //************* BUTTON CLICKS END *****************
+
+    //we want the buttons of the vertex upgrades to be off because initially player cannot buy those upgrades
+    private void DeactivateInitialVertexUpgrades()
+    {
+        GameObject[] vertexUpgrades = GameObject.FindGameObjectsWithTag("vertexUpgrade");
+        foreach (GameObject vertexUpgrade in vertexUpgrades)
+        {
+            vertexUpgrade.GetComponent<UIButton>().enabled = false;
+        }
+    }
+
+    private void CheckVertexUpgrades()
+    {
+
+        //make bus available at 20
+        if (money > 0 && money <= 20)
+        {
+            if (!isBusUpgraded)
+            {
+                GameObject busStation = GameObject.Find("BusStation");
+                if (busStation.GetComponent<UIButton>().enabled == false)
+                {
+                    busStation.GetComponent<UIButton>().enabled = true;
+                    busStation.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
+                    isBusUpgraded = true;
+                }
+            }
+        }
+
+        //make train pass available
+        else if (money > 20 && money <= 40)
+        {
+            if (!isRailUpgrade)
+            {
+                GameObject railStation = GameObject.Find("RailStation");
+                if (railStation.GetComponent<UIButton>().enabled == false)
+                {
+                    railStation.GetComponent<UIButton>().enabled = true;
+                    railStation.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
+                    isRailUpgrade = true;
+                }
+            }
+
+            if (!isBusUpgraded)
+            {
+                GameObject busStation = GameObject.Find("BusStation");
+                if (busStation.GetComponent<UIButton>().enabled == false)
+                {
+                    busStation.GetComponent<UIButton>().enabled = true;
+                    busStation.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
+                    isBusUpgraded = true;
+                }
+            }
+        }
+
+        //make bike available
+        else if (money > 40 && money <= 100)
+        {
+            if (!isRailUpgrade)
+            {
+                GameObject railStation = GameObject.Find("RailStation");
+                if (railStation.GetComponent<UIButton>().enabled == false)
+                {
+                    railStation.GetComponent<UIButton>().enabled = true;
+                    railStation.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
+                    isRailUpgrade = true;
+                }
+            }
+
+            if (!isBusUpgraded)
+            {
+                GameObject busStation = GameObject.Find("BusStation");
+                if (busStation.GetComponent<UIButton>().enabled == false)
+                {
+                    busStation.GetComponent<UIButton>().enabled = true;
+                    busStation.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
+                    isBusUpgraded = true;
+                }
+            }
+
+            if (!isBikeUpgraded)
+            {
+                GameObject bikeShop = GameObject.Find("BikeShop");
+                if (bikeShop.GetComponent<UIButton>().enabled == false)
+                {
+                    bikeShop.GetComponent<UIButton>().enabled = true;
+                    bikeShop.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
+                    isBikeUpgraded = true;
+                }
+            }
+        }
+
+        //make car available
+        else if (money > 100)
+        {
+            if (!isRailUpgrade)
+            {
+                GameObject railStation = GameObject.Find("RailStation");
+                if (railStation.GetComponent<UIButton>().enabled == false)
+                {
+                    railStation.GetComponent<UIButton>().enabled = true;
+                    railStation.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
+                    isRailUpgrade = true;
+                }
+            }
+
+            if (!isBusUpgraded)
+            {
+                GameObject busStation = GameObject.Find("BusStation");
+                if (busStation.GetComponent<UIButton>().enabled == false)
+                {
+                    busStation.GetComponent<UIButton>().enabled = true;
+                    busStation.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
+                    isBusUpgraded = true;
+                }
+            }
+
+            if (!isBikeUpgraded)
+            {
+                GameObject bikeShop = GameObject.Find("BikeShop");
+                if (bikeShop.GetComponent<UIButton>().enabled == false)
+                {
+                    bikeShop.GetComponent<UIButton>().enabled = true;
+                    bikeShop.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
+                    isBikeUpgraded = true;
+                }
+            }
+
+            if (!isCarUpgraded)
+            {
+                GameObject carShop = GameObject.Find("CarShop");
+                if (carShop.GetComponent<UIButton>().enabled == false)
+                {
+                    carShop.GetComponent<UIButton>().enabled = true;
+                    carShop.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
+                    isCarUpgraded = true;
+                }
+            }
+        }
+    }
+
+    //disable initial edge upgrades for the player
+    private void DeactivateInitialEdgeUpgrades()
+    {
+        GameObject[] vertexUpgrades = GameObject.FindGameObjectsWithTag("edgeUpgrade");
+        foreach (GameObject vertexUpgrade in vertexUpgrades)
+        {
+            vertexUpgrade.GetComponent<UIButton>().enabled = false;
+        }
+    }
+
+    //upgrade the edges based on the money
+    private void CheckEdgeUpgrades()
+    {
+        //for foothpath
+        if (money > 0 && money <= 10)
+        {
+            if (!isFoothPath)
+            {
+                GameObject footPath = GameObject.Find("FootPath");
+                if (footPath.GetComponent<UIButton>().enabled == false)
+                {
+                    footPath.GetComponent<UIButton>().enabled = true;
+                    footPath.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
+                    isFoothPath = true;
+                }
+            }
+        }
+
+        //for bike trails
+        if (money > 10 && money <= 50)
+        {
+            if (!isFoothPath)
+            {
+                GameObject footPath = GameObject.Find("FootPath");
+                if (footPath.GetComponent<UIButton>().enabled == false)
+                {
+                    footPath.GetComponent<UIButton>().enabled = true;
+                    footPath.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
+                    isFoothPath = true;
+                }
+            }
+
+            if (!isBikeTrail)
+            {
+                GameObject bikeTrail = GameObject.Find("BikeTrail");
+                if (bikeTrail.GetComponent<UIButton>().enabled == false)
+                {
+                    bikeTrail.GetComponent<UIButton>().enabled = true;
+                    bikeTrail.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
+                    isBikeTrail = true;
+                }
+            }
+        }
+
+        //for speed road
+        if (money > 50 && money <= 100)
+        {
+            if (!isFoothPath)
+            {
+                GameObject footPath = GameObject.Find("FootPath");
+                if (footPath.GetComponent<UIButton>().enabled == false)
+                {
+                    footPath.GetComponent<UIButton>().enabled = true;
+                    footPath.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
+                    isFoothPath = true;
+                }
+            }
+
+            if (!isBikeTrail)
+            {
+                GameObject bikeTrail = GameObject.Find("BikeTrail");
+                if (bikeTrail.GetComponent<UIButton>().enabled == false)
+                {
+                    bikeTrail.GetComponent<UIButton>().enabled = true;
+                    bikeTrail.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
+                    isBikeTrail = true;
+                }
+            }
+
+            if (!isSpeedRoad)
+            {
+                GameObject speedRoad = GameObject.Find("SpeedRoad");
+                if (speedRoad.GetComponent<UIButton>().enabled == false)
+                {
+                    speedRoad.GetComponent<UIButton>().enabled = true;
+                    speedRoad.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
+                    isSpeedRoad = true;
+                }
+            }
+        }
+
+        //for boulevard road
+        if (money > 100 && money <= 200)
+        {
+            if (!isFoothPath)
+            {
+                GameObject footPath = GameObject.Find("FootPath");
+                if (footPath.GetComponent<UIButton>().enabled == false)
+                {
+                    footPath.GetComponent<UIButton>().enabled = true;
+                    footPath.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
+                    isFoothPath = true;
+                }
+            }
+
+            if (!isBikeTrail)
+            {
+                GameObject bikeTrail = GameObject.Find("BikeTrail");
+                if (bikeTrail.GetComponent<UIButton>().enabled == false)
+                {
+                    bikeTrail.GetComponent<UIButton>().enabled = true;
+                    bikeTrail.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
+                    isBikeTrail = true;
+                }
+            }
+
+            if (!isSpeedRoad)
+            {
+                GameObject speedRoad = GameObject.Find("SpeedRoad");
+                if (speedRoad.GetComponent<UIButton>().enabled == false)
+                {
+                    speedRoad.GetComponent<UIButton>().enabled = true;
+                    speedRoad.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
+                    isSpeedRoad = true;
+                }
+            }
+
+            if (!isBoulevard)
+            {
+                GameObject boulevard = GameObject.Find("SpeedBoulevard");
+                if (boulevard.GetComponent<UIButton>().enabled == false)
+                {
+                    boulevard.GetComponent<UIButton>().enabled = true;
+                    boulevard.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
+                    isBoulevard = true;
+                }
+            }
+        }
+
+        //activate all edge upgrades
+        else if (money > 200)
+        {
+            GameObject[] edgeUpgrades = GameObject.FindGameObjectsWithTag("edgeUpgrade");
+            foreach (GameObject edge in edgeUpgrades)
+            {
+                if (edge.GetComponent<UIButton>().enabled == false)
+                {
+                    edge.GetComponent<UIButton>().enabled = true;
+                    edge.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
+                }
+            }
+            isRailUpgrade = true;
+            isBoulevard = true;
+            isSpeedRoad = true;
+            isBikeTrail = true;
+            isFoothPath = true;
+        }
+    }
+
+    //check for mouse inputs first click and second click
+    private void CheckMouseInput()
+    {
+        switch ((int)mouseClickStats)
+        {
+            case (int)MouseClickStats.firstClick:
+                if (isVertexUpgradeClicked)
+                {
+                    Debug.Log(" FIRST CLICK ON VERTEX UPGRADE ");
+                    //hide both UI BOXES
+                    DisablePersonStatsUI();
+                    DisableAverageStatsUI();
+                    currTime = waitTime;
+                    mouseClickStats = MouseClickStats.secondClick;
+                }
+                else if (isEdgeUpgradeClicked)
+                {
+                    Debug.Log(" FIRST CLICK ON EDGE UPGRADE ");
+                    DisablePersonStatsUI();
+                    DisableAverageStatsUI();
+                    currTime = waitTime;
+                    mouseClickStats = MouseClickStats.secondClick;
+                }
+                break;
+            case (int)MouseClickStats.secondClick:
+                currTime -= Time.deltaTime;
+                if (currTime <= 0)
+                {
+                    //if mouse button down and clicked on a neighborhood
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+                        RaycastHit hit;
+                        if (isVertexUpgradeClicked)
+                        {
+                            if (Physics.Raycast(ray, out hit, 500))
+                            {
+                                if (hit.collider.tag == "Neighbourhood")
+                                {
+                                    isVertexUpgradeClicked = false;
+                                    mouseClickStats = MouseClickStats.firstClick;
+
+                                    //call the function to BNeighborhood here based on vertexUpgrade type
+                                    //once the values are passed to BNeighborhood, we can retrieve those values from AvgStatsUIBox by clicking on its 3rd Tab
+                                    if ((int)vertexUpgradeType == 1)
+                                    {
+                                        Debug.Log(" UPGRADE TO BUS STOP ON THIS NEIGHBORHOOD ");
+                                    }
+                                    else if ((int)vertexUpgradeType == 2)
+                                    {
+                                        Debug.Log(" UPGRADE TO RAIL STATION ON THIS NEIGHBORHOOD ");
+                                    }
+                                    else if ((int)vertexUpgradeType == 3)
+                                    {
+                                        Debug.Log(" UPGRADE TO BIKE SHOP ON THIS NEIGHBORHOOD ");
+                                    }
+                                    else
+                                    {
+                                        Debug.Log(" UPGRADE TO CAR SHOP ON THIS NEIGHBORHOOD ");
+                                    }
+                                }
+                            }
+                        }
+                        else if (isEdgeUpgradeClicked)
+                        {
+                            if (Physics.Raycast(ray, out hit, 500))
+                            {
+                                if (hit.collider.tag == "Edge")
+                                {
+                                    isEdgeUpgradeClicked = false;
+                                    mouseClickStats = MouseClickStats.firstClick;
+
+                                    //perform all the edge upgrades here
+                                    if ((int)edgeUpgradeType == 1)
+                                    {
+                                        Debug.Log(" UPGRADE TO UNIMPROVED ROAD ");
+                                    }
+                                    else if ((int)edgeUpgradeType == 2)
+                                    {
+                                        Debug.Log(" UPGRADE TO FOOTHPATH ROAD ");
+                                    }
+                                    else if ((int)edgeUpgradeType == 3)
+                                    {
+                                        Debug.Log(" UPGRADE TO BIKE TRAIL ROAD ");
+                                    }
+                                    else if ((int)edgeUpgradeType == 4)
+                                    {
+                                        Debug.Log(" UPGRADE TO SPEED ROAD ");
+                                    }
+                                    else if ((int)edgeUpgradeType == 5)
+                                    {
+                                        Debug.Log(" UPGRADE TO SPEED BOULEVARD ");
+                                    }
+                                    else
+                                    {
+                                        Debug.Log(" UPGRADE TO RAIL ROAD ");
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            isVertexUpgradeClicked = false;
+                            isEdgeUpgradeClicked = false;
+                            mouseClickStats = MouseClickStats.firstClick;
+                        }
+                    }
+                }
+                break;
+        }
+    }
+
     //------------------------------- helper functions ---------------------------------
     public void setAvgStatsTab(int tabNo)
     {
         if (tabNo == 1)
             neighborhoodStatsTab = NeighborhoodStatsTab.avgstats;
-        if( tabNo == 2)
+        if (tabNo == 2)
             neighborhoodStatsTab = NeighborhoodStatsTab.peoplestats;
+        if (tabNo == 3)
+            neighborhoodStatsTab = NeighborhoodStatsTab.upgrades;
+
     }
 
     public int getAvgStatsCurrentTab()
@@ -193,4 +803,8 @@ public class PopUpStats : MonoBehaviour
         return (int)neighborhoodStatsTab;
     }
 
+    public int getVertexUpgradeType()
+    {
+        return (int)vertexUpgradeType;
+    }
 }

@@ -8,6 +8,10 @@ TagManager:
   - closemarkavgstats
   - closemarkpersonstats
   - Person
+  - vertexBox
+  - edgeBox
+  - vertexUpgrade
+  - edgeUpgrade
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

@@ -17,6 +17,62 @@ public enum Vehicle
 	Car
 }
 
+public enum VertexUpgrades
+{
+    BusStop,
+    TrainStation,
+    BikeShop,
+    CarShop
+}
+
+public enum EdgeUpgrades
+{
+    FootPath,
+    BikeTrail,
+    SpeedRoad,
+    SpeedBoulevard,
+    SpeedRail
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 public enum VertexType
 {
 	Rich,
