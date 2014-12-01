@@ -107,7 +107,7 @@ public class G_Person
 	/// returns a cost >= 0 if a path was found and the player has been moved.
 	/// The return value is the cost of any payments the player may have had to make.
 	/// </returns>
-	public int MoveTowards(G_Vertex v_new, int money)
+	public int MoveTowards(G_Vertex v_new, int money, bool consider_health)
 	{
 		// Compute a new shortest path if the person is given a new destination.
 		if(v_new != v_current_goal || money < path_money_cost)
@@ -162,7 +162,7 @@ public class G_Person
 		G_Edge edge = myVertex.getEdgeTo (next) as G_Edge;
 		Box<int> amount_left = new Box<int> (money);
 		
-		double speed = computePathSpeed (edge, myVertex, next, amount_left);
+		double speed = computePathSpeed (edge, myVertex, next, amount_left, consider_health);
 		
 		int next_vert_index = edge.getVerticeIndex (next);
 		
@@ -203,7 +203,7 @@ public class G_Person
 	/// was found and loaded into this G_Person.</returns>
 	/// 
 	/// 
-	private bool computeShortestPath(G_Vertex goal, int max_money_cost)
+	private bool computeShortestPath(G_Vertex goal, int max_money_cost, bool consider_health)
 	{
 		// -- Initialization functions.
 		
@@ -278,10 +278,20 @@ public class G_Person
 				double speed = computePathSpeed (e, vert, v_dest, money);
 				
 				double time = e.getLength() / speed;
-				
+
+				// Test this mechanism out.
+				if(consider_health)
+				{
+					time -= e.getHealth();
+					if(time < 0)
+					{
+						time = 0;
+					}
+				}
+
 				// Compute the estimated distance value for this node using the euclidean heuristic.
 				double estimate_val = node.priority + time + v_dest.distanceTo(goal);
-				
+
 				Priority_Node<G_Vertex> node_new = new Priority_Node<G_Vertex>(v_dest, money.elem, estimate_val);
 				node_new.last = node;
 				
@@ -293,8 +303,7 @@ public class G_Person
 		return false;
 		
 	}
-	
-	
+
 	/// <summary>
 	/// Returns the time it will take the person to walk down this edge.
 	/// </summary>

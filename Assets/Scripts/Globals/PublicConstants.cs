@@ -48,6 +48,15 @@ using System;
 		public static int MAX_WORKING_HOURS = 12;
 		public static int MIN_WAKEUP_TIME = 6;
 		public static int MAX_WAKEUP_TIME = 11;
-	}
 
+
+		// Healthiness values for edge types.
+		public static double health_footpath = 10.0;
+		public static double health_biking_trail = 6.0;
+		public static double health_unimproved = 1.0;
+		public static double health_rail = .3;
+		public static double health_road = .2;
+		public static double health_boulevard = .1;
+
+}
 
