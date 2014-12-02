@@ -137,6 +137,24 @@ public class PopUpStats : MonoBehaviour
             UI_nUpgradesBox.gameObject.active = true;
 
             //get all the values for that neighborhood here
+
+            //has bus stop
+            UI_nUpgradesBox.gameObject.transform.GetChild(0).GetChild(0).GetComponent<UILabel>().text = neighborhood.GetComponent<BNeighbourhood>().CheckIfAlreadyUpgraded(VertexUpgrades.BusStop).ToString();
+
+            //has train station
+            UI_nUpgradesBox.gameObject.transform.GetChild(1).GetChild(0).GetComponent<UILabel>().text = neighborhood.GetComponent<BNeighbourhood>().CheckIfAlreadyUpgraded(VertexUpgrades.TrainStation).ToString();
+
+            //Bike Shop
+            UI_nUpgradesBox.gameObject.transform.GetChild(2).GetChild(0).GetComponent<UILabel>().text = neighborhood.GetComponent<BNeighbourhood>().CheckIfAlreadyUpgraded(VertexUpgrades.BikeShop).ToString();
+
+            //Car Shop
+            UI_nUpgradesBox.gameObject.transform.GetChild(3).GetChild(0).GetComponent<UILabel>().text = neighborhood.GetComponent<BNeighbourhood>().CheckIfAlreadyUpgraded(VertexUpgrades.CarShop).ToString();
+
+            //no of bikes
+            UI_nUpgradesBox.gameObject.transform.GetChild(4).GetChild(0).GetComponent<UILabel>().text = neighborhood.GetComponent<BNeighbourhood>().GetNumberOfVehicles(Vehicle.Bike).ToString();
+
+            //no of cars
+            UI_nUpgradesBox.gameObject.transform.GetChild(5).GetChild(0).GetComponent<UILabel>().text = neighborhood.GetComponent<BNeighbourhood>().GetNumberOfVehicles(Vehicle.Car).ToString();
         }
     }
 
@@ -185,6 +203,12 @@ public class PopUpStats : MonoBehaviour
 
         //for average health
         UI_PersonStats.gameObject.transform.GetChild(0).GetChild(4).GetChild(0).GetComponent<UILabel>().text = person.GetComponent<BPerson>().GetHealth().ToString();
+
+        //has bike
+        UI_PersonStats.gameObject.transform.GetChild(0).GetChild(5).GetChild(0).GetComponent<UILabel>().text = person.GetComponent<BPerson>().hasVehicle(Vehicle.Bike).ToString();
+
+        //has car
+        UI_PersonStats.gameObject.transform.GetChild(0).GetChild(5).GetChild(0).GetComponent<UILabel>().text = person.GetComponent<BPerson>().hasVehicle(Vehicle.Car).ToString();
     }
 
 
@@ -718,21 +742,26 @@ public class PopUpStats : MonoBehaviour
 
                                     //call the function to BNeighborhood here based on vertexUpgrade type
                                     //once the values are passed to BNeighborhood, we can retrieve those values from AvgStatsUIBox by clicking on its 3rd Tab
+                                    
                                     if ((int)vertexUpgradeType == 1)
                                     {
                                         Debug.Log(" UPGRADE TO BUS STOP ON THIS NEIGHBORHOOD ");
+                                        hit.collider.GetComponent<BNeighbourhood>().AddUpgrade(VertexUpgrades.BusStop);
                                     }
                                     else if ((int)vertexUpgradeType == 2)
                                     {
                                         Debug.Log(" UPGRADE TO RAIL STATION ON THIS NEIGHBORHOOD ");
+                                        hit.collider.GetComponent<BNeighbourhood>().AddUpgrade(VertexUpgrades.TrainStation);
                                     }
                                     else if ((int)vertexUpgradeType == 3)
                                     {
                                         Debug.Log(" UPGRADE TO BIKE SHOP ON THIS NEIGHBORHOOD ");
+                                        hit.collider.GetComponent<BNeighbourhood>().AddUpgrade(VertexUpgrades.BikeShop);
                                     }
                                     else
                                     {
                                         Debug.Log(" UPGRADE TO CAR SHOP ON THIS NEIGHBORHOOD ");
+                                        hit.collider.GetComponent<BNeighbourhood>().AddUpgrade(VertexUpgrades.CarShop);
                                     }
                                 }
                             }

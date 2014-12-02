@@ -1976,7 +1976,7 @@ GameObject:
   - 4: {fileID: 207686696}
   - 114: {fileID: 207686697}
   m_Layer: 8
-  m_Name: NoOfBikes
+  m_Name: HASBIKE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2034,7 +2034,7 @@ MonoBehaviour:
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 12d99324d49394a40af6af88c1377668, type: 3}
   mFont: {fileID: 0}
-  mText: 0
+  mText: NO
   mFontSize: 29
   mFontStyle: 0
   mAlignment: 0
@@ -4013,7 +4013,7 @@ GameObject:
   - 4: {fileID: 358791690}
   - 114: {fileID: 358791691}
   m_Layer: 8
-  m_Name: No Of Cars
+  m_Name: HASCAR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4072,7 +4072,7 @@ MonoBehaviour:
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 12d99324d49394a40af6af88c1377668, type: 3}
   mFont: {fileID: 0}
-  mText: NO OF CARS
+  mText: HAS CAR
   mFontSize: 29
   mFontStyle: 0
   mAlignment: 0
@@ -21636,7 +21636,7 @@ GameObject:
   - 4: {fileID: 2085130330}
   - 114: {fileID: 2085130331}
   m_Layer: 8
-  m_Name: No Of Bikes
+  m_Name: HASBIKE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21695,7 +21695,7 @@ MonoBehaviour:
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 12d99324d49394a40af6af88c1377668, type: 3}
   mFont: {fileID: 0}
-  mText: NO OF BIKES
+  mText: HAS BIKE
   mFontSize: 29
   mFontStyle: 0
   mAlignment: 0
@@ -22395,7 +22395,7 @@ GameObject:
   - 4: {fileID: 2140033964}
   - 114: {fileID: 2140033965}
   m_Layer: 8
-  m_Name: carno
+  m_Name: HASCAR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22453,7 +22453,7 @@ MonoBehaviour:
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 12d99324d49394a40af6af88c1377668, type: 3}
   mFont: {fileID: 0}
-  mText: 0
+  mText: NO
   mFontSize: 29
   mFontStyle: 0
   mAlignment: 0
