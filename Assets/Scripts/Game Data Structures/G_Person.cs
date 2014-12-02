@@ -112,7 +112,7 @@ public class G_Person
 		// Compute a new shortest path if the person is given a new destination.
 		if(v_new != v_current_goal || money < path_money_cost)
 		{
-			if(computeShortestPath(v_new, money) == false)
+			if(computeShortestPath(v_new, money,consider_health) == false)
 			{
 				return -1;
 			}
@@ -275,7 +275,7 @@ public class G_Person
 				// while updating the money value to be the moeny left after the edge is traversed.
 				// WARNING : This algorithm assumes that the player is always willing to pay more to travel faster.
 				// Because of this design choice, it is possible for people to spend money on short edges instead of longer edges.
-				double speed = computePathSpeed (e, vert, v_dest, money);
+				double speed = computePathSpeed (e, vert, v_dest, money,consider_health);
 				
 				double time = e.getLength() / speed;
 
@@ -311,7 +311,7 @@ public class G_Person
 	/// </returns>
 	/// <param name="edge">Edge.</param>
 	// FIXME : I need to handle bus fares and train fares. (Basically, I need to handle the money.);
-	public double computePathSpeed(G_Edge edge, G_Vertex src, G_Vertex dest, Box<int> money)
+	public double computePathSpeed(G_Edge edge, G_Vertex src, G_Vertex dest, Box<int> money,bool consider_health)
 	{
 		HashSet<EdgeType> types = edge.getImprovements ();
 		

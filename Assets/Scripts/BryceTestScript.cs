@@ -73,13 +73,13 @@ public class BryceTestScript : MonoBehaviour
 		G_Person p = G.newPerson (v0, v1);
 		Debug.Log (p);
 
-		p.MoveTowards (v1, 20);
+		p.MoveTowards (v1, 20,false);
 		Debug.Log (p);
 
 		for(int i = 0; i < 100; i++)
 		{
 			ASSERT(e1.hasPerson (p));
-			p.MoveTowards (v1, 20);
+			p.MoveTowards (v1, 20,false);
 			Debug.Log (p);
 		}
 
