@@ -35,7 +35,7 @@ public class BryceTestScript : MonoBehaviour
 		ASSERT (G.getNumEdges () == 0);
 		ASSERT (v0.GetHashCode() == 0);
 
-		G_Vertex v1 = G.newVertex (-17, 0);
+		G_Vertex v1 = G.newVertex (17, 0);
 		ASSERT (G.getNumVertices () == 2);
 		ASSERT (G.getNumEdges () == 0);
 		ASSERT (v1.GetHashCode() == 1);
@@ -76,13 +76,16 @@ public class BryceTestScript : MonoBehaviour
 		p.MoveTowards (v1, 20,false);
 		Debug.Log (p);
 
-		for(int i = 0; i < 100; i++)
+		double times = 1/PublicConstants.SPEED_UNIMPROVED;
+
+		for(int i = 0; i < times; i++)
 		{
 			ASSERT(e1.hasPerson (p));
 			p.MoveTowards (v1, 20,false);
 			Debug.Log (p);
 		}
 
+		p.MoveTowards (v1, 20,false);
 		ASSERT(!e1.hasPerson (p));
 
 		Debug.Log ("Player should now be at v1!");
