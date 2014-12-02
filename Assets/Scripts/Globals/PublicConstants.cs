@@ -58,5 +58,15 @@ using System;
 		public static double health_road = .2;
 		public static double health_boulevard = .1;
 
+		//Used for BPerson
+		
+		public static int AVERAGE_WEALTH_RICH = 200;
+		public static int AVERAGE_WEALTH_POOR = 75;
+		public static int AVERAGE_HEALTH_RICH = 150;
+		public static int AVERAGE_HEALTH_POOR = 100;
+		
+		//used for BNeighbourhood
+		public static int RICHNESS_THRESHOLD = 150;
+
 }
 

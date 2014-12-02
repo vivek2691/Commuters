@@ -104,4 +104,44 @@ public class BNeighbourhood : MonoBehaviour {
 	{
 		return GetTotalHappines()/residents.Count;
 	}
+
+	public bool IsRich()
+	{
+		return GetAverageWealth () > PublicConstants.RICHNESS_THRESHOLD ? true : false;
+	}
+
+	public void AddUpgrade(VertexUpgrades upgrade)
+	{
+		//vertex.bike_shop = true;
+	}
+
+	public bool CheckIfAlreadyUpgraded(VertexUpgrades upgrade)
+	{
+		switch(upgrade)
+		{
+		case VertexUpgrades.BikeShop : return vertex.bike_shop;
+			break;
+		case VertexUpgrades.BusStop : return vertex.bus_stop;
+			break;
+		case VertexUpgrades.CarShop : return vertex.car_rental;
+			break;
+		case VertexUpgrades.TrainStation : return vertex.train_stop;
+			break;
+		default : return false;
+		}
+		
+	}
+
+	public int GetNumberOfVehicles(Vehicle v)
+	{
+		int result=0;
+		foreach(BPerson person in residents)
+		{
+			if(person.hasVehicle(v))
+			{
+				result += 1;
+			}
+		}
+		return result;
+	}
 }
