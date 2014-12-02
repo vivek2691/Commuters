@@ -26,9 +26,11 @@ public class G_Vertex : Vertex
 	public bool bus_stop    = false;
 	public bool train_stop  = false;
 	public bool bike_shop   = false;
+	public bool car_shop    = false;
 	public bool bike_rental = false;
 	public bool car_rental  = false;
-	
+
+
 	/// <summary>
 	/// Initializes a new instance of the <see cref="AssemblyCSharp.G_Vertex"/> class.
 	/// </summary>
