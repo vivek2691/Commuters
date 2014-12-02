@@ -81,7 +81,7 @@ public class BPerson : MonoBehaviour {
 
 	void TravelToWork()
 	{
-		int cost = gPerson.MoveTowards (destination.GetVertex(), wealth);
+		int cost = gPerson.MoveTowards (destination.GetVertex(), wealth,false);
 		if(cost!=-1)
 			transform.position = new Vector3(gPerson.getX(),transform.position.y,gPerson.getY());
 		else
@@ -94,7 +94,7 @@ public class BPerson : MonoBehaviour {
 	
 	void TravelToHome()
 	{
-		int cost = gPerson.MoveTowards (home.GetVertex(),wealth);
+		int cost = gPerson.MoveTowards (home.GetVertex(),wealth,false);
 		if(cost!=-1)
 			transform.position = new Vector3(gPerson.getX(),transform.position.y,gPerson.getY());
 		else
