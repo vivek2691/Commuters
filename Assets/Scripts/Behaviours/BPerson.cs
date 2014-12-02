@@ -25,6 +25,8 @@ public class BPerson : MonoBehaviour {
 
 	int finalCost;
 
+	bool consider_health;
+
 
 	BNeighbourhood home,destination,current;
 	G_Person gPerson;
@@ -84,7 +86,7 @@ public class BPerson : MonoBehaviour {
 
 	void TravelToWork()
 	{
-		int cost = gPerson.MoveTowards (destination.GetVertex(), wealth/2,false);
+		int cost = gPerson.MoveTowards (destination.GetVertex(), wealth/2,consider_health);
 		if(cost!=-1)
 		{
 			finalCost = cost;
@@ -95,7 +97,7 @@ public class BPerson : MonoBehaviour {
 		{
 			outForWork = false;
 			wealth -= finalCost;
-			print (finalCost);
+			//print (finalCost);
 			lastCommute = gPerson.getCurrentCommutetime();
 			wealth += (int)lastCommute;
 		}
@@ -104,7 +106,7 @@ public class BPerson : MonoBehaviour {
 	
 	void TravelToHome()
 	{
-		int cost = gPerson.MoveTowards (home.GetVertex(),wealth,false);
+		int cost = gPerson.MoveTowards (home.GetVertex(),wealth,consider_health);
 		if(cost!=-1)
 			transform.position = new Vector3(gPerson.getX(),transform.position.y,gPerson.getY());
 		else
@@ -112,6 +114,7 @@ public class BPerson : MonoBehaviour {
 			outForHome = false;
 			lastCommute = gPerson.getCurrentCommutetime(); 
 			OnIncome();
+			ConsiderHealthOrWealth();
 		}
 			
 	}
@@ -125,11 +128,11 @@ public class BPerson : MonoBehaviour {
 			if((home.IsRich() && wealth<PublicConstants.AVERAGE_WEALTH_RICH) ||
 			   (!home.IsRich() && wealth<PublicConstants.AVERAGE_WEALTH_POOR))
 			{
-				OnGetMoreWealth();
+				OnInvestInWealth();
 			}
 			else
 			{
-				OnGetMoreHealth();
+				OnInvestInHealth();
 			}
 		}
 		//If person is health oriented
@@ -138,11 +141,11 @@ public class BPerson : MonoBehaviour {
 			if((home.IsRich() && health<PublicConstants.AVERAGE_HEALTH_RICH) ||
 			   (!home.IsRich() && health<PublicConstants.AVERAGE_HEALTH_POOR))
 			{
-				OnGetMoreHealth();
+				OnInvestInHealth();
 			}
 			else
 			{
-				OnGetMoreWealth();
+				OnInvestInWealth();
 			}
 
 		}
@@ -150,7 +153,7 @@ public class BPerson : MonoBehaviour {
 
 
 
-	void OnGetMoreWealth()
+	void OnInvestInWealth()
 	{
 		if(!gPerson.hasVehicle(Vehicle.Car))
 		{
@@ -163,7 +166,7 @@ public class BPerson : MonoBehaviour {
 		}
 	}
 
-	void OnGetMoreHealth()
+	void OnInvestInHealth()
 	{
 		if(!gPerson.hasVehicle(Vehicle.Bike))
 		{
@@ -175,14 +178,33 @@ public class BPerson : MonoBehaviour {
 		}
 	}
 
-	public void ChooseModeOfTransport(){
-		//Meaning Person wants to be healthy
-		if(happinessFactor<0.5f){
-			//Transport preference = health;
+	public void ConsiderHealthOrWealth(){
+		//If person is wealth oriented
+		if(happinessFactor<0.5f)
+		{		
+			if((home.IsRich() && wealth<PublicConstants.AVERAGE_WEALTH_RICH) ||
+			   (!home.IsRich() && wealth<PublicConstants.AVERAGE_WEALTH_POOR))
+			{
+				consider_health = false;
+			}
+			else
+			{
+				consider_health=true;
+			}
 		}
-		//Person wants to be wealthy
-		else{
-			//transport preference = wealth;
+		//If person is health oriented
+		else
+		{
+			if((home.IsRich() && health<PublicConstants.AVERAGE_HEALTH_RICH) ||
+			   (!home.IsRich() && health<PublicConstants.AVERAGE_HEALTH_POOR))
+			{
+				consider_health=true;
+			}
+			else
+			{
+				consider_health=false;
+			}
+			
 		}
 	}
 
