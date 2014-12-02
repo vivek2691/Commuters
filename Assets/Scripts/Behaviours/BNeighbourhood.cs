@@ -112,7 +112,18 @@ public class BNeighbourhood : MonoBehaviour {
 
 	public void AddUpgrade(VertexUpgrades upgrade)
 	{
-		//vertex.bike_shop = true;
+		switch(upgrade)
+		{
+		case VertexUpgrades.BikeShop : vertex.bike_shop = true;
+			break;
+		case VertexUpgrades.BusStop : vertex.bus_stop = true;
+			break;
+		case VertexUpgrades.CarShop : vertex.car_rental = true;
+			break;
+		case VertexUpgrades.TrainStation : vertex.train_stop = true;
+			break;
+		default : break;
+		}
 	}
 
 	public bool CheckIfAlreadyUpgraded(VertexUpgrades upgrade)
@@ -130,6 +141,11 @@ public class BNeighbourhood : MonoBehaviour {
 		default : return false;
 		}
 		
+	}
+
+	public List<BPerson> GetAllResidents()
+	{
+		return residents;
 	}
 
 	public int GetNumberOfVehicles(Vehicle v)
