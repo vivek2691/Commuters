@@ -9,7 +9,7 @@ using System.Collections.Generic;
 /// </summary>
 public class BPerson : MonoBehaviour {
 	
-	int wealth=1000;
+	int wealth;
 	int health;
 	int happiness;
 	float happinessFactor;
@@ -23,9 +23,12 @@ public class BPerson : MonoBehaviour {
 	bool outForHome = false;
 	bool canMove = false;
 
+	int finalCost;
+
 
 	BNeighbourhood home,destination,current;
 	G_Person gPerson;
+
 	
 	
 	// Use this for initialization
@@ -81,13 +84,20 @@ public class BPerson : MonoBehaviour {
 
 	void TravelToWork()
 	{
-		int cost = gPerson.MoveTowards (destination.GetVertex(), wealth,false);
+		int cost = gPerson.MoveTowards (destination.GetVertex(), wealth/2,false);
 		if(cost!=-1)
+		{
+			finalCost = cost;
 			transform.position = new Vector3(gPerson.getX(),transform.position.y,gPerson.getY());
+		}
+			
 		else
 		{
 			outForWork = false;
+			wealth -= finalCost;
+			print (finalCost);
 			lastCommute = gPerson.getCurrentCommutetime();
+			wealth += (int)lastCommute;
 		}
 			
 	}
@@ -100,9 +110,80 @@ public class BPerson : MonoBehaviour {
 		else
 		{
 			outForHome = false;
-			lastCommute = gPerson.getCurrentCommutetime();
+			lastCommute = gPerson.getCurrentCommutetime(); 
+			OnIncome();
 		}
 			
+	}
+
+	void OnIncome()
+	{
+
+		//If person is wealth oriented
+		if(happinessFactor<0.5f)
+		{		
+			if((home.IsRich() && wealth<PublicConstants.AVERAGE_WEALTH_RICH) ||
+			   (!home.IsRich() && wealth<PublicConstants.AVERAGE_WEALTH_POOR))
+			{
+				OnGetMoreWealth();
+			}
+			else
+			{
+				OnGetMoreHealth();
+			}
+		}
+		//If person is health oriented
+		else
+		{
+			if((home.IsRich() && health<PublicConstants.AVERAGE_HEALTH_RICH) ||
+			   (!home.IsRich() && health<PublicConstants.AVERAGE_HEALTH_POOR))
+			{
+				OnGetMoreHealth();
+			}
+			else
+			{
+				OnGetMoreWealth();
+			}
+
+		}
+	}
+
+
+
+	void OnGetMoreWealth()
+	{
+		if(!gPerson.hasVehicle(Vehicle.Car))
+		{
+			if(wealth/2 >= PublicConstants.COST_BUY_CAR)
+			{
+				gPerson.AddVehicle(Vehicle.Car);
+				wealth -= PublicConstants.COST_BUY_CAR;
+			}
+
+		}
+	}
+
+	void OnGetMoreHealth()
+	{
+		if(!gPerson.hasVehicle(Vehicle.Bike))
+		{
+			if(wealth/2 >= PublicConstants.COST_BUY_BIKE)
+			{
+				gPerson.AddVehicle(Vehicle.Bike);
+				wealth -= PublicConstants.COST_BUY_BIKE;
+			}		
+		}
+	}
+
+	public void ChooseModeOfTransport(){
+		//Meaning Person wants to be healthy
+		if(happinessFactor<0.5f){
+			//Transport preference = health;
+		}
+		//Person wants to be wealthy
+		else{
+			//transport preference = wealth;
+		}
 	}
 
 	public int GetWealth()
