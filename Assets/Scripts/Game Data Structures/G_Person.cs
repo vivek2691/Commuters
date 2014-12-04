@@ -42,7 +42,8 @@ public class G_Person
 	private int path_time_cost = 0;
 
 	private double percentage_change_per_frame = 0.0;
-	
+
+	private EdgeType current_transport = EdgeType.Unimproved;
 	
 	private HashSet<Vehicle> vehicles = new HashSet<Vehicle> ();
 	
@@ -69,6 +70,7 @@ public class G_Person
 	/// <param name="v_new">V_new.</param>
 	public void teleportToVertex(G_Vertex v_new)
 	{
+
 		if (myState == PersonState.Vertex)
 		{
 			myVertex.removePerson(this);
@@ -79,6 +81,7 @@ public class G_Person
 		
 		if(myState == PersonState.Edge)
 		{
+			current_transport = EdgeType.Unimproved;
 			myEdge.removePerson(this);
 			myState = PersonState.Vertex;
 			v_new.addPerson (this);
@@ -319,6 +322,7 @@ public class G_Person
 		    money.elem >= PublicConstants.COST_TRAIN_TICKET)
 		{
 			money.elem -= PublicConstants.COST_TRAIN_TICKET;
+			current_transport = EdgeType.Rail;
 			return PublicConstants.SPEED_RAIL;
 		}
 		
@@ -327,11 +331,13 @@ public class G_Person
 		{
 			if(types.Contains (EdgeType.Boulevard))
 			{
+				current_transport = EdgeType.Boulevard;
 				return PublicConstants.SPEED_BOULEVARD;
 			}
 			
 			if(types.Contains (EdgeType.Road))
 			{
+				current_transport = EdgeType.Road;
 				return PublicConstants.SPEED_ROAD;
 			}
 		}
@@ -342,12 +348,14 @@ public class G_Person
 			if(types.Contains (EdgeType.Boulevard))
 			{
 				money.elem -= PublicConstants.COST_RENT_CAR;
+				current_transport = EdgeType.Boulevard;
 				return PublicConstants.SPEED_BOULEVARD;
 			}
 			
 			if(types.Contains (EdgeType.Road))
 			{
 				money.elem -= PublicConstants.COST_RENT_CAR;
+				current_transport = EdgeType.Road;
 				return PublicConstants.SPEED_ROAD;
 			}
 		}
@@ -359,12 +367,14 @@ public class G_Person
 			if(types.Contains (EdgeType.Boulevard))
 			{
 				money.elem -= PublicConstants.COST_BUS_TICKET;
+				current_transport = EdgeType.Boulevard;
 				return PublicConstants.SPEED_BOULEVARD;
 			}
 			
 			if(types.Contains (EdgeType.Road))
 			{
 				money.elem -= PublicConstants.COST_BUS_TICKET;
+				current_transport = EdgeType.Road;
 				return PublicConstants.SPEED_ROAD;
 			}
 		}
@@ -372,6 +382,7 @@ public class G_Person
 		// Ride an owned bike.
 		if(vehicles.Contains(Vehicle.Bike) && types.Contains(EdgeType.Biking_Trail))
 		{
+			current_transport = EdgeType.Biking_Trail;
 			return PublicConstants.SPEED_BIKE_TRAIL;
 		}
 		
@@ -379,18 +390,21 @@ public class G_Person
 		if(src.bike_rental && types.Contains(EdgeType.Biking_Trail) && money.elem >= PublicConstants.COST_RENT_BIKE)
 		{
 			money.elem -= PublicConstants.COST_RENT_BIKE;
+			current_transport = EdgeType.Biking_Trail;
 			return PublicConstants.SPEED_BIKE_TRAIL;
 		}
 		
 		// Walk along a footpath.
 		if(types.Contains (EdgeType.Footpath))
 		{
+			current_transport = EdgeType.Footpath;
 			return PublicConstants.SPEED_FOOTPATH;
 		}
 		
 		
 		// Walk along a nasty hunk of ground,
 		// hopefully the person will get to work without too many bruises!!!
+		current_transport = EdgeType.Unimproved;
 		return PublicConstants.SPEED_UNIMPROVED;
 	}
 	
@@ -556,5 +570,17 @@ public class G_Person
 	public override int GetHashCode()
 	{
 		return index;
+	}
+
+	/// <summary>
+	/// Returns the edge type cooresponding to the mode of transportation the person is currently using.
+	/// Let Bryce know if there are any short 1 frame false returns.
+	/// </summary>
+	/// <returns>The current mode of transport.
+	/// If the player is not currently traveling and is in a vertex this
+	/// function returns EdgeType.Unimproved.</returns>
+	public EdgeType getCurrentTransport()
+	{
+		return current_transport;
 	}
 }
