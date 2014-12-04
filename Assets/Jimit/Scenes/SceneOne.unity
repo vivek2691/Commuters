@@ -449,7 +449,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 17545697}
   - 114: {fileID: 17545698}
-  - 114: {fileID: 17545699}
   m_Layer: 8
   m_Name: PopUpMessageText
   m_TagString: Untagged
@@ -531,17 +530,6 @@ MonoBehaviour:
   mMaxLineHeight: 0
   mLineWidth: 0
   mMultiline: 1
---- !u!114 &17545699
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 17545696}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67209b93b3a4e5e4c84e3544a91f468f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &19374178
 GameObject:
   m_ObjectHideFlags: 0
@@ -10678,6 +10666,7 @@ MonoBehaviour:
   BPlayerScript: {fileID: 1293611521}
   UI_GlobalParameters: {fileID: 888493889}
   UI_HoverLabel: {fileID: 1830960385}
+  UI_PopMessage: {fileID: 17545696}
   UI_PersonStats: {fileID: 1894554679}
   VertexUpgradesBox: {fileID: 1270928157}
   EdgeUpgradesBox: {fileID: 956223707}
@@ -18255,7 +18244,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1674256313
 Transform:
   m_ObjectHideFlags: 0

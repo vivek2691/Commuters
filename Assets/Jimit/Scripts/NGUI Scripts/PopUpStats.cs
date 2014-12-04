@@ -14,6 +14,7 @@ public class PopUpStats : MonoBehaviour
     public BPlayer BPlayerScript;
     public GameObject UI_GlobalParameters;
     public GameObject UI_HoverLabel;
+    public GameObject UI_PopMessage;
 
     //for person
     public GameObject UI_PersonStats;
@@ -51,6 +52,8 @@ public class PopUpStats : MonoBehaviour
     //floats
     private float waitTime = 1.0f;
     private float currTime;
+    private bool startPopUpMessageTimer = false;
+    private float popUpMessageTimer;
 
     //money
     private int money;
@@ -105,6 +108,16 @@ public class PopUpStats : MonoBehaviour
         {
             moneyUpgradeTimer = 0.0f;
             UpgradeMoneyText();
+        }
+
+        if (startPopUpMessageTimer)
+        {
+            popUpMessageTimer += Time.deltaTime;
+            if (popUpMessageTimer >= 2.0f)
+            {
+                popUpMessageTimer = 0.0f;
+                UI_PopMessage.GetComponent<UILabel>().text = " ";
+            }
         }
     }
 
@@ -878,25 +891,33 @@ public class PopUpStats : MonoBehaviour
                                     //once the values are passed to BNeighborhood, we can retrieve those values from AvgStatsUIBox by clicking on its 3rd Tab                                   
                                     if ((int)vertexUpgradeType == 1)
                                     {
-                                        Debug.Log(" UPGRADE TO BUS STOP ON THIS NEIGHBORHOOD ");
+                                       // Debug.Log(" UPGRADE TO BUS STOP ON THIS NEIGHBORHOOD ");
+                                        startPopUpMessageTimer = true;
+                                        UI_PopMessage.GetComponent<UILabel>().text = " UPGRADE TO BUS STOP ON NEIGHBORHOOD ";
                                         Instantiate(partcile, hit.collider.transform.position + new Vector3(0, 1.5f, 0), Quaternion.identity);
                                         hit.collider.GetComponent<BNeighbourhood>().AddUpgrade(VertexUpgrades.BusStop);
                                     }
                                     else if ((int)vertexUpgradeType == 2)
                                     {
-                                        Debug.Log(" UPGRADE TO RAIL STATION ON THIS NEIGHBORHOOD ");
+                                       // Debug.Log(" UPGRADE TO RAIL STATION ON THIS NEIGHBORHOOD ");
+                                        startPopUpMessageTimer = true;
+                                        UI_PopMessage.GetComponent<UILabel>().text = " UPGRADE TO RAIL STATION ON NEIGHBORHOOD ";
                                         Instantiate(partcile, hit.collider.transform.position + new Vector3(0, 1.5f, 0), Quaternion.identity);
                                         hit.collider.GetComponent<BNeighbourhood>().AddUpgrade(VertexUpgrades.TrainStation);
                                     }
                                     else if ((int)vertexUpgradeType == 3)
                                     {
-                                        Debug.Log(" UPGRADE TO BIKE SHOP ON THIS NEIGHBORHOOD ");
+                                        //Debug.Log(" UPGRADE TO BIKE SHOP ON THIS NEIGHBORHOOD ");
+                                        startPopUpMessageTimer = true;
+                                        UI_PopMessage.GetComponent<UILabel>().text = " UPGRADE TO BIKE SHOP ON NEIGHBORHOOD ";
                                         Instantiate(partcile, hit.collider.transform.position + new Vector3(0, 1.5f, 0), Quaternion.identity);
                                         hit.collider.GetComponent<BNeighbourhood>().AddUpgrade(VertexUpgrades.BikeShop);
                                     }
                                     else
                                     {
-                                        Debug.Log(" UPGRADE TO CAR SHOP ON THIS NEIGHBORHOOD ");
+                                       // Debug.Log(" UPGRADE TO CAR SHOP ON THIS NEIGHBORHOOD ");
+                                        startPopUpMessageTimer = true;
+                                        UI_PopMessage.GetComponent<UILabel>().text = " UPGRADE TO CAR SHOP ON NEIGHBORHOOD ";
                                         Instantiate(partcile, hit.collider.transform.position + new Vector3(0, 1.5f, 0), Quaternion.identity);
                                         hit.collider.GetComponent<BNeighbourhood>().AddUpgrade(VertexUpgrades.CarShop);
                                     }
@@ -915,17 +936,23 @@ public class PopUpStats : MonoBehaviour
                                     //perform all the edge upgrades here
                                     if ((int)edgeUpgradeType == 1)
                                     {
-                                        Debug.Log(" UPGRADE TO UNIMPROVED ROAD ");                                       
+                                        //Debug.Log(" UPGRADE TO UNIMPROVED ROAD ");
+                                        startPopUpMessageTimer = true;
+                                        UI_PopMessage.GetComponent<UILabel>().text = " UPGRADE TO IMPROVED ROAD ";
                                         hit.collider.gameObject.renderer.material = DirtRoadMaterial;
                                     }
                                     else if ((int)edgeUpgradeType == 2)
                                     {
-                                        Debug.Log(" UPGRADE TO FOOTHPATH ROAD ");
+                                        //Debug.Log(" UPGRADE TO FOOTHPATH ROAD ");
+                                        startPopUpMessageTimer = true;
+                                        UI_PopMessage.GetComponent<UILabel>().text = " UPGRADE TO BUS FOOTPATH ";
                                         hit.collider.gameObject.renderer.material = FootpathMat;
                                     }
                                     else if ((int)edgeUpgradeType == 3)
                                     {
-                                        Debug.Log(" UPGRADE TO BIKE TRAIL ROAD ");
+                                       // Debug.Log(" UPGRADE TO BIKE TRAIL ROAD ");
+                                        startPopUpMessageTimer = true;
+                                        UI_PopMessage.GetComponent<UILabel>().text = " UPGRADE TO BIKE TRAIL ";
                                         hit.collider.gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = true;
                                         hit.collider.gameObject.transform.GetChild(1).GetComponent<MeshRenderer>().enabled = true;
                                         hit.collider.gameObject.transform.GetChild(0).renderer.material = SideBikeLaneMat;
@@ -933,17 +960,23 @@ public class PopUpStats : MonoBehaviour
                                     }
                                     else if ((int)edgeUpgradeType == 4)
                                     {
-                                        Debug.Log(" UPGRADE TO SPEED ROAD ");
+                                      //  Debug.Log(" UPGRADE TO SPEED ROAD ");
+                                        startPopUpMessageTimer = true;
+                                        UI_PopMessage.GetComponent<UILabel>().text = " UPGRADE TO SPEED ROAD  ";
                                         hit.collider.gameObject.renderer.material = SpeedRoadMat;
                                     }
                                     else if ((int)edgeUpgradeType == 5)
                                     {
-                                        Debug.Log(" UPGRADE TO SPEED BOULEVARD ");
+                                      //  Debug.Log(" UPGRADE TO SPEED BOULEVARD ");
+                                        startPopUpMessageTimer = true;
+                                        UI_PopMessage.GetComponent<UILabel>().text = " UPGRADE TO BOULEVARD ";
                                         hit.collider.gameObject.renderer.material = BoulevardMat;
                                     }
                                     else
                                     {
-                                        Debug.Log(" UPGRADE TO RAIL ROAD ");
+                                       // Debug.Log(" UPGRADE TO RAIL ROAD ");
+                                        startPopUpMessageTimer = true;
+                                        UI_PopMessage.GetComponent<UILabel>().text = " UPGRADE TO RAIL ROAD ";
                                         hit.collider.gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = true;
                                         hit.collider.gameObject.transform.GetChild(1).GetComponent<MeshRenderer>().enabled = true;
                                         hit.collider.gameObject.transform.GetChild(0).renderer.material = SideRailwayMat;
