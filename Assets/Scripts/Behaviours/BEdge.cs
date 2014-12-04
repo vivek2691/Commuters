@@ -38,15 +38,25 @@ public class BEdge : MonoBehaviour {
 	{
 		switch(type)
 		{
-		case EdgeType.Footpath : player.money -= PublicConstants.COST_BUY_FOOTPATH;
+		case EdgeType.Footpath :
+			if(player.money>= PublicConstants.COST_BUY_FOOTPATH)
+			player.money -= PublicConstants.COST_BUY_FOOTPATH;
 			break;
-		case EdgeType.Biking_Trail : player.money -= PublicConstants.COST_BUY_BIKETRAIL;
+		case EdgeType.Biking_Trail :
+			if(player.money>=PublicConstants.COST_BUY_BIKETRAIL)
+			player.money -= PublicConstants.COST_BUY_BIKETRAIL;
 			break;
-		case EdgeType.Road : player.money -= PublicConstants.COST_BUY_ROAD;
+		case EdgeType.Road :
+			if(player.money >= PublicConstants.COST_BUY_ROAD)
+			player.money -= PublicConstants.COST_BUY_ROAD;
 			break;
-		case EdgeType.Boulevard : player.money -= PublicConstants.COST_BUY_BOULEVARD;
+		case EdgeType.Boulevard :
+			if(player.money >= PublicConstants.COST_BUY_BOULEVARD)
+			player.money -= PublicConstants.COST_BUY_BOULEVARD;
 			break;
-		case EdgeType.Rail : player.money -= PublicConstants.COST_BUY_RAIL;
+		case EdgeType.Rail :
+			if(player.money >= PublicConstants.COST_BUY_RAIL)
+			player.money -= PublicConstants.COST_BUY_RAIL;
 			break;
 		default : break;
 		}
