@@ -124,12 +124,16 @@ public class BNeighbourhood : MonoBehaviour {
 		switch(upgrade)
 		{
 		case VertexUpgrades.BikeShop : vertex.bike_shop = true;
+			player.money -= PublicConstants.COST_BUY_BIKE_SHOP;
 			break;
 		case VertexUpgrades.BusStop : vertex.bus_stop = true;
+			player.money -= PublicConstants.COST_BUY_BUS_STOP;
 			break;
 		case VertexUpgrades.CarShop : vertex.car_shop = true;
+			player.money -= PublicConstants.COST_BUY_CAR_SHOP;
 			break;
 		case VertexUpgrades.TrainStation : vertex.train_stop = true;
+			player.money -= PublicConstants.COST_BUY_TRAIN_STOP;
 			break;
 		default : break;
 		}

@@ -40,6 +40,21 @@ using System;
 		
 		public static int COST_BUY_BIKE  = 3;
 		public static int COST_BUY_CAR   = 4;
+
+		public static int COST_BUY_CAR_SHOP = 250;
+		public static int COST_BUY_BIKE_SHOP = 100;
+		public static int COST_BUY_TRAIN_STOP = 100;
+		public static int COST_BUY_BUS_STOP = 75;
+
+		
+
+		public static int COST_BUY_FOOTPATH = 10;
+		public static int COST_BUY_BIKETRAIL = 20;
+		public static int COST_BUY_ROAD = 50;
+		public static int COST_BUY_BOULEVARD = 150;
+		public static int COST_BUY_RAIL = 300;
+		
+		
 		
 		// Used for Game Clock
 		

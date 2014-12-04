@@ -20,7 +20,7 @@ public class BPlayer : MonoBehaviour {
 	void Update () {
 
 
-		//print (GetGlobalAverageHappiness());
+		print (money);
 	}
 
 	void OnStartGame()

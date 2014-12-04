@@ -12,6 +12,8 @@ public class BEdge : MonoBehaviour {
 
 	public G_Edge gEdge;
 
+	public BPlayer player;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -22,13 +24,33 @@ public class BEdge : MonoBehaviour {
 	
 	}
 
-	public void Spawn(G_Graph graph)
+	public void Spawn(G_Graph graph,BPlayer player)
 	{
 		if(vertex1.GetVertex () == null || vertex2.GetVertex () == null)
 			print("A vertex is null for this edge");
 		this.gEdge = graph.newEdge(vertex1.GetVertex(),vertex2.GetVertex());
+		this.player = player;
 //		print (gEdge);
 
+	}
+
+	public void AddUpgrade(EdgeType type)
+	{
+		switch(type)
+		{
+		case EdgeType.Footpath : player.money -= PublicConstants.COST_BUY_FOOTPATH;
+			break;
+		case EdgeType.Biking_Trail : player.money -= PublicConstants.COST_BUY_BIKETRAIL;
+			break;
+		case EdgeType.Road : player.money -= PublicConstants.COST_BUY_ROAD;
+			break;
+		case EdgeType.Boulevard : player.money -= PublicConstants.COST_BUY_BOULEVARD;
+			break;
+		case EdgeType.Rail : player.money -= PublicConstants.COST_BUY_RAIL;
+			break;
+		default : break;
+		}
+		gEdge.addImprovement (type);
 	}
 
 	public bool IsVertex(BNeighbourhood vertex)

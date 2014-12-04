@@ -25,15 +25,6 @@ public enum VertexUpgrades
     CarShop
 }
 
-public enum EdgeUpgrades
-{
-    FootPath,
-    BikeTrail,
-    SpeedRoad,
-    SpeedBoulevard,
-    SpeedRail
-}
-
 
 
 
