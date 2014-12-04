@@ -623,7 +623,7 @@ public class PopUpStats : MonoBehaviour
     {
         money = BPlayerScript.money;
         //make bus available at 20
-        if (money > 10 && money <= 20)
+        if (money >= 10 && money < 20)
         {
             if (!isBusUpgraded)
             {
@@ -638,7 +638,7 @@ public class PopUpStats : MonoBehaviour
         }
 
         //make train pass available
-        else if (money > 20 && money <= 40)
+        else if (money >= 20 && money < 40)
         {
             if (!isRailUpgrade)
             {
@@ -664,7 +664,7 @@ public class PopUpStats : MonoBehaviour
         }
 
         //make bike available
-        else if (money > 40 && money <= 100)
+        else if (money >= 40 && money < 100)
         {
             if (!isRailUpgrade)
             {
@@ -701,7 +701,7 @@ public class PopUpStats : MonoBehaviour
         }
 
         //make car available
-        else if (money > 100)
+        else if (money >= 100)
         {
             if (!isRailUpgrade)
             {
@@ -917,7 +917,7 @@ public class PopUpStats : MonoBehaviour
             case (int)MouseClickStats.firstClick:
                 if (isVertexUpgradeClicked)
                 {
-                    Debug.Log(" FIRST CLICK ON VERTEX UPGRADE ");
+                  //  Debug.Log(" FIRST CLICK ON VERTEX UPGRADE ");
                     //hide both UI BOXES
                     DisablePersonStatsUI();
                     DisableAverageStatsUI();
@@ -926,7 +926,7 @@ public class PopUpStats : MonoBehaviour
                 }
                 else if (isEdgeUpgradeClicked)
                 {
-                    Debug.Log(" FIRST CLICK ON EDGE UPGRADE ");
+                  //  Debug.Log(" FIRST CLICK ON EDGE UPGRADE ");
                     DisablePersonStatsUI();
                     DisableAverageStatsUI();
                     currTime = waitTime;
