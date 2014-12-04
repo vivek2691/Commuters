@@ -662,7 +662,9 @@ public class PopUpStats : MonoBehaviour
                     }
                 }
             }
-            else if (money < PublicConstants.COST_BUY_BUS_STOP)
+           
+            // if money less than bus cost, black out everything
+            if (money < PublicConstants.COST_BUY_BUS_STOP)
             {
                 //black out 
                 if (isBusUpgraded)
@@ -675,7 +677,41 @@ public class PopUpStats : MonoBehaviour
                         isBusUpgraded = false;
                     }
                 }
+
+                if (isRailUpgrade)
+                {
+                    GameObject railStation = GameObject.Find("RailStation");
+                    if (railStation.GetComponent<UIButton>().enabled == true)
+                    {
+                        railStation.GetComponent<UIButton>().enabled = false;
+                        railStation.transform.GetChild(0).GetComponent<UISprite>().enabled = true;
+                        isRailUpgrade = false;
+                    }
+                }
+
+                if (isBikeUpgraded)
+                {
+                    GameObject bikeShop = GameObject.Find("BikeShop");
+                    if (bikeShop.GetComponent<UIButton>().enabled == true)
+                    {
+                        bikeShop.GetComponent<UIButton>().enabled = false;
+                        bikeShop.transform.GetChild(0).GetComponent<UISprite>().enabled = true;
+                        isBikeUpgraded = false;
+                    }
+                }
+
+                if (isCarUpgraded)
+                {
+                    GameObject carShop = GameObject.Find("CarShop");
+                    if (carShop.GetComponent<UIButton>().enabled == true)
+                    {
+                        carShop.GetComponent<UIButton>().enabled = false;
+                        carShop.transform.GetChild(0).GetComponent<UISprite>().enabled = true;
+                        isCarUpgraded = false;
+                    }
+                }
             }
+            
 
             //make train pass available
             if (money >= PublicConstants.COST_BUY_TRAIN_STOP && money < PublicConstants.COST_BUY_BIKE_SHOP)
@@ -703,7 +739,8 @@ public class PopUpStats : MonoBehaviour
                 }
             }
 
-            else if (money < PublicConstants.COST_BUY_TRAIN_STOP)
+            //if money > bus cost and less than train cost, black out train, bike and car
+            if (money > PublicConstants.COST_BUY_BUS_STOP && money < PublicConstants.COST_BUY_TRAIN_STOP)
             {
                 if (isRailUpgrade)
                 {
@@ -716,14 +753,25 @@ public class PopUpStats : MonoBehaviour
                     }
                 }
 
-                if (isBusUpgraded)
+                if (isBikeUpgraded)
                 {
-                    GameObject busStation = GameObject.Find("BusStation");
-                    if (busStation.GetComponent<UIButton>().enabled == true)
+                    GameObject bikeShop = GameObject.Find("BikeShop");
+                    if (bikeShop.GetComponent<UIButton>().enabled == true)
                     {
-                        busStation.GetComponent<UIButton>().enabled = false;
-                        busStation.transform.GetChild(0).GetComponent<UISprite>().enabled = true;
-                        isBusUpgraded = false;
+                        bikeShop.GetComponent<UIButton>().enabled = false;
+                        bikeShop.transform.GetChild(0).GetComponent<UISprite>().enabled = true;
+                        isBikeUpgraded = false;
+                    }
+                }
+
+                if (isCarUpgraded)
+                {
+                    GameObject carShop = GameObject.Find("CarShop");
+                    if (carShop.GetComponent<UIButton>().enabled == true)
+                    {
+                        carShop.GetComponent<UIButton>().enabled = false;
+                        carShop.transform.GetChild(0).GetComponent<UISprite>().enabled = true;
+                        isCarUpgraded = false;
                     }
                 }
             }
@@ -765,30 +813,9 @@ public class PopUpStats : MonoBehaviour
                 }
             }
 
-            else if (money < PublicConstants.COST_BUY_BIKE_SHOP)
-            {
-                if (isRailUpgrade)
-                {
-                    GameObject railStation = GameObject.Find("RailStation");
-                    if (railStation.GetComponent<UIButton>().enabled == true)
-                    {
-                        railStation.GetComponent<UIButton>().enabled = false;
-                        railStation.transform.GetChild(0).GetComponent<UISprite>().enabled = true;
-                        isRailUpgrade = false;
-                    }
-                }
-
-                if (isBusUpgraded)
-                {
-                    GameObject busStation = GameObject.Find("BusStation");
-                    if (busStation.GetComponent<UIButton>().enabled == true)
-                    {
-                        busStation.GetComponent<UIButton>().enabled = false;
-                        busStation.transform.GetChild(0).GetComponent<UISprite>().enabled = true;
-                        isBusUpgraded = false;
-                    }
-                }
-
+            //money > train shop but less than bike, black out bike and car
+            if (money > PublicConstants.COST_BUY_TRAIN_STOP && money < PublicConstants.COST_BUY_BIKE_SHOP)
+            {             
                 if (isBikeUpgraded)
                 {
                     GameObject bikeShop = GameObject.Find("BikeShop");
@@ -797,6 +824,17 @@ public class PopUpStats : MonoBehaviour
                         bikeShop.GetComponent<UIButton>().enabled = false;
                         bikeShop.transform.GetChild(0).GetComponent<UISprite>().enabled = true;
                         isBikeUpgraded = false;
+                    }
+                }
+
+                if (isCarUpgraded)
+                {
+                    GameObject carShop = GameObject.Find("CarShop");
+                    if (carShop.GetComponent<UIButton>().enabled == true)
+                    {
+                        carShop.GetComponent<UIButton>().enabled = false;
+                        carShop.transform.GetChild(0).GetComponent<UISprite>().enabled = true;
+                        isCarUpgraded = false;
                     }
                 }
             }
