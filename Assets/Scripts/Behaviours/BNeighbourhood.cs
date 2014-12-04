@@ -65,7 +65,10 @@ public class BNeighbourhood : MonoBehaviour {
 
 	public int GetAverageWealth()
 	{
-		return GetTotalWealth () / residents.Count;
+		if(residents.Count!=0)
+			return GetTotalWealth () / residents.Count;
+		else
+			return 0;
 
 	}
 	public int GetTotalWealth()
@@ -89,7 +92,10 @@ public class BNeighbourhood : MonoBehaviour {
 	}
 	public int GetAverageHealth()
 	{
-		return GetTotalHealth()/residents.Count;
+		if(residents.Count!=0)
+			return GetTotalHealth()/residents.Count;
+		else
+			return 0;
 	}
 	public int GetTotalHappines()
 	{
@@ -102,7 +108,10 @@ public class BNeighbourhood : MonoBehaviour {
 	}
 	public int GetAverageHappiness()
 	{
-		return GetTotalHappines()/residents.Count;
+		if(residents.Count!=0)
+			return GetTotalHappines()/residents.Count;
+		else
+			return 0;
 	}
 
 	public bool IsRich()

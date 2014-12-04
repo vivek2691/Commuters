@@ -13,16 +13,14 @@ public class BPlayer : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		gGraph = new G_Graph ();
+		OnStartGame ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.S))
-		{
-			OnStartGame();
-		}
 
-		print (money);
+
+		//print (GetGlobalAverageHappiness());
 	}
 
 	void OnStartGame()
@@ -83,6 +81,21 @@ public class BPlayer : MonoBehaviour {
 	public List<BEdge> GetAllEdges()
 	{
 		return allEdges;
+	}
+
+	public int GetGlobalAverageHappiness()
+	{
+		int result = 0;
+		foreach(BNeighbourhood hood in allHoods)
+		{
+			result+= hood.GetAverageHappiness();
+		}
+
+		if(allHoods.Count!=0)
+			return result/allHoods.Count;
+		else
+			return 0;
+
 	}
 
 
