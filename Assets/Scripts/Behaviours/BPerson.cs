@@ -29,7 +29,11 @@ public class BPerson : MonoBehaviour {
 
 
 	BNeighbourhood home,destination,current;
+	BPlayer player;
 	G_Person gPerson;
+	PersonState state;
+
+	EdgeType lastTransport;
 
 	
 	
@@ -66,10 +70,11 @@ public class BPerson : MonoBehaviour {
 
 	}
 
-	public void Spawn(BNeighbourhood home,BNeighbourhood destination,G_Graph graph)
+	public void Spawn(BNeighbourhood home,BNeighbourhood destination,G_Graph graph,BPlayer player)
 	{
 		this.home = home;
 		this.destination = destination;
+		this.player = player;
 		this.wealth = Random.Range (20, 50);
 		this.health = Random.Range (70,90);
 		this.happinessFactor = Random.Range (0f,1f);
@@ -91,6 +96,11 @@ public class BPerson : MonoBehaviour {
 		{
 			finalCost = cost;
 			transform.position = new Vector3(gPerson.getX(),transform.position.y,gPerson.getY());
+			//lastTransport = gPerson.getCurrentTransport();
+			//if(state!=){
+
+			//}
+
 		}
 			
 		else
@@ -100,6 +110,7 @@ public class BPerson : MonoBehaviour {
 			//print (finalCost);
 			lastCommute = gPerson.getCurrentCommutetime();
 			wealth += (int)lastCommute;
+
 		}
 			
 	}
@@ -161,6 +172,8 @@ public class BPerson : MonoBehaviour {
 			{
 				gPerson.AddVehicle(Vehicle.Car);
 				wealth -= PublicConstants.COST_BUY_CAR;
+				player.money += PublicConstants.COST_BUY_CAR;
+
 			}
 
 		}
@@ -174,6 +187,7 @@ public class BPerson : MonoBehaviour {
 			{
 				gPerson.AddVehicle(Vehicle.Bike);
 				wealth -= PublicConstants.COST_BUY_BIKE;
+				player.money += PublicConstants.COST_BUY_BIKE;
 			}		
 		}
 	}

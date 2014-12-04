@@ -53,7 +53,7 @@ public class BNeighbourhood : MonoBehaviour {
 		{
 			GameObject personObject =  (GameObject)Instantiate (personPrefab,this.transform.position,Quaternion.identity);
 			BPerson person = personObject.GetComponent<BPerson>();
-			person.Spawn (this,RandomDestination(),graph);
+			person.Spawn (this,RandomDestination(),graph,player);
 			residents.Add(person);
 		}
 	}
@@ -118,7 +118,7 @@ public class BNeighbourhood : MonoBehaviour {
 			break;
 		case VertexUpgrades.BusStop : vertex.bus_stop = true;
 			break;
-		case VertexUpgrades.CarShop : vertex.car_rental = true;
+		case VertexUpgrades.CarShop : vertex.car_shop = true;
 			break;
 		case VertexUpgrades.TrainStation : vertex.train_stop = true;
 			break;
@@ -134,7 +134,7 @@ public class BNeighbourhood : MonoBehaviour {
 			break;
 		case VertexUpgrades.BusStop : return vertex.bus_stop;
 			break;
-		case VertexUpgrades.CarShop : return vertex.car_rental;
+		case VertexUpgrades.CarShop : return vertex.car_shop;
 			break;
 		case VertexUpgrades.TrainStation : return vertex.train_stop;
 			break;

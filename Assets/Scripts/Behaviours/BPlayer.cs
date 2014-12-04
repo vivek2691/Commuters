@@ -21,6 +21,8 @@ public class BPlayer : MonoBehaviour {
 		{
 			OnStartGame();
 		}
+
+		print (money);
 	}
 
 	void OnStartGame()
