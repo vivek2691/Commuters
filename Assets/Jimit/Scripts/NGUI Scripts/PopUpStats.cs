@@ -127,6 +127,7 @@ public class PopUpStats : MonoBehaviour
         //for upgrades when stats box is open real time
         if (isNeighborHoodBoxOpen && currentNeighborhood != null)
         {
+            //Debug.Log(" BOX OPEN ");
             UpgradeAvgStatsTabRealTime();
             UpgradePeopleStatsTabRealTime();
             UpgradeBoxStatsTabRealTime();
@@ -142,6 +143,7 @@ public class PopUpStats : MonoBehaviour
     //deactive ui average neighbourhood stats
     private void DisableAverageStatsUI()
     {
+        isNeighborHoodBoxOpen = false;
         UI_AverageNeighborhoodStats.gameObject.active = false;
     }
 
@@ -170,7 +172,6 @@ public class PopUpStats : MonoBehaviour
             //average happiness
 
             //for real time changes in values
-            currentActiveNeighborhood = neighborhood;
             isNeighborHoodBoxOpen = true;
             
             //happiness
@@ -187,7 +188,6 @@ public class PopUpStats : MonoBehaviour
         if (tabNo == 2)
         {
             //for real time changes in values
-            currentActiveNeighborhood = neighborhood;
             isNeighborHoodBoxOpen = true;
            
             UI_nAvgStatsBox.gameObject.active = false;
@@ -199,7 +199,6 @@ public class PopUpStats : MonoBehaviour
         if (tabNo == 3)
         {
             //for real time changes in values
-            currentActiveNeighborhood = neighborhood;
             isNeighborHoodBoxOpen = true;
 
             UI_nAvgStatsBox.gameObject.active = false;
@@ -231,13 +230,13 @@ public class PopUpStats : MonoBehaviour
     private void UpgradeAvgStatsTabRealTime()
     {
         //happiness
-        UI_AverageNeighborhoodStats.gameObject.transform.GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetComponent<UILabel>().text = currentActiveNeighborhood.GetComponent<BNeighbourhood>().GetAverageHappiness().ToString();
+        UI_AverageNeighborhoodStats.gameObject.transform.GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetComponent<UILabel>().text = currentNeighborhood.GetComponent<BNeighbourhood>().GetAverageHappiness().ToString();
 
         //for average wealth
-        UI_AverageNeighborhoodStats.gameObject.transform.GetChild(0).GetChild(0).GetChild(3).GetChild(0).GetComponent<UILabel>().text = currentActiveNeighborhood.GetComponent<BNeighbourhood>().GetAverageWealth().ToString();
+        UI_AverageNeighborhoodStats.gameObject.transform.GetChild(0).GetChild(0).GetChild(3).GetChild(0).GetComponent<UILabel>().text = currentNeighborhood.GetComponent<BNeighbourhood>().GetAverageWealth().ToString();
 
         //for average health
-        UI_AverageNeighborhoodStats.gameObject.transform.GetChild(0).GetChild(0).GetChild(4).GetChild(0).GetComponent<UILabel>().text = currentActiveNeighborhood.GetComponent<BNeighbourhood>().GetAverageHealth().ToString();
+        UI_AverageNeighborhoodStats.gameObject.transform.GetChild(0).GetChild(0).GetChild(4).GetChild(0).GetComponent<UILabel>().text = currentNeighborhood.GetComponent<BNeighbourhood>().GetAverageHealth().ToString();
     }
 
     private void UpgradePeopleStatsTabRealTime()
@@ -248,22 +247,22 @@ public class PopUpStats : MonoBehaviour
     private void UpgradeBoxStatsTabRealTime()
     {
         //has bus stop
-        UI_nUpgradesBox.gameObject.transform.GetChild(0).GetChild(0).GetComponent<UILabel>().text = currentActiveNeighborhood.GetComponent<BNeighbourhood>().CheckIfAlreadyUpgraded(VertexUpgrades.BusStop).ToString();
+        UI_nUpgradesBox.gameObject.transform.GetChild(0).GetChild(0).GetComponent<UILabel>().text = currentNeighborhood.GetComponent<BNeighbourhood>().CheckIfAlreadyUpgraded(VertexUpgrades.BusStop).ToString();
 
         //has train station
-        UI_nUpgradesBox.gameObject.transform.GetChild(1).GetChild(0).GetComponent<UILabel>().text = currentActiveNeighborhood.GetComponent<BNeighbourhood>().CheckIfAlreadyUpgraded(VertexUpgrades.TrainStation).ToString();
+        UI_nUpgradesBox.gameObject.transform.GetChild(1).GetChild(0).GetComponent<UILabel>().text = currentNeighborhood.GetComponent<BNeighbourhood>().CheckIfAlreadyUpgraded(VertexUpgrades.TrainStation).ToString();
 
         //Bike Shop
-        UI_nUpgradesBox.gameObject.transform.GetChild(2).GetChild(0).GetComponent<UILabel>().text = currentActiveNeighborhood.GetComponent<BNeighbourhood>().CheckIfAlreadyUpgraded(VertexUpgrades.BikeShop).ToString();
+        UI_nUpgradesBox.gameObject.transform.GetChild(2).GetChild(0).GetComponent<UILabel>().text = currentNeighborhood.GetComponent<BNeighbourhood>().CheckIfAlreadyUpgraded(VertexUpgrades.BikeShop).ToString();
 
         //Car Shop
-        UI_nUpgradesBox.gameObject.transform.GetChild(3).GetChild(0).GetComponent<UILabel>().text = currentActiveNeighborhood.GetComponent<BNeighbourhood>().CheckIfAlreadyUpgraded(VertexUpgrades.CarShop).ToString();
+        UI_nUpgradesBox.gameObject.transform.GetChild(3).GetChild(0).GetComponent<UILabel>().text = currentNeighborhood.GetComponent<BNeighbourhood>().CheckIfAlreadyUpgraded(VertexUpgrades.CarShop).ToString();
 
         //no of bikes
-        UI_nUpgradesBox.gameObject.transform.GetChild(4).GetChild(0).GetComponent<UILabel>().text = currentActiveNeighborhood.GetComponent<BNeighbourhood>().GetNumberOfVehicles(Vehicle.Bike).ToString();
+        UI_nUpgradesBox.gameObject.transform.GetChild(4).GetChild(0).GetComponent<UILabel>().text = currentNeighborhood.GetComponent<BNeighbourhood>().GetNumberOfVehicles(Vehicle.Bike).ToString();
 
         //no of cars
-        UI_nUpgradesBox.gameObject.transform.GetChild(5).GetChild(0).GetComponent<UILabel>().text = currentActiveNeighborhood.GetComponent<BNeighbourhood>().GetNumberOfVehicles(Vehicle.Car).ToString();
+        UI_nUpgradesBox.gameObject.transform.GetChild(5).GetChild(0).GetComponent<UILabel>().text = currentNeighborhood.GetComponent<BNeighbourhood>().GetNumberOfVehicles(Vehicle.Car).ToString();
     }
 
     //on click event on neighborhood avg stats tab
@@ -623,7 +622,7 @@ public class PopUpStats : MonoBehaviour
     {
         money = BPlayerScript.money;
         //make bus available at 20
-        if (money > 10 && money <= 20)
+        if (money >= 10 && money < 20)
         {
             if (!isBusUpgraded)
             {
@@ -638,7 +637,7 @@ public class PopUpStats : MonoBehaviour
         }
 
         //make train pass available
-        else if (money > 20 && money <= 40)
+        else if (money >= 20 && money < 40)
         {
             if (!isRailUpgrade)
             {
@@ -664,7 +663,7 @@ public class PopUpStats : MonoBehaviour
         }
 
         //make bike available
-        else if (money > 40 && money <= 100)
+        else if (money >= 40 && money < 100)
         {
             if (!isRailUpgrade)
             {
@@ -701,7 +700,7 @@ public class PopUpStats : MonoBehaviour
         }
 
         //make car available
-        else if (money > 100)
+        else if (money >= 100)
         {
             if (!isRailUpgrade)
             {
@@ -764,7 +763,7 @@ public class PopUpStats : MonoBehaviour
     {
         //for foothpath
         money = BPlayerScript.money;
-        if (money > 10 && money < 20)
+        if (money >= 10 && money < 20)
         {
             if (!isFoothPath)
             {
@@ -901,7 +900,7 @@ public class PopUpStats : MonoBehaviour
                     edge.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
                 }
             }
-            isRailUpgrade = true;
+            isSpeedRail = true;
             isBoulevard = true;
             isSpeedRoad = true;
             isBikeTrail = true;
@@ -917,7 +916,7 @@ public class PopUpStats : MonoBehaviour
             case (int)MouseClickStats.firstClick:
                 if (isVertexUpgradeClicked)
                 {
-                    Debug.Log(" FIRST CLICK ON VERTEX UPGRADE ");
+                  //  Debug.Log(" FIRST CLICK ON VERTEX UPGRADE ");
                     //hide both UI BOXES
                     DisablePersonStatsUI();
                     DisableAverageStatsUI();
@@ -926,7 +925,7 @@ public class PopUpStats : MonoBehaviour
                 }
                 else if (isEdgeUpgradeClicked)
                 {
-                    Debug.Log(" FIRST CLICK ON EDGE UPGRADE ");
+                  //  Debug.Log(" FIRST CLICK ON EDGE UPGRADE ");
                     DisablePersonStatsUI();
                     DisableAverageStatsUI();
                     currTime = waitTime;
@@ -1005,14 +1004,14 @@ public class PopUpStats : MonoBehaviour
                                         UI_PopMessage.GetComponent<UILabel>().text = " UPGRADE TO IMPROVED ROAD ";
                                         hit.collider.gameObject.renderer.material = DirtRoadMaterial;
                                     }
-                                    else if ((int)edgeUpgradeType == 2)
+                                     if ((int)edgeUpgradeType == 2)
                                     {
                                         //Debug.Log(" UPGRADE TO FOOTHPATH ROAD ");
                                         startPopUpMessageTimer = true;
                                         UI_PopMessage.GetComponent<UILabel>().text = " UPGRADE TO BUS FOOTPATH ";
                                         hit.collider.gameObject.renderer.material = FootpathMat;
                                     }
-                                    else if ((int)edgeUpgradeType == 3)
+                                     if ((int)edgeUpgradeType == 3)
                                     {
                                        // Debug.Log(" UPGRADE TO BIKE TRAIL ROAD ");
                                         startPopUpMessageTimer = true;
@@ -1022,21 +1021,21 @@ public class PopUpStats : MonoBehaviour
                                         hit.collider.gameObject.transform.GetChild(0).renderer.material = SideBikeLaneMat;
                                         hit.collider.gameObject.transform.GetChild(1).renderer.material = SideBikeLaneMat;
                                     }
-                                    else if ((int)edgeUpgradeType == 4)
+                                     if ((int)edgeUpgradeType == 4)
                                     {
                                       //  Debug.Log(" UPGRADE TO SPEED ROAD ");
                                         startPopUpMessageTimer = true;
-                                        UI_PopMessage.GetComponent<UILabel>().text = " UPGRADE TO SPEED ROAD  ";
+                                        UI_PopMessage.GetComponent<UILabel>().text = " UPGRADE TO ROAD  ";
                                         hit.collider.gameObject.renderer.material = SpeedRoadMat;
                                     }
-                                    else if ((int)edgeUpgradeType == 5)
+                                     if ((int)edgeUpgradeType == 5)
                                     {
                                       //  Debug.Log(" UPGRADE TO SPEED BOULEVARD ");
                                         startPopUpMessageTimer = true;
                                         UI_PopMessage.GetComponent<UILabel>().text = " UPGRADE TO BOULEVARD ";
                                         hit.collider.gameObject.renderer.material = BoulevardMat;
                                     }
-                                    else
+                                    if ((int)edgeUpgradeType == 6)
                                     {
                                        // Debug.Log(" UPGRADE TO RAIL ROAD ");
                                         startPopUpMessageTimer = true;
