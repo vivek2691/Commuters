@@ -183,7 +183,6 @@
      <Compile Include="Assets\Jimit\NGUI\Scripts\UI\UITooltip.cs" />
      <Compile Include="Assets\Jimit\NGUI\Scripts\UI\UIViewport.cs" />
      <Compile Include="Assets\Jimit\Scripts\NGUI Scripts\DestroyParticle.cs" />
-     <Compile Include="Assets\Jimit\Scripts\NGUI Scripts\PopUpMessageScript.cs" />
      <Compile Include="Assets\Jimit\Scripts\NGUI Scripts\PopUpStats.cs" />
      <Compile Include="Assets\Jimit\Scripts\NGUI Scripts\TimerLabelScript.cs" />
      <Compile Include="Assets\Jimit\SimpleParticlePack\Scripts\ParticleTester.cs" />

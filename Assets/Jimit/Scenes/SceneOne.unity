@@ -134,7 +134,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 64
   mHeight: 36
-  mDepth: 5
+  mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -449,7 +449,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 17545697}
   - 114: {fileID: 17545698}
-  - 114: {fileID: 17545699}
   m_Layer: 8
   m_Name: PopUpMessageText
   m_TagString: Untagged
@@ -531,17 +530,6 @@ MonoBehaviour:
   mMaxLineHeight: 0
   mLineWidth: 0
   mMultiline: 1
---- !u!114 &17545699
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 17545696}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67209b93b3a4e5e4c84e3544a91f468f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &19374178
 GameObject:
   m_ObjectHideFlags: 0
@@ -871,7 +859,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 460
   mHeight: 48
-  mDepth: 9
+  mDepth: 5
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -1181,7 +1169,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 102
   mHeight: 96
-  mDepth: 23
+  mDepth: 18
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -2100,7 +2088,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 132
   mHeight: 30
-  mDepth: 11
+  mDepth: 7
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -2234,7 +2222,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 164
   mHeight: 48
-  mDepth: 10
+  mDepth: 6
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -2617,7 +2605,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 116
   mHeight: 108
-  mDepth: 20
+  mDepth: 15
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -3472,7 +3460,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 518
   mHeight: 80
-  mDepth: 1
+  mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -3774,7 +3762,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 64
   mHeight: 36
-  mDepth: 5
+  mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -3864,7 +3852,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 132
   mHeight: 30
-  mDepth: 11
+  mDepth: 7
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -4187,7 +4175,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 132
   mHeight: 30
-  mDepth: 6
+  mDepth: 3
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -4278,7 +4266,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 254
   mHeight: 56
-  mDepth: 12
+  mDepth: 8
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -4455,6 +4443,7 @@ GameObject:
   - 114: {fileID: 385366748}
   - 65: {fileID: 385366750}
   - 114: {fileID: 385366749}
+  - 114: {fileID: 385366751}
   m_Layer: 8
   m_Name: BusStation
   m_TagString: vertexUpgrade
@@ -4507,7 +4496,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 100
   mHeight: 101
-  mDepth: 22
+  mDepth: 17
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -4566,6 +4555,38 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 96.4400024, y: 94.4100037, z: 2.94000006}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &385366751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 385366746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e862f287df53bb64db191162f851a296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onHoverOver:
+  - mTarget: {fileID: 981266249}
+    mMethodName: onBusStationHover
+    mParameters: []
+    oneShot: 0
+  onHoverOut:
+  - mTarget: {fileID: 981266249}
+    mMethodName: onBusStationUnHover
+    mParameters: []
+    oneShot: 0
+  onPress: []
+  onRelease: []
+  onSelect: []
+  onDeselect: []
+  onClick: []
+  onDoubleClick: []
+  onDragStart: []
+  onDragEnd: []
+  onDragOver: []
+  onDragOut: []
+  onDrag: []
 --- !u!1 &389005794
 GameObject:
   m_ObjectHideFlags: 0
@@ -4735,7 +4756,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 192
   mHeight: 40
-  mDepth: 5
+  mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -4884,7 +4905,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 192
   mHeight: 40
-  mDepth: 5
+  mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -5161,7 +5182,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 32
   mHeight: 32
-  mDepth: 20
+  mDepth: 15
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -5330,7 +5351,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 132
   mHeight: 30
-  mDepth: 6
+  mDepth: 3
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -5825,6 +5846,7 @@ GameObject:
   - 114: {fileID: 521388240}
   - 65: {fileID: 521388239}
   - 114: {fileID: 521388238}
+  - 114: {fileID: 521388241}
   m_Layer: 8
   m_Name: FootPath
   m_TagString: edgeUpgrade
@@ -5918,7 +5940,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 100
   mHeight: 101
-  mDepth: 22
+  mDepth: 17
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -5936,6 +5958,38 @@ MonoBehaviour:
   mAtlas: {fileID: 11400000, guid: 6f90957a4b46f8244819635c76c8febc, type: 2}
   mSpriteName: footpath
   mFillCenter: 1
+--- !u!114 &521388241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 521388236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e862f287df53bb64db191162f851a296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onHoverOver:
+  - mTarget: {fileID: 981266249}
+    mMethodName: onFootPathHover
+    mParameters: []
+    oneShot: 0
+  onHoverOut:
+  - mTarget: {fileID: 981266249}
+    mMethodName: onFootPathUnHover
+    mParameters: []
+    oneShot: 0
+  onPress: []
+  onRelease: []
+  onSelect: []
+  onDeselect: []
+  onClick: []
+  onDoubleClick: []
+  onDragStart: []
+  onDragEnd: []
+  onDragOver: []
+  onDragOut: []
+  onDrag: []
 --- !u!1 &525988090
 GameObject:
   m_ObjectHideFlags: 0
@@ -6557,7 +6611,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 102
   mHeight: 96
-  mDepth: 23
+  mDepth: 18
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -6693,7 +6747,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 64
   mHeight: 36
-  mDepth: 5
+  mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -6870,6 +6924,7 @@ GameObject:
   - 114: {fileID: 610297161}
   - 65: {fileID: 610297160}
   - 114: {fileID: 610297159}
+  - 114: {fileID: 610297162}
   m_Layer: 8
   m_Name: SpeedRoad
   m_TagString: edgeUpgrade
@@ -6963,7 +7018,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 100
   mHeight: 101
-  mDepth: 22
+  mDepth: 17
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -6981,6 +7036,38 @@ MonoBehaviour:
   mAtlas: {fileID: 11400000, guid: 857e7024c7949ed42a85a3873f89ee82, type: 2}
   mSpriteName: road2
   mFillCenter: 1
+--- !u!114 &610297162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 610297157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e862f287df53bb64db191162f851a296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onHoverOver:
+  - mTarget: {fileID: 981266249}
+    mMethodName: onSpeedRoadHover
+    mParameters: []
+    oneShot: 0
+  onHoverOut:
+  - mTarget: {fileID: 981266249}
+    mMethodName: onSpeedRoadUnHover
+    mParameters: []
+    oneShot: 0
+  onPress: []
+  onRelease: []
+  onSelect: []
+  onDeselect: []
+  onClick: []
+  onDoubleClick: []
+  onDragStart: []
+  onDragEnd: []
+  onDragOver: []
+  onDragOut: []
+  onDrag: []
 --- !u!1 &620125334
 GameObject:
   m_ObjectHideFlags: 0
@@ -7243,7 +7330,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 278
   mHeight: 36
-  mDepth: 16
+  mDepth: 11
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -7467,7 +7554,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 460
   mHeight: 420
-  mDepth: 4
+  mDepth: 1
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -7987,7 +8074,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 102
   mHeight: 96
-  mDepth: 23
+  mDepth: 18
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -8145,7 +8232,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 460
   mHeight: 420
-  mDepth: 10
+  mDepth: 6
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -8259,6 +8346,7 @@ GameObject:
   - 114: {fileID: 783582471}
   - 65: {fileID: 783582470}
   - 114: {fileID: 783582469}
+  - 114: {fileID: 783582472}
   m_Layer: 8
   m_Name: SpeedRail
   m_TagString: edgeUpgrade
@@ -8352,7 +8440,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 100
   mHeight: 101
-  mDepth: 22
+  mDepth: 17
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -8370,6 +8458,38 @@ MonoBehaviour:
   mAtlas: {fileID: 11400000, guid: 857e7024c7949ed42a85a3873f89ee82, type: 2}
   mSpriteName: railtrack1
   mFillCenter: 1
+--- !u!114 &783582472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 783582467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e862f287df53bb64db191162f851a296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onHoverOver:
+  - mTarget: {fileID: 981266249}
+    mMethodName: onSpeedRailHover
+    mParameters: []
+    oneShot: 0
+  onHoverOut:
+  - mTarget: {fileID: 981266249}
+    mMethodName: onSpeedRailUnHover
+    mParameters: []
+    oneShot: 0
+  onPress: []
+  onRelease: []
+  onSelect: []
+  onDeselect: []
+  onClick: []
+  onDoubleClick: []
+  onDragStart: []
+  onDragEnd: []
+  onDragOver: []
+  onDragOut: []
+  onDrag: []
 --- !u!1 &792075684
 GameObject:
   m_ObjectHideFlags: 0
@@ -8544,6 +8664,7 @@ GameObject:
   - 114: {fileID: 833983503}
   - 65: {fileID: 833983502}
   - 114: {fileID: 833983501}
+  - 114: {fileID: 833983504}
   m_Layer: 8
   m_Name: BikeTrail
   m_TagString: edgeUpgrade
@@ -8637,7 +8758,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 100
   mHeight: 101
-  mDepth: 22
+  mDepth: 17
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -8655,6 +8776,38 @@ MonoBehaviour:
   mAtlas: {fileID: 11400000, guid: 6f90957a4b46f8244819635c76c8febc, type: 2}
   mSpriteName: biketrail
   mFillCenter: 1
+--- !u!114 &833983504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 833983499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e862f287df53bb64db191162f851a296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onHoverOver:
+  - mTarget: {fileID: 981266249}
+    mMethodName: onBikeTrailHover
+    mParameters: []
+    oneShot: 0
+  onHoverOut:
+  - mTarget: {fileID: 981266249}
+    mMethodName: onBikeTrailUnHover
+    mParameters: []
+    oneShot: 0
+  onPress: []
+  onRelease: []
+  onSelect: []
+  onDeselect: []
+  onClick: []
+  onDoubleClick: []
+  onDragStart: []
+  onDragEnd: []
+  onDragOver: []
+  onDragOut: []
+  onDrag: []
 --- !u!1 &836134073
 GameObject:
   m_ObjectHideFlags: 0
@@ -8751,6 +8904,7 @@ GameObject:
   - 114: {fileID: 845727500}
   - 65: {fileID: 845727499}
   - 114: {fileID: 845727498}
+  - 114: {fileID: 845727501}
   m_Layer: 8
   m_Name: UnImproved
   m_TagString: Untagged
@@ -8843,7 +8997,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 100
   mHeight: 101
-  mDepth: 22
+  mDepth: 17
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -8861,6 +9015,38 @@ MonoBehaviour:
   mAtlas: {fileID: 11400000, guid: 6f90957a4b46f8244819635c76c8febc, type: 2}
   mSpriteName: dirtyroad
   mFillCenter: 1
+--- !u!114 &845727501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 845727496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e862f287df53bb64db191162f851a296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onHoverOver:
+  - mTarget: {fileID: 981266249}
+    mMethodName: onUnImprovedHover
+    mParameters: []
+    oneShot: 0
+  onHoverOut:
+  - mTarget: {fileID: 981266249}
+    mMethodName: onUnImprovedHoverOut
+    mParameters: []
+    oneShot: 0
+  onPress: []
+  onRelease: []
+  onSelect: []
+  onDeselect: []
+  onClick: []
+  onDoubleClick: []
+  onDragStart: []
+  onDragEnd: []
+  onDragOver: []
+  onDragOut: []
+  onDrag: []
 --- !u!1 &846434170
 GameObject:
   m_ObjectHideFlags: 0
@@ -8872,6 +9058,7 @@ GameObject:
   - 114: {fileID: 846434174}
   - 65: {fileID: 846434173}
   - 114: {fileID: 846434172}
+  - 114: {fileID: 846434175}
   m_Layer: 8
   m_Name: SpeedBoulevard
   m_TagString: edgeUpgrade
@@ -8965,7 +9152,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 100
   mHeight: 101
-  mDepth: 22
+  mDepth: 17
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -8983,6 +9170,38 @@ MonoBehaviour:
   mAtlas: {fileID: 11400000, guid: 857e7024c7949ed42a85a3873f89ee82, type: 2}
   mSpriteName: highway
   mFillCenter: 1
+--- !u!114 &846434175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 846434170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e862f287df53bb64db191162f851a296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onHoverOver:
+  - mTarget: {fileID: 981266249}
+    mMethodName: onSpeedBoulevardHover
+    mParameters: []
+    oneShot: 0
+  onHoverOut:
+  - mTarget: {fileID: 981266249}
+    mMethodName: onSpeedBoulevardUnHover
+    mParameters: []
+    oneShot: 0
+  onPress: []
+  onRelease: []
+  onSelect: []
+  onDeselect: []
+  onClick: []
+  onDoubleClick: []
+  onDragStart: []
+  onDragEnd: []
+  onDragOver: []
+  onDragOut: []
+  onDrag: []
 --- !u!1 &853175467
 GameObject:
   m_ObjectHideFlags: 0
@@ -9330,7 +9549,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 462
   mHeight: 258
-  mDepth: 24
+  mDepth: 19
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -9510,7 +9729,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 164
   mHeight: 48
-  mDepth: 10
+  mDepth: 6
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -9742,6 +9961,7 @@ Transform:
   m_Children:
   - {fileID: 229367862}
   - {fileID: 1762252433}
+  - {fileID: 1830960386}
   m_Father: {fileID: 1341028335}
   m_RootOrder: 2
 --- !u!114 &925010835
@@ -9776,7 +9996,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 140
   mHeight: 302
-  mDepth: 19
+  mDepth: 14
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -9953,7 +10173,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &941706812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10147,7 +10367,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 64
   mHeight: 36
-  mDepth: 5
+  mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -10244,7 +10464,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 524
   mHeight: 304
-  mDepth: 21
+  mDepth: 16
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -10380,7 +10600,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 64
   mHeight: 36
-  mDepth: 5
+  mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -10443,10 +10663,13 @@ MonoBehaviour:
   UI_nAvgStatsBox: {fileID: 1975886087}
   UI_nPeopleStatsBox: {fileID: 1057561825}
   UI_nUpgradesBox: {fileID: 657399550}
+  BPlayerScript: {fileID: 1293611521}
+  UI_GlobalParameters: {fileID: 888493889}
+  UI_HoverLabel: {fileID: 1830960385}
+  UI_PopMessage: {fileID: 17545696}
   UI_PersonStats: {fileID: 1894554679}
   VertexUpgradesBox: {fileID: 1270928157}
   EdgeUpgradesBox: {fileID: 956223707}
-  money: 200
   partcile: {fileID: 100000, guid: 28b516aeb9176f54b9cd27825c3cb7c3, type: 2}
   DirtRoadMaterial: {fileID: 2100000, guid: 8237bc0224baf8640a93190c1ec53311, type: 2}
   FootpathMat: {fileID: 2100000, guid: 2b15ae90b7a524a4781ff0c67ff8bfbd, type: 2}
@@ -10454,6 +10677,7 @@ MonoBehaviour:
   SpeedRoadMat: {fileID: 2100000, guid: d4bd957d6ab94a646a8f93a24f1fc7bd, type: 2}
   SideBikeLaneMat: {fileID: 2100000, guid: 9d3f6a608f817b447b996b67e1751bb0, type: 2}
   SideRailwayMat: {fileID: 2100000, guid: 1204317a836953f44a02f23f76d4f954, type: 2}
+  moneyUpgradeTimer: 0
 --- !u!4 &981266250
 Transform:
   m_ObjectHideFlags: 0
@@ -10881,7 +11105,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 460
   mHeight: 420
-  mDepth: 4
+  mDepth: 1
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -11118,7 +11342,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 58
   mHeight: 54
-  mDepth: 23
+  mDepth: 18
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -11370,7 +11594,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 102
   mHeight: 96
-  mDepth: 23
+  mDepth: 18
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -11564,7 +11788,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 132
   mHeight: 30
-  mDepth: 11
+  mDepth: 7
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -11811,7 +12035,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 192
   mHeight: 40
-  mDepth: 5
+  mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -12003,7 +12227,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 164
   mHeight: 48
-  mDepth: 10
+  mDepth: 6
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -12558,7 +12782,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 250
   mHeight: 56
-  mDepth: 15
+  mDepth: 10
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -12701,7 +12925,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 102
   mHeight: 96
-  mDepth: 23
+  mDepth: 18
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -12845,7 +13069,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 102
   mHeight: 96
-  mDepth: 23
+  mDepth: 18
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -13040,7 +13264,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 250
   mHeight: 56
-  mDepth: 12
+  mDepth: 8
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -13416,7 +13640,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 250
   mHeight: 56
-  mDepth: 15
+  mDepth: 10
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -13507,7 +13731,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 522
   mHeight: 84
-  mDepth: 1
+  mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -13592,9 +13816,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 1249690443}
   - 114: {fileID: 1249690445}
-  - 114: {fileID: 1249690444}
   m_Layer: 8
-  m_Name: TimerLabel
+  m_Name: WealthLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13612,17 +13835,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1238495233}
   m_RootOrder: 0
---- !u!114 &1249690444
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1249690442}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7b71093c33c13e49baff06ef829bc7b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1249690445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13655,7 +13867,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 50
   mHeight: 60
-  mDepth: 16
+  mDepth: 11
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -13866,7 +14078,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 524
   mHeight: 304
-  mDepth: 21
+  mDepth: 16
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -14134,7 +14346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78bec3e334729494d9ee9a5844e29c16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  money: 0
+  money: 100
 --- !u!4 &1293611522
 Transform:
   m_ObjectHideFlags: 0
@@ -14776,7 +14988,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 64
   mHeight: 36
-  mDepth: 5
+  mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -15099,7 +15311,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 192
   mHeight: 40
-  mDepth: 5
+  mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -15363,7 +15575,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 102
   mHeight: 96
-  mDepth: 23
+  mDepth: 18
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -15441,7 +15653,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 132
   mHeight: 30
-  mDepth: 6
+  mDepth: 3
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -16081,7 +16293,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 250
   mHeight: 56
-  mDepth: 11
+  mDepth: 7
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -16325,7 +16537,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 58
   mHeight: 54
-  mDepth: 23
+  mDepth: 18
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -16682,7 +16894,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 102
   mHeight: 112
-  mDepth: 23
+  mDepth: 18
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -16761,7 +16973,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 192
   mHeight: 40
-  mDepth: 5
+  mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -17085,7 +17297,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 36
   mHeight: 38
-  mDepth: 13
+  mDepth: 9
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -18561,7 +18773,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 250
   mHeight: 56
-  mDepth: 5
+  mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -19034,7 +19246,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 116
   mHeight: 108
-  mDepth: 20
+  mDepth: 15
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -19293,7 +19505,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 102
   mHeight: 96
-  mDepth: 23
+  mDepth: 18
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -19372,7 +19584,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 50
   mHeight: 60
-  mDepth: 16
+  mDepth: 11
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -19413,6 +19625,96 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7b71093c33c13e49baff06ef829bc7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1830960385
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1830960386}
+  - 114: {fileID: 1830960387}
+  m_Layer: 8
+  m_Name: HoverLabel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1830960386
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1830960385}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 305.997803, y: 186.015259, z: 0}
+  m_LocalScale: {x: 1.00015998, y: 1.00015998, z: 1.00015998}
+  m_Children: []
+  m_Father: {fileID: 925010834}
+  m_RootOrder: 2
+--- !u!114 &1830960387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1830960385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9d0b5f3bbe925a408bd595c79d0bf63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftAnchor:
+    target: {fileID: 0}
+    relative: 0
+    absolute: 0
+  rightAnchor:
+    target: {fileID: 0}
+    relative: 1
+    absolute: 0
+  bottomAnchor:
+    target: {fileID: 0}
+    relative: 0
+    absolute: 0
+  topAnchor:
+    target: {fileID: 0}
+    relative: 1
+    absolute: 0
+  updateAnchors: 1
+  mColor: {r: 1, g: 1, b: 1, a: 1}
+  mPivot: 4
+  mWidth: 446
+  mHeight: 76
+  mDepth: 20
+  autoResizeBoxCollider: 0
+  hideIfOffScreen: 0
+  keepAspectRatio: 0
+  aspectRatio: 5.86842108
+  keepCrispWhenShrunk: 1
+  mTrueTypeFont: {fileID: 12800000, guid: 12d99324d49394a40af6af88c1377668, type: 3}
+  mFont: {fileID: 0}
+  mText: 
+  mFontSize: 55
+  mFontStyle: 0
+  mAlignment: 0
+  mEncoding: 1
+  mMaxLineCount: 0
+  mEffectStyle: 0
+  mEffectColor: {r: 0, g: 0, b: 0, a: 1}
+  mSymbols: 1
+  mEffectDistance: {x: 1, y: 1}
+  mOverflow: 0
+  mMaterial: {fileID: 0}
+  mApplyGradient: 1
+  mGradientTop: {r: 1, g: 1, b: 1, a: 1}
+  mGradientBottom: {r: 1, g: 1, b: 1, a: 1}
+  mSpacingX: 0
+  mSpacingY: 0
+  mShrinkToFit: 0
+  mMaxLineWidth: 0
+  mMaxLineHeight: 0
+  mLineWidth: 0
+  mMultiline: 1
 --- !u!1 &1831812747
 GameObject:
   m_ObjectHideFlags: 0
@@ -19834,7 +20136,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 250
   mHeight: 56
-  mDepth: 17
+  mDepth: 12
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -19925,7 +20227,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 460
   mHeight: 48
-  mDepth: 11
+  mDepth: 7
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -20012,6 +20314,7 @@ GameObject:
   - 114: {fileID: 1899013400}
   - 65: {fileID: 1899013402}
   - 114: {fileID: 1899013401}
+  - 114: {fileID: 1899013403}
   m_Layer: 8
   m_Name: RailStation
   m_TagString: vertexUpgrade
@@ -20064,7 +20367,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 100
   mHeight: 101
-  mDepth: 22
+  mDepth: 17
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -20123,6 +20426,38 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 94.3600006, y: 95.5800018, z: 8.06999969}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1899013403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1899013398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e862f287df53bb64db191162f851a296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onHoverOver:
+  - mTarget: {fileID: 981266249}
+    mMethodName: onRailStationHover
+    mParameters: []
+    oneShot: 0
+  onHoverOut:
+  - mTarget: {fileID: 981266249}
+    mMethodName: onRailStationUnHover
+    mParameters: []
+    oneShot: 0
+  onPress: []
+  onRelease: []
+  onSelect: []
+  onDeselect: []
+  onClick: []
+  onDoubleClick: []
+  onDragStart: []
+  onDragEnd: []
+  onDragOver: []
+  onDragOut: []
+  onDrag: []
 --- !u!1 &1902804368
 GameObject:
   m_ObjectHideFlags: 0
@@ -21037,7 +21372,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 460
   mHeight: 420
-  mDepth: 4
+  mDepth: 1
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -21503,7 +21838,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 192
   mHeight: 40
-  mDepth: 5
+  mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -22067,6 +22402,7 @@ GameObject:
   - 114: {fileID: 2046597899}
   - 65: {fileID: 2046597901}
   - 114: {fileID: 2046597900}
+  - 114: {fileID: 2046597902}
   m_Layer: 8
   m_Name: CarShop
   m_TagString: vertexUpgrade
@@ -22119,7 +22455,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 100
   mHeight: 101
-  mDepth: 22
+  mDepth: 17
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -22178,6 +22514,38 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 94.3600006, y: 95.5800018, z: 8.06999969}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2046597902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2046597897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e862f287df53bb64db191162f851a296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onHoverOver:
+  - mTarget: {fileID: 981266249}
+    mMethodName: onCarShopHover
+    mParameters: []
+    oneShot: 0
+  onHoverOut:
+  - mTarget: {fileID: 981266249}
+    mMethodName: onCarShopUnHover
+    mParameters: []
+    oneShot: 0
+  onPress: []
+  onRelease: []
+  onSelect: []
+  onDeselect: []
+  onClick: []
+  onDoubleClick: []
+  onDragStart: []
+  onDragEnd: []
+  onDragOver: []
+  onDragOut: []
+  onDrag: []
 --- !u!1 &2047127890
 GameObject:
   m_ObjectHideFlags: 0
@@ -22294,6 +22662,7 @@ GameObject:
   - 114: {fileID: 2062507191}
   - 65: {fileID: 2062507193}
   - 114: {fileID: 2062507192}
+  - 114: {fileID: 2062507194}
   m_Layer: 8
   m_Name: BikeShop
   m_TagString: vertexUpgrade
@@ -22346,7 +22715,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 100
   mHeight: 101
-  mDepth: 22
+  mDepth: 17
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -22405,6 +22774,38 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 94.3600006, y: 95.5800018, z: 8.06999969}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2062507194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2062507189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e862f287df53bb64db191162f851a296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onHoverOver:
+  - mTarget: {fileID: 981266249}
+    mMethodName: onBikeShopHover
+    mParameters: []
+    oneShot: 0
+  onHoverOut:
+  - mTarget: {fileID: 981266249}
+    mMethodName: onBikeShopUnHover
+    mParameters: []
+    oneShot: 0
+  onPress: []
+  onRelease: []
+  onSelect: []
+  onDeselect: []
+  onClick: []
+  onDoubleClick: []
+  onDragStart: []
+  onDragEnd: []
+  onDragOver: []
+  onDragOut: []
+  onDrag: []
 --- !u!1 &2065969237
 GameObject:
   m_ObjectHideFlags: 0
@@ -22524,7 +22925,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 192
   mHeight: 40
-  mDepth: 5
+  mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -22614,7 +23015,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 132
   mHeight: 30
-  mDepth: 18
+  mDepth: 13
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -22819,7 +23220,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 250
   mHeight: 56
-  mDepth: 12
+  mDepth: 8
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -23016,7 +23417,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 250
   mHeight: 56
-  mDepth: 6
+  mDepth: 3
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -23165,7 +23566,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 250
   mHeight: 56
-  mDepth: 7
+  mDepth: 4
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -23429,7 +23830,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 64
   mHeight: 36
-  mDepth: 5
+  mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -23577,7 +23978,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 134
   mHeight: 34
-  mDepth: 11
+  mDepth: 7
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
