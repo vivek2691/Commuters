@@ -37,7 +37,7 @@ public class BPlayer : MonoBehaviour {
 		foreach(GameObject obj in objects)
 		{
 			BEdge edge = obj.GetComponent<BEdge>();
-			edge.Spawn(gGraph);
+			edge.Spawn(gGraph,this);
 		}
 
 	}
