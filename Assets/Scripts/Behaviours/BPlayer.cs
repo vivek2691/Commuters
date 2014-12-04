@@ -20,7 +20,36 @@ public class BPlayer : MonoBehaviour {
 	void Update () {
 
 
-		print (money);
+		//print (money);
+	}
+
+	bool CheckWin()
+	{
+		if(GetGlobalAverageHappiness()>=5000 && PublicClock.clock.GetDays()<15)
+		{
+			return true;
+		}
+		else 
+		{
+			return false;
+		}
+	}
+
+	public bool CheckLose()
+	{
+		if(PublicClock.clock.GetDays()>=15)
+		{
+			if(GetGlobalAverageHappiness()<5000)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else
+			return false;
 	}
 
 	void OnStartGame()
