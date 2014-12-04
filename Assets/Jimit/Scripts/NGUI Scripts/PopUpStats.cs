@@ -52,6 +52,17 @@ public class PopUpStats : MonoBehaviour
     //test variables 
     public int money;
 
+    //particle prefab
+    public GameObject partcile;
+
+    //side materials
+    public Material DirtRoadMaterial;
+    public Material FootpathMat;
+    public Material BoulevardMat;
+    public Material SpeedRoadMat;
+    public Material SideBikeLaneMat;
+    public Material SideRailwayMat;
+
     void Start()
     {
         neighborhoodStatsTab = NeighborhoodStatsTab.avgstats;
@@ -344,7 +355,7 @@ public class PopUpStats : MonoBehaviour
     }
     // ******** vertex button click ends *********
 
-    // ******** edge button click starts **********
+    // ******** edge button click starts *********
     public void OnEdgeUnImprovedButtonClick()
     {
         isEdgeUpgradeClicked = true;
@@ -395,7 +406,6 @@ public class PopUpStats : MonoBehaviour
             edgeUpgradeType = EdgeUpgradeType.SpeedRail;
         }
     }
-
     // ******** edge button click ends **********
     //************* BUTTON CLICKS END *****************
 
@@ -746,21 +756,25 @@ public class PopUpStats : MonoBehaviour
                                     if ((int)vertexUpgradeType == 1)
                                     {
                                         Debug.Log(" UPGRADE TO BUS STOP ON THIS NEIGHBORHOOD ");
+                                        Instantiate(partcile, hit.collider.transform.position + new Vector3(0, 1.5f, 0), Quaternion.identity);
                                         hit.collider.GetComponent<BNeighbourhood>().AddUpgrade(VertexUpgrades.BusStop);
                                     }
                                     else if ((int)vertexUpgradeType == 2)
                                     {
                                         Debug.Log(" UPGRADE TO RAIL STATION ON THIS NEIGHBORHOOD ");
+                                        Instantiate(partcile, hit.collider.transform.position + new Vector3(0, 1.5f, 0), Quaternion.identity);
                                         hit.collider.GetComponent<BNeighbourhood>().AddUpgrade(VertexUpgrades.TrainStation);
                                     }
                                     else if ((int)vertexUpgradeType == 3)
                                     {
                                         Debug.Log(" UPGRADE TO BIKE SHOP ON THIS NEIGHBORHOOD ");
+                                        Instantiate(partcile, hit.collider.transform.position + new Vector3(0, 1.5f, 0), Quaternion.identity);
                                         hit.collider.GetComponent<BNeighbourhood>().AddUpgrade(VertexUpgrades.BikeShop);
                                     }
                                     else
                                     {
                                         Debug.Log(" UPGRADE TO CAR SHOP ON THIS NEIGHBORHOOD ");
+                                        Instantiate(partcile, hit.collider.transform.position + new Vector3(0, 1.5f, 0), Quaternion.identity);
                                         hit.collider.GetComponent<BNeighbourhood>().AddUpgrade(VertexUpgrades.CarShop);
                                     }
                                 }
@@ -778,27 +792,39 @@ public class PopUpStats : MonoBehaviour
                                     //perform all the edge upgrades here
                                     if ((int)edgeUpgradeType == 1)
                                     {
-                                        Debug.Log(" UPGRADE TO UNIMPROVED ROAD ");
+                                        Debug.Log(" UPGRADE TO UNIMPROVED ROAD ");                                       
+                                        hit.collider.gameObject.renderer.material = DirtRoadMaterial;
                                     }
                                     else if ((int)edgeUpgradeType == 2)
                                     {
                                         Debug.Log(" UPGRADE TO FOOTHPATH ROAD ");
+                                        hit.collider.gameObject.renderer.material = FootpathMat;
                                     }
                                     else if ((int)edgeUpgradeType == 3)
                                     {
                                         Debug.Log(" UPGRADE TO BIKE TRAIL ROAD ");
+                                        hit.collider.gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = true;
+                                        hit.collider.gameObject.transform.GetChild(1).GetComponent<MeshRenderer>().enabled = true;
+                                        hit.collider.gameObject.transform.GetChild(0).renderer.material = SideBikeLaneMat;
+                                        hit.collider.gameObject.transform.GetChild(1).renderer.material = SideBikeLaneMat;
                                     }
                                     else if ((int)edgeUpgradeType == 4)
                                     {
                                         Debug.Log(" UPGRADE TO SPEED ROAD ");
+                                        hit.collider.gameObject.renderer.material = SpeedRoadMat;
                                     }
                                     else if ((int)edgeUpgradeType == 5)
                                     {
                                         Debug.Log(" UPGRADE TO SPEED BOULEVARD ");
+                                        hit.collider.gameObject.renderer.material = BoulevardMat;
                                     }
                                     else
                                     {
                                         Debug.Log(" UPGRADE TO RAIL ROAD ");
+                                        hit.collider.gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = true;
+                                        hit.collider.gameObject.transform.GetChild(1).GetComponent<MeshRenderer>().enabled = true;
+                                        hit.collider.gameObject.transform.GetChild(0).renderer.material = SideRailwayMat;
+                                        hit.collider.gameObject.transform.GetChild(1).renderer.material = SideRailwayMat;
                                     }
                                 }
                             }
