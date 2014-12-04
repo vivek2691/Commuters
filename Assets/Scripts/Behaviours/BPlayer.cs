@@ -8,7 +8,7 @@ public class BPlayer : MonoBehaviour {
 	List<BNeighbourhood> allHoods;
 	List<BEdge> allEdges;
 	public G_Graph gGraph;
-	public int money;
+	public int money = 100;
 
 	// Use this for initialization
 	void Start () {

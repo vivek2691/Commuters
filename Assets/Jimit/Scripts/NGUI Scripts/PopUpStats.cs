@@ -11,6 +11,9 @@ public class PopUpStats : MonoBehaviour
     public GameObject UI_nAvgStatsBox;
     public GameObject UI_nPeopleStatsBox;
     public GameObject UI_nUpgradesBox;
+    public BPlayer BPlayerScript;
+    public GameObject UI_GlobalParameters;
+    public GameObject UI_HoverLabel;
 
     //for person
     public GameObject UI_PersonStats;
@@ -49,8 +52,8 @@ public class PopUpStats : MonoBehaviour
     private float waitTime = 1.0f;
     private float currTime;
 
-    //test variables 
-    public int money;
+    //money
+    private int money;
 
     //particle prefab
     public GameObject partcile;
@@ -62,6 +65,9 @@ public class PopUpStats : MonoBehaviour
     public Material SpeedRoadMat;
     public Material SideBikeLaneMat;
     public Material SideRailwayMat;
+
+    //floats
+    public float moneyUpgradeTimer;
 
     void Start()
     {
@@ -92,6 +98,20 @@ public class PopUpStats : MonoBehaviour
         }
 
         CheckMouseInput();
+
+        //money upgrade
+        moneyUpgradeTimer += Time.deltaTime;
+        if (moneyUpgradeTimer >= 4.0f)
+        {
+            moneyUpgradeTimer = 0.0f;
+            UpgradeMoneyText();
+        }
+    }
+
+    //upgrade the money text value
+    private void UpgradeMoneyText()
+    {
+        UI_GlobalParameters.transform.GetChild(0).GetChild(0).GetComponent<UILabel>().text = ((int)BPlayerScript.money).ToString();
     }
 
     //deactive ui average neighbourhood stats
@@ -409,6 +429,109 @@ public class PopUpStats : MonoBehaviour
     // ******** edge button click ends **********
     //************* BUTTON CLICKS END *****************
 
+    //******** ON HOVER EVENTS **************
+    public void onUnImprovedHover()
+    {
+        UI_HoverLabel.GetComponent<UILabel>().text = "UNIMPROVED, $0";
+    }
+
+    public void onUnImprovedHoverOut()
+    {
+        UI_HoverLabel.GetComponent<UILabel>().text = " ";
+    }
+
+    public void onFootPathHover()
+    {
+        UI_HoverLabel.GetComponent<UILabel>().text = "FOOTPATH, $10";
+    }
+
+    public void onFootPathUnHover()
+    {
+        UI_HoverLabel.GetComponent<UILabel>().text = " ";
+    }
+
+    public void onBikeTrailHover()
+    {
+        UI_HoverLabel.GetComponent<UILabel>().text = "BIKETRAIL, $20";
+    }
+
+    public void onBikeTrailUnHover()
+    {
+        UI_HoverLabel.GetComponent<UILabel>().text = " ";
+    }
+
+    public void onSpeedRoadHover()
+    {
+        UI_HoverLabel.GetComponent<UILabel>().text = "SPEEDROAD, $50";
+    }
+
+    public void onSpeedRoadUnHover()
+    {
+        UI_HoverLabel.GetComponent<UILabel>().text = " ";
+    }
+
+    public void onSpeedBoulevardHover()
+    {
+        UI_HoverLabel.GetComponent<UILabel>().text = "BOULEVARD, $150";
+    }
+
+    public void onSpeedBoulevardUnHover()
+    {
+        UI_HoverLabel.GetComponent<UILabel>().text = " ";
+    }
+
+    public void onSpeedRailHover()
+    {
+        UI_HoverLabel.GetComponent<UILabel>().text = "SPEEDRAIL, $300";
+    }
+
+    public void onSpeedRailUnHover()
+    {
+        UI_HoverLabel.GetComponent<UILabel>().text = " ";
+    }
+
+    public void onBusStationHover()
+    {
+        UI_HoverLabel.GetComponent<UILabel>().text = "BUS-STATION, $10";
+    }
+
+    public void onBusStationUnHover()
+    {
+        UI_HoverLabel.GetComponent<UILabel>().text = " ";
+    }
+
+    public void onRailStationHover()
+    {
+        UI_HoverLabel.GetComponent<UILabel>().text = "RAIL-STATION, $20";
+    }
+
+    public void onRailStationUnHover()
+    {
+        UI_HoverLabel.GetComponent<UILabel>().text = " ";
+    }
+
+    public void onBikeShopHover()
+    {
+        UI_HoverLabel.GetComponent<UILabel>().text = "BIKE-SHOP, $40";
+    }
+
+    public void onBikeShopUnHover()
+    {
+        UI_HoverLabel.GetComponent<UILabel>().text = " ";
+    }
+
+    public void onCarShopHover()
+    {
+        UI_HoverLabel.GetComponent<UILabel>().text = "CAR-SHOP, $100";
+    }
+
+    public void onCarShopUnHover()
+    {
+        UI_HoverLabel.GetComponent<UILabel>().text = " ";
+    }
+
+    //********** ON HOVER EVENTS END **********
+
     //we want the buttons of the vertex upgrades to be off because initially player cannot buy those upgrades
     private void DeactivateInitialVertexUpgrades()
     {
@@ -421,9 +544,9 @@ public class PopUpStats : MonoBehaviour
 
     private void CheckVertexUpgrades()
     {
-
+        money = BPlayerScript.money;
         //make bus available at 20
-        if (money > 0 && money <= 20)
+        if (money > 10 && money <= 20)
         {
             if (!isBusUpgraded)
             {
@@ -563,7 +686,8 @@ public class PopUpStats : MonoBehaviour
     private void CheckEdgeUpgrades()
     {
         //for foothpath
-        if (money > 0 && money <= 10)
+        money = BPlayerScript.money;
+        if (money > 10 && money < 20)
         {
             if (!isFoothPath)
             {
@@ -578,7 +702,7 @@ public class PopUpStats : MonoBehaviour
         }
 
         //for bike trails
-        if (money > 10 && money <= 50)
+        if (money >= 20 && money < 50)
         {
             if (!isFoothPath)
             {
@@ -604,7 +728,7 @@ public class PopUpStats : MonoBehaviour
         }
 
         //for speed road
-        if (money > 50 && money <= 100)
+        if (money >= 50 && money < 150)
         {
             if (!isFoothPath)
             {
@@ -641,7 +765,7 @@ public class PopUpStats : MonoBehaviour
         }
 
         //for boulevard road
-        if (money > 100 && money <= 200)
+        if (money >= 150 && money <= 200)
         {
             if (!isFoothPath)
             {
@@ -689,7 +813,7 @@ public class PopUpStats : MonoBehaviour
         }
 
         //activate all edge upgrades
-        else if (money > 200)
+        else if (money >= 300)
         {
             GameObject[] edgeUpgrades = GameObject.FindGameObjectsWithTag("edgeUpgrade");
             foreach (GameObject edge in edgeUpgrades)
@@ -751,8 +875,7 @@ public class PopUpStats : MonoBehaviour
                                     mouseClickStats = MouseClickStats.firstClick;
 
                                     //call the function to BNeighborhood here based on vertexUpgrade type
-                                    //once the values are passed to BNeighborhood, we can retrieve those values from AvgStatsUIBox by clicking on its 3rd Tab
-                                    
+                                    //once the values are passed to BNeighborhood, we can retrieve those values from AvgStatsUIBox by clicking on its 3rd Tab                                   
                                     if ((int)vertexUpgradeType == 1)
                                     {
                                         Debug.Log(" UPGRADE TO BUS STOP ON THIS NEIGHBORHOOD ");
