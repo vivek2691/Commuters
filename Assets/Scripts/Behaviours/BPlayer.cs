@@ -23,7 +23,7 @@ public class BPlayer : MonoBehaviour {
 		//print (money);
 	}
 
-	bool CheckWin()
+	public bool CheckWin()
 	{
 		if(GetGlobalAverageHappiness()>=5000 && PublicClock.clock.GetDays()<15)
 		{
