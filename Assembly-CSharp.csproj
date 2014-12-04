@@ -185,6 +185,7 @@
      <Compile Include="Assets\Jimit\Scripts\NGUI Scripts\DestroyParticle.cs" />
      <Compile Include="Assets\Jimit\Scripts\NGUI Scripts\PopUpStats.cs" />
      <Compile Include="Assets\Jimit\Scripts\NGUI Scripts\TimerLabelScript.cs" />
+     <Compile Include="Assets\Jimit\Scripts\NGUI Scripts\globalHappinessScript.cs" />
      <Compile Include="Assets\Jimit\SimpleParticlePack\Scripts\ParticleTester.cs" />
      <Compile Include="Assets\Scripts\Abstract Data Structures\Box.cs" />
      <Compile Include="Assets\Scripts\Abstract Data Structures\Edge.cs" />
