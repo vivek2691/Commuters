@@ -583,4 +583,9 @@ public class G_Person
 	{
 		return current_transport;
 	}
+
+	public PersonState getState()
+	{
+		return myState;
+	}
 }
