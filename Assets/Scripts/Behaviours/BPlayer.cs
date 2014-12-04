@@ -13,6 +13,7 @@ public class BPlayer : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		gGraph = new G_Graph ();
+		OnStartGame ();
 	}
 	
 	// Update is called once per frame
