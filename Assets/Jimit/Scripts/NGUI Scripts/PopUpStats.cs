@@ -72,6 +72,10 @@ public class PopUpStats : MonoBehaviour
     //floats
     public float moneyUpgradeTimer;
 
+    //booleans
+    private bool isNeighborHoodBoxOpen = false;
+    public GameObject currentActiveNeighborhood;
+
     void Start()
     {
         neighborhoodStatsTab = NeighborhoodStatsTab.avgstats;
@@ -119,6 +123,14 @@ public class PopUpStats : MonoBehaviour
                 UI_PopMessage.GetComponent<UILabel>().text = " ";
             }
         }
+
+        //for upgrades when stats box is open real time
+        if (isNeighborHoodBoxOpen && currentNeighborhood != null)
+        {
+            UpgradeAvgStatsTabRealTime();
+            UpgradePeopleStatsTabRealTime();
+            UpgradeBoxStatsTabRealTime();
+        }
     }
 
     //upgrade the money text value
@@ -156,6 +168,12 @@ public class PopUpStats : MonoBehaviour
             UI_nPeopleStatsBox.gameObject.active = false;
             UI_nUpgradesBox.gameObject.active = false;
             //average happiness
+
+            //for real time changes in values
+            currentActiveNeighborhood = neighborhood;
+            isNeighborHoodBoxOpen = true;
+            
+            //happiness
             UI_AverageNeighborhoodStats.gameObject.transform.GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetComponent<UILabel>().text = neighborhood.GetComponent<BNeighbourhood>().GetAverageHappiness().ToString();
 
             //for average wealth
@@ -168,6 +186,10 @@ public class PopUpStats : MonoBehaviour
         //activate people stats of neighborhood, 2nd Tab
         if (tabNo == 2)
         {
+            //for real time changes in values
+            currentActiveNeighborhood = neighborhood;
+            isNeighborHoodBoxOpen = true;
+           
             UI_nAvgStatsBox.gameObject.active = false;
             UI_nPeopleStatsBox.gameObject.active = true;
             UI_nUpgradesBox.gameObject.active = false;
@@ -176,6 +198,10 @@ public class PopUpStats : MonoBehaviour
         //activate 3rd tab
         if (tabNo == 3)
         {
+            //for real time changes in values
+            currentActiveNeighborhood = neighborhood;
+            isNeighborHoodBoxOpen = true;
+
             UI_nAvgStatsBox.gameObject.active = false;
             UI_nPeopleStatsBox.gameObject.active = false;
             UI_nUpgradesBox.gameObject.active = true;
@@ -200,6 +226,44 @@ public class PopUpStats : MonoBehaviour
             //no of cars
             UI_nUpgradesBox.gameObject.transform.GetChild(5).GetChild(0).GetComponent<UILabel>().text = neighborhood.GetComponent<BNeighbourhood>().GetNumberOfVehicles(Vehicle.Car).ToString();
         }
+    }
+
+    private void UpgradeAvgStatsTabRealTime()
+    {
+        //happiness
+        UI_AverageNeighborhoodStats.gameObject.transform.GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetComponent<UILabel>().text = currentActiveNeighborhood.GetComponent<BNeighbourhood>().GetAverageHappiness().ToString();
+
+        //for average wealth
+        UI_AverageNeighborhoodStats.gameObject.transform.GetChild(0).GetChild(0).GetChild(3).GetChild(0).GetComponent<UILabel>().text = currentActiveNeighborhood.GetComponent<BNeighbourhood>().GetAverageWealth().ToString();
+
+        //for average health
+        UI_AverageNeighborhoodStats.gameObject.transform.GetChild(0).GetChild(0).GetChild(4).GetChild(0).GetComponent<UILabel>().text = currentActiveNeighborhood.GetComponent<BNeighbourhood>().GetAverageHealth().ToString();
+    }
+
+    private void UpgradePeopleStatsTabRealTime()
+    {
+
+    }
+
+    private void UpgradeBoxStatsTabRealTime()
+    {
+        //has bus stop
+        UI_nUpgradesBox.gameObject.transform.GetChild(0).GetChild(0).GetComponent<UILabel>().text = currentActiveNeighborhood.GetComponent<BNeighbourhood>().CheckIfAlreadyUpgraded(VertexUpgrades.BusStop).ToString();
+
+        //has train station
+        UI_nUpgradesBox.gameObject.transform.GetChild(1).GetChild(0).GetComponent<UILabel>().text = currentActiveNeighborhood.GetComponent<BNeighbourhood>().CheckIfAlreadyUpgraded(VertexUpgrades.TrainStation).ToString();
+
+        //Bike Shop
+        UI_nUpgradesBox.gameObject.transform.GetChild(2).GetChild(0).GetComponent<UILabel>().text = currentActiveNeighborhood.GetComponent<BNeighbourhood>().CheckIfAlreadyUpgraded(VertexUpgrades.BikeShop).ToString();
+
+        //Car Shop
+        UI_nUpgradesBox.gameObject.transform.GetChild(3).GetChild(0).GetComponent<UILabel>().text = currentActiveNeighborhood.GetComponent<BNeighbourhood>().CheckIfAlreadyUpgraded(VertexUpgrades.CarShop).ToString();
+
+        //no of bikes
+        UI_nUpgradesBox.gameObject.transform.GetChild(4).GetChild(0).GetComponent<UILabel>().text = currentActiveNeighborhood.GetComponent<BNeighbourhood>().GetNumberOfVehicles(Vehicle.Bike).ToString();
+
+        //no of cars
+        UI_nUpgradesBox.gameObject.transform.GetChild(5).GetChild(0).GetComponent<UILabel>().text = currentActiveNeighborhood.GetComponent<BNeighbourhood>().GetNumberOfVehicles(Vehicle.Car).ToString();
     }
 
     //on click event on neighborhood avg stats tab

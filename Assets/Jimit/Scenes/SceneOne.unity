@@ -10678,6 +10678,7 @@ MonoBehaviour:
   SideBikeLaneMat: {fileID: 2100000, guid: 9d3f6a608f817b447b996b67e1751bb0, type: 2}
   SideRailwayMat: {fileID: 2100000, guid: 1204317a836953f44a02f23f76d4f954, type: 2}
   moneyUpgradeTimer: 0
+  currentActiveNeighborhood: {fileID: 0}
 --- !u!4 &981266250
 Transform:
   m_ObjectHideFlags: 0
