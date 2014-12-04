@@ -193,6 +193,8 @@ public class PopUpStats : MonoBehaviour
             UI_nAvgStatsBox.gameObject.active = false;
             UI_nPeopleStatsBox.gameObject.active = true;
             UI_nUpgradesBox.gameObject.active = false;
+
+            UI_nPeopleStatsBox.gameObject.transform.GetChild(0).GetChild(0).GetComponent<UILabel>().text = neighborhood.GetComponent<BNeighbourhood>().GetAllResidents().Count.ToString();
         }
 
         //activate 3rd tab
@@ -241,7 +243,7 @@ public class PopUpStats : MonoBehaviour
 
     private void UpgradePeopleStatsTabRealTime()
     {
-
+        UI_nPeopleStatsBox.gameObject.transform.GetChild(0).GetChild(0).GetComponent<UILabel>().text = currentNeighborhood.GetComponent<BNeighbourhood>().GetAllResidents().Count.ToString();
     }
 
     private void UpgradeBoxStatsTabRealTime()
@@ -568,7 +570,7 @@ public class PopUpStats : MonoBehaviour
 
     public void onBusStationHover()
     {
-        UI_HoverLabel.GetComponent<UILabel>().text = "BUS-STATION, $10";
+        UI_HoverLabel.GetComponent<UILabel>().text = "BUS-STATION, $" + PublicConstants.COST_BUY_BUS_STOP;
     }
 
     public void onBusStationUnHover()
@@ -578,7 +580,7 @@ public class PopUpStats : MonoBehaviour
 
     public void onRailStationHover()
     {
-        UI_HoverLabel.GetComponent<UILabel>().text = "RAIL-STATION, $20";
+        UI_HoverLabel.GetComponent<UILabel>().text = "RAIL-STATION, $" + PublicConstants.COST_BUY_TRAIN_STOP;
     }
 
     public void onRailStationUnHover()
@@ -588,7 +590,7 @@ public class PopUpStats : MonoBehaviour
 
     public void onBikeShopHover()
     {
-        UI_HoverLabel.GetComponent<UILabel>().text = "BIKE-SHOP, $40";
+        UI_HoverLabel.GetComponent<UILabel>().text = "BIKE-SHOP, $" + PublicConstants.COST_BUY_BIKE_SHOP;
     }
 
     public void onBikeShopUnHover()
@@ -598,7 +600,7 @@ public class PopUpStats : MonoBehaviour
 
     public void onCarShopHover()
     {
-        UI_HoverLabel.GetComponent<UILabel>().text = "CAR-SHOP, $100";
+        UI_HoverLabel.GetComponent<UILabel>().text = "CAR-SHOP, $" + PublicConstants.COST_BUY_CAR_SHOP;
     }
 
     public void onCarShopUnHover()
@@ -622,7 +624,7 @@ public class PopUpStats : MonoBehaviour
     {
         money = BPlayerScript.money;
         //make bus available at 20
-        if (money >= 10 && money < 20)
+        if (money >= PublicConstants.COST_BUY_BUS_STOP && money < PublicConstants.COST_BUY_TRAIN_STOP)
         {
             if (!isBusUpgraded)
             {
@@ -637,7 +639,7 @@ public class PopUpStats : MonoBehaviour
         }
 
         //make train pass available
-        else if (money >= 20 && money < 40)
+        else if (money >= PublicConstants.COST_BUY_TRAIN_STOP && money < PublicConstants.COST_RENT_BIKE)
         {
             if (!isRailUpgrade)
             {
@@ -663,7 +665,7 @@ public class PopUpStats : MonoBehaviour
         }
 
         //make bike available
-        else if (money >= 40 && money < 100)
+        else if (money >= PublicConstants.COST_BUY_BIKE_SHOP && money < PublicConstants.COST_BUY_CAR_SHOP)
         {
             if (!isRailUpgrade)
             {
@@ -700,7 +702,7 @@ public class PopUpStats : MonoBehaviour
         }
 
         //make car available
-        else if (money >= 100)
+        else if (money >= PublicConstants.COST_BUY_CAR_SHOP)
         {
             if (!isRailUpgrade)
             {
@@ -841,7 +843,7 @@ public class PopUpStats : MonoBehaviour
         }
 
         //for boulevard road
-        if (money >= 150 && money <= 200)
+        if (money >= 150 && money < 300)
         {
             if (!isFoothPath)
             {
