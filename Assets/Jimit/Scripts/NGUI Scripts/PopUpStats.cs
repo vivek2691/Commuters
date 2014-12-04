@@ -15,6 +15,7 @@ public class PopUpStats : MonoBehaviour
     public GameObject UI_GlobalParameters;
     public GameObject UI_HoverLabel;
     public GameObject UI_PopMessage;
+    public GameObject winLoseObj;
 
     //for person
     public GameObject UI_PersonStats;
@@ -89,6 +90,7 @@ public class PopUpStats : MonoBehaviour
         DeactivateInitialEdgeUpgrades();
         DisableVertexUpgradesBox();
         DisableEdgeUpgradesBox();
+        winLoseObj.active = false;
     }
 
     // Update is called once per frame
@@ -108,9 +110,11 @@ public class PopUpStats : MonoBehaviour
 
         //money upgrade
         moneyUpgradeTimer += Time.deltaTime;
-        if (moneyUpgradeTimer >= 4.0f)
+        if (moneyUpgradeTimer >= 1.0f)
         {
             moneyUpgradeTimer = 0.0f;
+            //CheckVertexUpgrades();
+            //CheckEdgeUpgrades();
             UpgradeMoneyText();
         }
 
@@ -132,6 +136,25 @@ public class PopUpStats : MonoBehaviour
             UpgradePeopleStatsTabRealTime();
             UpgradeBoxStatsTabRealTime();
         }
+
+        if (BPlayerScript.CheckWin())
+        {
+            winLoseObj.active = true;
+            winLoseObj.transform.GetChild(0).GetComponent<UILabel>().text = " YOU HAVE WON ";
+            DeactivateTheGame();
+        }
+
+        if (BPlayerScript.CheckLose())
+        {
+            winLoseObj.active = true;
+            winLoseObj.transform.GetChild(0).GetComponent<UILabel>().text = " YOU HAVE LOST ";
+            DeactivateTheGame();
+        }
+    }
+
+    private void DeactivateTheGame()
+    {
+
     }
 
     //upgrade the money text value
@@ -639,9 +662,23 @@ public class PopUpStats : MonoBehaviour
                     }
                 }
             }
+            else if (money < PublicConstants.COST_BUY_BUS_STOP)
+            {
+                //black out 
+                if (isBusUpgraded)
+                {
+                    GameObject busStation = GameObject.Find("BusStation");
+                    if (busStation.GetComponent<UIButton>().enabled == true)
+                    {
+                        busStation.GetComponent<UIButton>().enabled = false;
+                        busStation.transform.GetChild(0).GetComponent<UISprite>().enabled = true;
+                        isBusUpgraded = false;
+                    }
+                }
+            }
 
             //make train pass available
-            else if (money >= PublicConstants.COST_BUY_TRAIN_STOP && money < PublicConstants.COST_RENT_BIKE)
+            if (money >= PublicConstants.COST_BUY_TRAIN_STOP && money < PublicConstants.COST_BUY_BIKE_SHOP)
             {
                 if (!isRailUpgrade)
                 {
@@ -666,8 +703,33 @@ public class PopUpStats : MonoBehaviour
                 }
             }
 
+            else if (money < PublicConstants.COST_BUY_TRAIN_STOP)
+            {
+                if (isRailUpgrade)
+                {
+                    GameObject railStation = GameObject.Find("RailStation");
+                    if (railStation.GetComponent<UIButton>().enabled == true)
+                    {
+                        railStation.GetComponent<UIButton>().enabled = false;
+                        railStation.transform.GetChild(0).GetComponent<UISprite>().enabled = true;
+                        isRailUpgrade = false;
+                    }
+                }
+
+                if (isBusUpgraded)
+                {
+                    GameObject busStation = GameObject.Find("BusStation");
+                    if (busStation.GetComponent<UIButton>().enabled == true)
+                    {
+                        busStation.GetComponent<UIButton>().enabled = false;
+                        busStation.transform.GetChild(0).GetComponent<UISprite>().enabled = true;
+                        isBusUpgraded = false;
+                    }
+                }
+            }
+
             //make bike available
-            else if (money >= PublicConstants.COST_BUY_BIKE_SHOP && money < PublicConstants.COST_BUY_CAR_SHOP)
+            if (money >= PublicConstants.COST_BUY_BIKE_SHOP && money < PublicConstants.COST_BUY_CAR_SHOP)
             {
                 if (!isRailUpgrade)
                 {
@@ -703,8 +765,44 @@ public class PopUpStats : MonoBehaviour
                 }
             }
 
+            else if (money < PublicConstants.COST_BUY_BIKE_SHOP)
+            {
+                if (isRailUpgrade)
+                {
+                    GameObject railStation = GameObject.Find("RailStation");
+                    if (railStation.GetComponent<UIButton>().enabled == true)
+                    {
+                        railStation.GetComponent<UIButton>().enabled = false;
+                        railStation.transform.GetChild(0).GetComponent<UISprite>().enabled = true;
+                        isRailUpgrade = false;
+                    }
+                }
+
+                if (isBusUpgraded)
+                {
+                    GameObject busStation = GameObject.Find("BusStation");
+                    if (busStation.GetComponent<UIButton>().enabled == true)
+                    {
+                        busStation.GetComponent<UIButton>().enabled = false;
+                        busStation.transform.GetChild(0).GetComponent<UISprite>().enabled = true;
+                        isBusUpgraded = false;
+                    }
+                }
+
+                if (isBikeUpgraded)
+                {
+                    GameObject bikeShop = GameObject.Find("BikeShop");
+                    if (bikeShop.GetComponent<UIButton>().enabled == true)
+                    {
+                        bikeShop.GetComponent<UIButton>().enabled = false;
+                        bikeShop.transform.GetChild(0).GetComponent<UISprite>().enabled = true;
+                        isBikeUpgraded = false;
+                    }
+                }
+            }
+
             //make car available
-            else if (money >= PublicConstants.COST_BUY_CAR_SHOP)
+            if (money >= PublicConstants.COST_BUY_CAR_SHOP)
             {
                 if (!isRailUpgrade)
                 {
@@ -1009,15 +1107,17 @@ public class PopUpStats : MonoBehaviour
                                     {
                                         //Debug.Log(" UPGRADE TO UNIMPROVED ROAD ");
                                         startPopUpMessageTimer = true;
-                                        UI_PopMessage.GetComponent<UILabel>().text = " UPGRADE TO IMPROVED ROAD ";
+                                        UI_PopMessage.GetComponent<UILabel>().text = " UPGRADE TO UNIMPROVED ROAD ";
                                         hit.collider.gameObject.renderer.material = DirtRoadMaterial;
+                                        hit.collider.gameObject.GetComponent<BEdge>().AddUpgrade(EdgeType.Unimproved);
                                     }
                                      if ((int)edgeUpgradeType == 2)
                                     {
                                         //Debug.Log(" UPGRADE TO FOOTHPATH ROAD ");
                                         startPopUpMessageTimer = true;
-                                        UI_PopMessage.GetComponent<UILabel>().text = " UPGRADE TO BUS FOOTPATH ";
+                                        UI_PopMessage.GetComponent<UILabel>().text = " UPGRADE TO FOOTPATH ";
                                         hit.collider.gameObject.renderer.material = FootpathMat;
+                                        hit.collider.gameObject.GetComponent<BEdge>().AddUpgrade(EdgeType.Footpath);
                                     }
                                      if ((int)edgeUpgradeType == 3)
                                     {
@@ -1028,6 +1128,7 @@ public class PopUpStats : MonoBehaviour
                                         hit.collider.gameObject.transform.GetChild(1).GetComponent<MeshRenderer>().enabled = true;
                                         hit.collider.gameObject.transform.GetChild(0).renderer.material = SideBikeLaneMat;
                                         hit.collider.gameObject.transform.GetChild(1).renderer.material = SideBikeLaneMat;
+                                        hit.collider.gameObject.GetComponent<BEdge>().AddUpgrade(EdgeType.Biking_Trail);
                                     }
                                      if ((int)edgeUpgradeType == 4)
                                     {
@@ -1035,6 +1136,7 @@ public class PopUpStats : MonoBehaviour
                                         startPopUpMessageTimer = true;
                                         UI_PopMessage.GetComponent<UILabel>().text = " UPGRADE TO ROAD  ";
                                         hit.collider.gameObject.renderer.material = SpeedRoadMat;
+                                        hit.collider.gameObject.GetComponent<BEdge>().AddUpgrade(EdgeType.Road);
                                     }
                                      if ((int)edgeUpgradeType == 5)
                                     {
@@ -1042,6 +1144,7 @@ public class PopUpStats : MonoBehaviour
                                         startPopUpMessageTimer = true;
                                         UI_PopMessage.GetComponent<UILabel>().text = " UPGRADE TO BOULEVARD ";
                                         hit.collider.gameObject.renderer.material = BoulevardMat;
+                                        hit.collider.gameObject.GetComponent<BEdge>().AddUpgrade(EdgeType.Boulevard);
                                     }
                                     if ((int)edgeUpgradeType == 6)
                                     {
@@ -1052,6 +1155,7 @@ public class PopUpStats : MonoBehaviour
                                         hit.collider.gameObject.transform.GetChild(1).GetComponent<MeshRenderer>().enabled = true;
                                         hit.collider.gameObject.transform.GetChild(0).renderer.material = SideRailwayMat;
                                         hit.collider.gameObject.transform.GetChild(1).renderer.material = SideRailwayMat;
+                                        hit.collider.gameObject.GetComponent<BEdge>().AddUpgrade(EdgeType.Rail);
                                     }
                                 }
                             }
