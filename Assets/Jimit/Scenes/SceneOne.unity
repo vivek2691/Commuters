@@ -413,6 +413,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vertex1: {fileID: 994840277}
   vertex2: {fileID: 15661050}
+  player: {fileID: 0}
 --- !u!23 &17407315
 Renderer:
   m_ObjectHideFlags: 0
@@ -1407,6 +1408,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vertex1: {fileID: 15661050}
   vertex2: {fileID: 1418658418}
+  player: {fileID: 0}
 --- !u!23 &100822369
 Renderer:
   m_ObjectHideFlags: 0
@@ -1604,6 +1606,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vertex1: {fileID: 994840277}
   vertex2: {fileID: 15661050}
+  player: {fileID: 0}
 --- !u!23 &170804133
 Renderer:
   m_ObjectHideFlags: 0
@@ -3082,6 +3085,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vertex1: {fileID: 994840277}
   vertex2: {fileID: 15661050}
+  player: {fileID: 0}
 --- !u!23 &277889968
 Renderer:
   m_ObjectHideFlags: 0
@@ -4088,6 +4092,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vertex1: {fileID: 994840277}
   vertex2: {fileID: 15661050}
+  player: {fileID: 0}
 --- !u!23 &347715883
 Renderer:
   m_ObjectHideFlags: 0
@@ -5011,6 +5016,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vertex1: {fileID: 15661050}
   vertex2: {fileID: 247343653}
+  player: {fileID: 0}
 --- !u!23 &437347007
 Renderer:
   m_ObjectHideFlags: 0
@@ -5651,6 +5657,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vertex1: {fileID: 994840277}
   vertex2: {fileID: 15661050}
+  player: {fileID: 0}
 --- !u!23 &478716552
 Renderer:
   m_ObjectHideFlags: 0
@@ -5721,6 +5728,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vertex1: {fileID: 994840277}
   vertex2: {fileID: 15661050}
+  player: {fileID: 0}
 --- !u!23 &492707949
 Renderer:
   m_ObjectHideFlags: 0
@@ -7172,6 +7180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vertex1: {fileID: 994840277}
   vertex2: {fileID: 1418658418}
+  player: {fileID: 0}
 --- !u!23 &630225100
 Renderer:
   m_ObjectHideFlags: 0
@@ -7403,6 +7412,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vertex1: {fileID: 994840277}
   vertex2: {fileID: 15661050}
+  player: {fileID: 0}
 --- !u!23 &644253949
 Renderer:
   m_ObjectHideFlags: 0
@@ -8135,6 +8145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vertex1: {fileID: 994840277}
   vertex2: {fileID: 15661050}
+  player: {fileID: 0}
 --- !u!23 &723527455
 Renderer:
   m_ObjectHideFlags: 0
@@ -10118,6 +10129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vertex1: {fileID: 994840277}
   vertex2: {fileID: 247343653}
+  player: {fileID: 0}
 --- !u!23 &941315718
 Renderer:
   m_ObjectHideFlags: 0
@@ -11862,6 +11874,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vertex1: {fileID: 994840277}
   vertex2: {fileID: 15661050}
+  player: {fileID: 0}
 --- !u!23 &1099584177
 Renderer:
   m_ObjectHideFlags: 0
@@ -14347,7 +14360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78bec3e334729494d9ee9a5844e29c16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  money: 400
+  money: 10
 --- !u!4 &1293611522
 Transform:
   m_ObjectHideFlags: 0
@@ -16090,6 +16103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vertex1: {fileID: 994840277}
   vertex2: {fileID: 15661050}
+  player: {fileID: 0}
 --- !u!23 &1444618021
 Renderer:
   m_ObjectHideFlags: 0
@@ -18847,6 +18861,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vertex1: {fileID: 994840277}
   vertex2: {fileID: 15661050}
+  player: {fileID: 0}
 --- !u!23 &1732641120
 Renderer:
   m_ObjectHideFlags: 0
@@ -19875,6 +19890,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vertex1: {fileID: 994840277}
   vertex2: {fileID: 15661050}
+  player: {fileID: 0}
 --- !u!23 &1854033454
 Renderer:
   m_ObjectHideFlags: 0
@@ -21423,6 +21439,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vertex1: {fileID: 1418658418}
   vertex2: {fileID: 247343653}
+  player: {fileID: 0}
 --- !u!23 &1986022186
 Renderer:
   m_ObjectHideFlags: 0
@@ -21751,6 +21768,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vertex1: {fileID: 994840277}
   vertex2: {fileID: 15661050}
+  player: {fileID: 0}
 --- !u!23 &2015682295
 Renderer:
   m_ObjectHideFlags: 0
