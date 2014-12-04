@@ -110,6 +110,7 @@ public class BPerson : MonoBehaviour {
 			//print (finalCost);
 			lastCommute = gPerson.getCurrentCommutetime();
 			wealth += (int)lastCommute;
+			player.money += 1;
 
 		}
 			
