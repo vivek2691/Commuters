@@ -624,127 +624,130 @@ public class PopUpStats : MonoBehaviour
     {
         money = BPlayerScript.money;
         //make bus available at 20
-        if (money >= PublicConstants.COST_BUY_BUS_STOP && money < PublicConstants.COST_BUY_TRAIN_STOP)
+        if (money > 0)
         {
-            if (!isBusUpgraded)
+            if (money >= PublicConstants.COST_BUY_BUS_STOP && money < PublicConstants.COST_BUY_TRAIN_STOP)
             {
-                GameObject busStation = GameObject.Find("BusStation");
-                if (busStation.GetComponent<UIButton>().enabled == false)
+                if (!isBusUpgraded)
                 {
-                    busStation.GetComponent<UIButton>().enabled = true;
-                    busStation.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
-                    isBusUpgraded = true;
-                }
-            }
-        }
-
-        //make train pass available
-        else if (money >= PublicConstants.COST_BUY_TRAIN_STOP && money < PublicConstants.COST_RENT_BIKE)
-        {
-            if (!isRailUpgrade)
-            {
-                GameObject railStation = GameObject.Find("RailStation");
-                if (railStation.GetComponent<UIButton>().enabled == false)
-                {
-                    railStation.GetComponent<UIButton>().enabled = true;
-                    railStation.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
-                    isRailUpgrade = true;
+                    GameObject busStation = GameObject.Find("BusStation");
+                    if (busStation.GetComponent<UIButton>().enabled == false)
+                    {
+                        busStation.GetComponent<UIButton>().enabled = true;
+                        busStation.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
+                        isBusUpgraded = true;
+                    }
                 }
             }
 
-            if (!isBusUpgraded)
+            //make train pass available
+            else if (money >= PublicConstants.COST_BUY_TRAIN_STOP && money < PublicConstants.COST_RENT_BIKE)
             {
-                GameObject busStation = GameObject.Find("BusStation");
-                if (busStation.GetComponent<UIButton>().enabled == false)
+                if (!isRailUpgrade)
                 {
-                    busStation.GetComponent<UIButton>().enabled = true;
-                    busStation.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
-                    isBusUpgraded = true;
+                    GameObject railStation = GameObject.Find("RailStation");
+                    if (railStation.GetComponent<UIButton>().enabled == false)
+                    {
+                        railStation.GetComponent<UIButton>().enabled = true;
+                        railStation.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
+                        isRailUpgrade = true;
+                    }
                 }
-            }
-        }
 
-        //make bike available
-        else if (money >= PublicConstants.COST_BUY_BIKE_SHOP && money < PublicConstants.COST_BUY_CAR_SHOP)
-        {
-            if (!isRailUpgrade)
-            {
-                GameObject railStation = GameObject.Find("RailStation");
-                if (railStation.GetComponent<UIButton>().enabled == false)
+                if (!isBusUpgraded)
                 {
-                    railStation.GetComponent<UIButton>().enabled = true;
-                    railStation.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
-                    isRailUpgrade = true;
-                }
-            }
-
-            if (!isBusUpgraded)
-            {
-                GameObject busStation = GameObject.Find("BusStation");
-                if (busStation.GetComponent<UIButton>().enabled == false)
-                {
-                    busStation.GetComponent<UIButton>().enabled = true;
-                    busStation.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
-                    isBusUpgraded = true;
+                    GameObject busStation = GameObject.Find("BusStation");
+                    if (busStation.GetComponent<UIButton>().enabled == false)
+                    {
+                        busStation.GetComponent<UIButton>().enabled = true;
+                        busStation.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
+                        isBusUpgraded = true;
+                    }
                 }
             }
 
-            if (!isBikeUpgraded)
+            //make bike available
+            else if (money >= PublicConstants.COST_BUY_BIKE_SHOP && money < PublicConstants.COST_BUY_CAR_SHOP)
             {
-                GameObject bikeShop = GameObject.Find("BikeShop");
-                if (bikeShop.GetComponent<UIButton>().enabled == false)
+                if (!isRailUpgrade)
                 {
-                    bikeShop.GetComponent<UIButton>().enabled = true;
-                    bikeShop.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
-                    isBikeUpgraded = true;
+                    GameObject railStation = GameObject.Find("RailStation");
+                    if (railStation.GetComponent<UIButton>().enabled == false)
+                    {
+                        railStation.GetComponent<UIButton>().enabled = true;
+                        railStation.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
+                        isRailUpgrade = true;
+                    }
                 }
-            }
-        }
 
-        //make car available
-        else if (money >= PublicConstants.COST_BUY_CAR_SHOP)
-        {
-            if (!isRailUpgrade)
-            {
-                GameObject railStation = GameObject.Find("RailStation");
-                if (railStation.GetComponent<UIButton>().enabled == false)
+                if (!isBusUpgraded)
                 {
-                    railStation.GetComponent<UIButton>().enabled = true;
-                    railStation.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
-                    isRailUpgrade = true;
+                    GameObject busStation = GameObject.Find("BusStation");
+                    if (busStation.GetComponent<UIButton>().enabled == false)
+                    {
+                        busStation.GetComponent<UIButton>().enabled = true;
+                        busStation.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
+                        isBusUpgraded = true;
+                    }
                 }
-            }
 
-            if (!isBusUpgraded)
-            {
-                GameObject busStation = GameObject.Find("BusStation");
-                if (busStation.GetComponent<UIButton>().enabled == false)
+                if (!isBikeUpgraded)
                 {
-                    busStation.GetComponent<UIButton>().enabled = true;
-                    busStation.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
-                    isBusUpgraded = true;
-                }
-            }
-
-            if (!isBikeUpgraded)
-            {
-                GameObject bikeShop = GameObject.Find("BikeShop");
-                if (bikeShop.GetComponent<UIButton>().enabled == false)
-                {
-                    bikeShop.GetComponent<UIButton>().enabled = true;
-                    bikeShop.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
-                    isBikeUpgraded = true;
+                    GameObject bikeShop = GameObject.Find("BikeShop");
+                    if (bikeShop.GetComponent<UIButton>().enabled == false)
+                    {
+                        bikeShop.GetComponent<UIButton>().enabled = true;
+                        bikeShop.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
+                        isBikeUpgraded = true;
+                    }
                 }
             }
 
-            if (!isCarUpgraded)
+            //make car available
+            else if (money >= PublicConstants.COST_BUY_CAR_SHOP)
             {
-                GameObject carShop = GameObject.Find("CarShop");
-                if (carShop.GetComponent<UIButton>().enabled == false)
+                if (!isRailUpgrade)
                 {
-                    carShop.GetComponent<UIButton>().enabled = true;
-                    carShop.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
-                    isCarUpgraded = true;
+                    GameObject railStation = GameObject.Find("RailStation");
+                    if (railStation.GetComponent<UIButton>().enabled == false)
+                    {
+                        railStation.GetComponent<UIButton>().enabled = true;
+                        railStation.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
+                        isRailUpgrade = true;
+                    }
+                }
+
+                if (!isBusUpgraded)
+                {
+                    GameObject busStation = GameObject.Find("BusStation");
+                    if (busStation.GetComponent<UIButton>().enabled == false)
+                    {
+                        busStation.GetComponent<UIButton>().enabled = true;
+                        busStation.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
+                        isBusUpgraded = true;
+                    }
+                }
+
+                if (!isBikeUpgraded)
+                {
+                    GameObject bikeShop = GameObject.Find("BikeShop");
+                    if (bikeShop.GetComponent<UIButton>().enabled == false)
+                    {
+                        bikeShop.GetComponent<UIButton>().enabled = true;
+                        bikeShop.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
+                        isBikeUpgraded = true;
+                    }
+                }
+
+                if (!isCarUpgraded)
+                {
+                    GameObject carShop = GameObject.Find("CarShop");
+                    if (carShop.GetComponent<UIButton>().enabled == false)
+                    {
+                        carShop.GetComponent<UIButton>().enabled = true;
+                        carShop.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
+                        isCarUpgraded = true;
+                    }
                 }
             }
         }
@@ -765,148 +768,151 @@ public class PopUpStats : MonoBehaviour
     {
         //for foothpath
         money = BPlayerScript.money;
-        if (money >= 10 && money < 20)
+        if (money > 0)
         {
-            if (!isFoothPath)
+            if (money >= 10 && money < 20)
             {
-                GameObject footPath = GameObject.Find("FootPath");
-                if (footPath.GetComponent<UIButton>().enabled == false)
+                if (!isFoothPath)
                 {
-                    footPath.GetComponent<UIButton>().enabled = true;
-                    footPath.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
-                    isFoothPath = true;
-                }
-            }
-        }
-
-        //for bike trails
-        if (money >= 20 && money < 50)
-        {
-            if (!isFoothPath)
-            {
-                GameObject footPath = GameObject.Find("FootPath");
-                if (footPath.GetComponent<UIButton>().enabled == false)
-                {
-                    footPath.GetComponent<UIButton>().enabled = true;
-                    footPath.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
-                    isFoothPath = true;
+                    GameObject footPath = GameObject.Find("FootPath");
+                    if (footPath.GetComponent<UIButton>().enabled == false)
+                    {
+                        footPath.GetComponent<UIButton>().enabled = true;
+                        footPath.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
+                        isFoothPath = true;
+                    }
                 }
             }
 
-            if (!isBikeTrail)
+            //for bike trails
+            if (money >= 20 && money < 50)
             {
-                GameObject bikeTrail = GameObject.Find("BikeTrail");
-                if (bikeTrail.GetComponent<UIButton>().enabled == false)
+                if (!isFoothPath)
                 {
-                    bikeTrail.GetComponent<UIButton>().enabled = true;
-                    bikeTrail.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
-                    isBikeTrail = true;
+                    GameObject footPath = GameObject.Find("FootPath");
+                    if (footPath.GetComponent<UIButton>().enabled == false)
+                    {
+                        footPath.GetComponent<UIButton>().enabled = true;
+                        footPath.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
+                        isFoothPath = true;
+                    }
                 }
-            }
-        }
 
-        //for speed road
-        if (money >= 50 && money < 150)
-        {
-            if (!isFoothPath)
-            {
-                GameObject footPath = GameObject.Find("FootPath");
-                if (footPath.GetComponent<UIButton>().enabled == false)
+                if (!isBikeTrail)
                 {
-                    footPath.GetComponent<UIButton>().enabled = true;
-                    footPath.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
-                    isFoothPath = true;
-                }
-            }
-
-            if (!isBikeTrail)
-            {
-                GameObject bikeTrail = GameObject.Find("BikeTrail");
-                if (bikeTrail.GetComponent<UIButton>().enabled == false)
-                {
-                    bikeTrail.GetComponent<UIButton>().enabled = true;
-                    bikeTrail.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
-                    isBikeTrail = true;
+                    GameObject bikeTrail = GameObject.Find("BikeTrail");
+                    if (bikeTrail.GetComponent<UIButton>().enabled == false)
+                    {
+                        bikeTrail.GetComponent<UIButton>().enabled = true;
+                        bikeTrail.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
+                        isBikeTrail = true;
+                    }
                 }
             }
 
-            if (!isSpeedRoad)
+            //for speed road
+            if (money >= 50 && money < 150)
             {
-                GameObject speedRoad = GameObject.Find("SpeedRoad");
-                if (speedRoad.GetComponent<UIButton>().enabled == false)
+                if (!isFoothPath)
                 {
-                    speedRoad.GetComponent<UIButton>().enabled = true;
-                    speedRoad.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
-                    isSpeedRoad = true;
+                    GameObject footPath = GameObject.Find("FootPath");
+                    if (footPath.GetComponent<UIButton>().enabled == false)
+                    {
+                        footPath.GetComponent<UIButton>().enabled = true;
+                        footPath.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
+                        isFoothPath = true;
+                    }
                 }
-            }
-        }
 
-        //for boulevard road
-        if (money >= 150 && money < 300)
-        {
-            if (!isFoothPath)
-            {
-                GameObject footPath = GameObject.Find("FootPath");
-                if (footPath.GetComponent<UIButton>().enabled == false)
+                if (!isBikeTrail)
                 {
-                    footPath.GetComponent<UIButton>().enabled = true;
-                    footPath.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
-                    isFoothPath = true;
+                    GameObject bikeTrail = GameObject.Find("BikeTrail");
+                    if (bikeTrail.GetComponent<UIButton>().enabled == false)
+                    {
+                        bikeTrail.GetComponent<UIButton>().enabled = true;
+                        bikeTrail.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
+                        isBikeTrail = true;
+                    }
                 }
-            }
 
-            if (!isBikeTrail)
-            {
-                GameObject bikeTrail = GameObject.Find("BikeTrail");
-                if (bikeTrail.GetComponent<UIButton>().enabled == false)
+                if (!isSpeedRoad)
                 {
-                    bikeTrail.GetComponent<UIButton>().enabled = true;
-                    bikeTrail.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
-                    isBikeTrail = true;
-                }
-            }
-
-            if (!isSpeedRoad)
-            {
-                GameObject speedRoad = GameObject.Find("SpeedRoad");
-                if (speedRoad.GetComponent<UIButton>().enabled == false)
-                {
-                    speedRoad.GetComponent<UIButton>().enabled = true;
-                    speedRoad.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
-                    isSpeedRoad = true;
+                    GameObject speedRoad = GameObject.Find("SpeedRoad");
+                    if (speedRoad.GetComponent<UIButton>().enabled == false)
+                    {
+                        speedRoad.GetComponent<UIButton>().enabled = true;
+                        speedRoad.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
+                        isSpeedRoad = true;
+                    }
                 }
             }
 
-            if (!isBoulevard)
+            //for boulevard road
+            if (money >= 150 && money < 300)
             {
-                GameObject boulevard = GameObject.Find("SpeedBoulevard");
-                if (boulevard.GetComponent<UIButton>().enabled == false)
+                if (!isFoothPath)
                 {
-                    boulevard.GetComponent<UIButton>().enabled = true;
-                    boulevard.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
-                    isBoulevard = true;
+                    GameObject footPath = GameObject.Find("FootPath");
+                    if (footPath.GetComponent<UIButton>().enabled == false)
+                    {
+                        footPath.GetComponent<UIButton>().enabled = true;
+                        footPath.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
+                        isFoothPath = true;
+                    }
                 }
-            }
-        }
 
-        //activate all edge upgrades
-        else if (money >= 300)
-        {
-            GameObject[] edgeUpgrades = GameObject.FindGameObjectsWithTag("edgeUpgrade");
-            foreach (GameObject edge in edgeUpgrades)
-            {
-                if (edge.GetComponent<UIButton>().enabled == false)
+                if (!isBikeTrail)
                 {
-                    edge.GetComponent<UIButton>().enabled = true;
-                    edge.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
+                    GameObject bikeTrail = GameObject.Find("BikeTrail");
+                    if (bikeTrail.GetComponent<UIButton>().enabled == false)
+                    {
+                        bikeTrail.GetComponent<UIButton>().enabled = true;
+                        bikeTrail.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
+                        isBikeTrail = true;
+                    }
+                }
+
+                if (!isSpeedRoad)
+                {
+                    GameObject speedRoad = GameObject.Find("SpeedRoad");
+                    if (speedRoad.GetComponent<UIButton>().enabled == false)
+                    {
+                        speedRoad.GetComponent<UIButton>().enabled = true;
+                        speedRoad.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
+                        isSpeedRoad = true;
+                    }
+                }
+
+                if (!isBoulevard)
+                {
+                    GameObject boulevard = GameObject.Find("SpeedBoulevard");
+                    if (boulevard.GetComponent<UIButton>().enabled == false)
+                    {
+                        boulevard.GetComponent<UIButton>().enabled = true;
+                        boulevard.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
+                        isBoulevard = true;
+                    }
                 }
             }
-            isSpeedRail = true;
-            isBoulevard = true;
-            isSpeedRoad = true;
-            isBikeTrail = true;
-            isFoothPath = true;
+
+            //activate all edge upgrades
+            else if (money >= 300)
+            {
+                GameObject[] edgeUpgrades = GameObject.FindGameObjectsWithTag("edgeUpgrade");
+                foreach (GameObject edge in edgeUpgrades)
+                {
+                    if (edge.GetComponent<UIButton>().enabled == false)
+                    {
+                        edge.GetComponent<UIButton>().enabled = true;
+                        edge.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
+                    }
+                }
+                isSpeedRail = true;
+                isBoulevard = true;
+                isSpeedRoad = true;
+                isBikeTrail = true;
+                isFoothPath = true;
+            }
         }
     }
 
