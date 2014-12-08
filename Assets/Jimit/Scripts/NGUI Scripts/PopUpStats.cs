@@ -920,6 +920,25 @@ public class PopUpStats : MonoBehaviour
                 }
             }
 
+            //hide all edges
+            if (money < 10)
+            {
+                GameObject[] edgeUpgrades = GameObject.FindGameObjectsWithTag("edgeUpgrade");
+                foreach (GameObject edge in edgeUpgrades)
+                {
+                    if (edge.GetComponent<UIButton>().enabled == true)
+                    {
+                        edge.GetComponent<UIButton>().enabled = false;
+                        edge.transform.GetChild(0).GetComponent<UISprite>().enabled = true;
+                    }
+                }
+                isSpeedRail = false;
+                isBoulevard = false;
+                isSpeedRoad = false;
+                isBikeTrail = false;
+                isFoothPath = false;
+            }
+
             //for bike trails
             if (money >= 20 && money < 50)
             {
@@ -944,6 +963,27 @@ public class PopUpStats : MonoBehaviour
                         isBikeTrail = true;
                     }
                 }
+            }
+
+            //hide everything else except footpath
+            if (money >= 10 && money < 20)
+            {
+                GameObject[] edgeUpgrades = GameObject.FindGameObjectsWithTag("edgeUpgrade");
+                foreach (GameObject edge in edgeUpgrades)
+                {
+                    if (edge.name != "FootPath")
+                    {
+                        if (edge.GetComponent<UIButton>().enabled == true)
+                        {
+                            edge.GetComponent<UIButton>().enabled = false;
+                            edge.transform.GetChild(0).GetComponent<UISprite>().enabled = true;
+                        }
+                    }
+                }
+                isSpeedRail = false;
+                isBoulevard = false;
+                isSpeedRoad = false;
+                isBikeTrail = false;
             }
 
             //for speed road
@@ -979,6 +1019,32 @@ public class PopUpStats : MonoBehaviour
                         speedRoad.GetComponent<UIButton>().enabled = true;
                         speedRoad.transform.GetChild(0).GetComponent<UISprite>().enabled = false;
                         isSpeedRoad = true;
+                    }
+                }
+            }
+
+            //hide except bike and footpath
+            if (money >= 20 && money < 50)
+            {
+                if (isSpeedRoad)
+                {
+                    GameObject speedRoad = GameObject.Find("SpeedRoad");
+                    if (speedRoad.GetComponent<UIButton>().enabled == true)
+                    {
+                        speedRoad.GetComponent<UIButton>().enabled = false;
+                        speedRoad.transform.GetChild(0).GetComponent<UISprite>().enabled = true;
+                        isSpeedRoad = false;
+                    }
+                }
+
+                if (isBoulevard)
+                {
+                    GameObject boulevard = GameObject.Find("SpeedBoulevard");
+                    if (boulevard.GetComponent<UIButton>().enabled == true)
+                    {
+                        boulevard.GetComponent<UIButton>().enabled = false;
+                        boulevard.transform.GetChild(0).GetComponent<UISprite>().enabled = true;
+                        isBoulevard = false;
                     }
                 }
             }
@@ -1031,8 +1097,23 @@ public class PopUpStats : MonoBehaviour
                 }
             }
 
+            //black out bouelavard
+            if (money >= 50 && money < 150)
+            {
+                if (isBoulevard)
+                {
+                    GameObject boulevard = GameObject.Find("SpeedBoulevard");
+                    if (boulevard.GetComponent<UIButton>().enabled == true)
+                    {
+                        boulevard.GetComponent<UIButton>().enabled = false;
+                        boulevard.transform.GetChild(0).GetComponent<UISprite>().enabled = true;
+                        isBoulevard = false;
+                    }
+                }
+            }
+
             //activate all edge upgrades
-            else if (money >= 300)
+            if (money >= 300)
             {
                 GameObject[] edgeUpgrades = GameObject.FindGameObjectsWithTag("edgeUpgrade");
                 foreach (GameObject edge in edgeUpgrades)
